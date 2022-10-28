@@ -1,0 +1,20 @@
+name: Generate gateway sdks
+on:
+  push:
+    branches:
+      - main
+jobs:
+  generate-angular-client:
+    runs-on: ubuntu-latest
+    name: Example
+    steps:
+
+      # Checkout your code
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Generate gateway sdks and commit them
+        run: |
+          make gateway
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: save generated gateway sdks
