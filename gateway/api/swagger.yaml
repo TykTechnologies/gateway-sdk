@@ -24,7 +24,7 @@ info:
     ```
     <br/>
     <b>The Tyk Gateway API is subsumed by the Tyk Dashboard API in Pro installations.</b>
-  version: 3.2.0
+  version: 4.3.0
 servers:
 - url: http://localhost/
 - url: https://localhost/
@@ -391,6 +391,13 @@ paths:
       responses:
         "200":
           description: API definition
+          headers:
+            x-tyk-base-api-id:
+              description: ID of the base API if the requested API is a version.
+              style: simple
+              explode: false
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -516,6 +523,13 @@ paths:
       responses:
         "200":
           description: API definition
+          headers:
+            x-tyk-base-api-id:
+              description: ID of the base API if the requested API is a version.
+              style: simple
+              explode: false
+              schema:
+                type: string
           content:
             application/json:
               schema:

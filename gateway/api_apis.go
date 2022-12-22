@@ -24,21 +24,21 @@ var (
 	_ context.Context
 )
 
-type PoliciesApiService service
+type APIsApiService service
 /*
-PoliciesApiService Create a Policy
-You can create a Policy in your Tyk Instance
+APIsApiService
+Create API  A single Tyk node can have its API Definitions queried, deleted and updated remotely. This functionality enables you to remotely update your Tyk definitions without having to manage the files manually.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *PoliciesApiAddPolicyOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Policy) - 
+ * @param optional nil or *APIsApiCreateApiOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of ApiDefinition) - 
 @return ApiModifyKeySuccess
 */
 
-type PoliciesApiAddPolicyOpts struct {
+type APIsApiCreateApiOpts struct {
     Body optional.Interface
 }
 
-func (a *PoliciesApiService) AddPolicy(ctx context.Context, localVarOptionals *PoliciesApiAddPolicyOpts) (ApiModifyKeySuccess, *http.Response, error) {
+func (a *APIsApiService) CreateApi(ctx context.Context, localVarOptionals *APIsApiCreateApiOpts) (ApiModifyKeySuccess, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -48,7 +48,7 @@ func (a *PoliciesApiService) AddPolicy(ctx context.Context, localVarOptionals *P
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/policies"
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -139,40 +139,30 @@ func (a *PoliciesApiService) AddPolicy(ctx context.Context, localVarOptionals *P
 				newErr.model = v
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
-			var v ApiStatusMessage
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-PoliciesApiService Delete a Policy
-Delete a policy by ID in your Tyk instance.
+APIsApiService
+Deleting an API definition will remove the file from the file store, the API definition will NOT be unloaded, a separate reload request will need to be made to disable the API endpoint.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param polID The policy ID
-@return ApiModifyKeySuccess
+ * @param apiID The API ID
+@return ApiStatusMessage
 */
-func (a *PoliciesApiService) DeletePolicy(ctx context.Context, polID string) (ApiModifyKeySuccess, *http.Response, error) {
+func (a *APIsApiService) DeleteApi(ctx context.Context, apiID string) (ApiStatusMessage, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ApiModifyKeySuccess
+		localVarReturnValue ApiStatusMessage
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/policies/{polID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"polID"+"}", fmt.Sprintf("%v", polID), -1)
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/{apiID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"apiID"+"}", fmt.Sprintf("%v", apiID), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -238,7 +228,7 @@ func (a *PoliciesApiService) DeletePolicy(ctx context.Context, polID string) (Ap
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ApiModifyKeySuccess
+			var v ApiStatusMessage
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -247,7 +237,7 @@ func (a *PoliciesApiService) DeletePolicy(ctx context.Context, polID string) (Ap
 				newErr.model = v
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
+		if localVarHttpResponse.StatusCode == 400 {
 			var v ApiStatusMessage
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
@@ -263,24 +253,24 @@ func (a *PoliciesApiService) DeletePolicy(ctx context.Context, polID string) (Ap
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-PoliciesApiService Get a Policy
-You can retrieve details of a single policy by ID in your Tyk instance. Returns an array policies.
+APIsApiService
+Get API definition Only if used without the Tyk Dashboard
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param polID The policy ID
-@return Policy
+ * @param apiID The API ID
+@return ApiDefinition
 */
-func (a *PoliciesApiService) GetPolicy(ctx context.Context, polID string) (Policy, *http.Response, error) {
+func (a *APIsApiService) GetApi(ctx context.Context, apiID string) (ApiDefinition, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue Policy
+		localVarReturnValue ApiDefinition
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/policies/{polID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"polID"+"}", fmt.Sprintf("%v", polID), -1)
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/{apiID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"apiID"+"}", fmt.Sprintf("%v", apiID), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -346,17 +336,7 @@ func (a *PoliciesApiService) GetPolicy(ctx context.Context, polID string) (Polic
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Policy
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 404 {
-			var v ApiStatusMessage
+			var v ApiDefinition
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -371,22 +351,22 @@ func (a *PoliciesApiService) GetPolicy(ctx context.Context, polID string) (Polic
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-PoliciesApiService List Policies
-You can retrieve all the policies in your Tyk instance. Returns an array policies.
+APIsApiService
+List APIs  Only if used without the Tyk Dashboard
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return []Policy
+@return []ApiDefinition
 */
-func (a *PoliciesApiService) ListPolicies(ctx context.Context) ([]Policy, *http.Response, error) {
+func (a *APIsApiService) ListApis(ctx context.Context) ([]ApiDefinition, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue []Policy
+		localVarReturnValue []ApiDefinition
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/policies"
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -452,7 +432,7 @@ func (a *PoliciesApiService) ListPolicies(ctx context.Context) ([]Policy, *http.
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []Policy
+			var v []ApiDefinition
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -467,20 +447,20 @@ func (a *PoliciesApiService) ListPolicies(ctx context.Context) ([]Policy, *http.
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-PoliciesApiService Update a Policy
-You can update a Policy in your Tyk Instance by ID
+APIsApiService
+Updating an API definition uses the same signature an object as a &#x60;POST&#x60;, however it will first ensure that the API ID that is being updated is the same as the one in the object being &#x60;PUT&#x60;.   Updating will completely replace the file descriptor and will not change an API Definition that has already been loaded, the hot-reload endpoint will need to be called to push the new definition to live. 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param polID The policy ID
- * @param optional nil or *PoliciesApiUpdatePolicyOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Policy) - 
+ * @param apiID The API ID
+ * @param optional nil or *APIsApiUpdateApiOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of ApiDefinition) - 
 @return ApiModifyKeySuccess
 */
 
-type PoliciesApiUpdatePolicyOpts struct {
+type APIsApiUpdateApiOpts struct {
     Body optional.Interface
 }
 
-func (a *PoliciesApiService) UpdatePolicy(ctx context.Context, polID string, localVarOptionals *PoliciesApiUpdatePolicyOpts) (ApiModifyKeySuccess, *http.Response, error) {
+func (a *APIsApiService) UpdateApi(ctx context.Context, apiID string, localVarOptionals *APIsApiUpdateApiOpts) (ApiModifyKeySuccess, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}
@@ -490,8 +470,8 @@ func (a *PoliciesApiService) UpdatePolicy(ctx context.Context, polID string, loc
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/policies/{polID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"polID"+"}", fmt.Sprintf("%v", polID), -1)
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/{apiID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"apiID"+"}", fmt.Sprintf("%v", apiID), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -573,16 +553,6 @@ func (a *PoliciesApiService) UpdatePolicy(ctx context.Context, polID string, loc
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
-			var v ApiStatusMessage
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 500 {
 			var v ApiStatusMessage
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
