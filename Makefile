@@ -18,3 +18,5 @@ gateway-sdks:
         -i /local/swagger.yml \
         -g go \
         -o /local/gateway-dev
+
+
