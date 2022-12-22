@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Tyk Gateway API
-  version: 3.2.0
+  version: 4.3.0
   description: |-
     The Tyk Gateway API is the primary means for integrating your application with the Tyk API Gateway system. This API is very small, and has no granular permissions system. It is intended to be used purely for internal automation and integration.
 
@@ -395,6 +395,11 @@ paths:
                 active: true
                 proxy:
                   listen_path: "/test"
+          headers:
+            x-tyk-base-api-id:
+              schema:
+                type: string
+              description: ID of the base API if the requested API is a version.
     put:
       description: |
         Updating an API definition uses the same signature an object as a `POST`, however it will first ensure that the API ID that is being updated is the same as the one in the object being `PUT`.
@@ -493,6 +498,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/OASSchemaResponse"
+          headers:
+            x-tyk-base-api-id:
+              schema:
+                type: string
+              description: ID of the base API if the requested API is a version.
     put:
       description: |
         Updating an API definition uses the same signature an object as a `POST`, however it will first ensure that the API ID that is being updated is the same as the one in the object being `PUT`.
@@ -3717,4 +3727,3 @@ components:
       type: apiKey
 security:
   - api_key: []
-  
