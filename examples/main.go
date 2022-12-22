@@ -2,29 +2,25 @@ package main
 
 import (
 	"context"
-
-	gate2 "github.com/TykTechnologies/gateway-sdk/gateway-dev"
+	"github.com/TykTechnologies/gateway-sdk/gateway"
 
 	"log"
 )
 
 var (
-	baseUrl = "http://localhost:8080/hello"
+	baseUrl = "http://localhost:8080"
 )
 
 func main() {
-	conf := gate2.Configuration{
-		Host:             "",
-		Scheme:           "",
-		DefaultHeader:    nil,
-		UserAgent:        "",
-		Debug:            false,
-		Servers:          gate2.ServerConfigurations{},
-		OperationServers: nil,
-		HTTPClient:       nil,
+	conf := gateway.Configuration{
+		BasePath:      baseUrl,
+		Host:          "",
+		Scheme:        "",
+		DefaultHeader: map[string]string{},
+		UserAgent:     "",
+		HTTPClient:    nil,
 	}
-	client := gate2.NewAPIClient(&conf)
-
+	client := gateway.NewAPIClient(&conf)
 	ctx := context.Background()
 	api, resp, err := client.HealthCheckingApi.HelloAPI(ctx, "hello")
 	if err != nil {
