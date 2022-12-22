@@ -24,135 +24,31 @@ var (
 	_ context.Context
 )
 
-type OAuthApiService service
+type OASAPIsApiService service
 /*
-OAuthApiService Authorize client
-With the OAuth flow you will need to create authorisation or access tokens for your clients, in order to do this, Tyk provides a private API endpoint for your application to generate these codes and redirect the end-user back to the API Client.
+OASAPIsApiService
+Create API with OAS format  A single Tyk node can have its API Definitions queried, deleted and updated remotely. This functionality enables you to remotely update your Tyk definitions without having to manage the files manually.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param responseType
- * @param clientId
- * @param redirectUri
- * @param keyRules
-@return interface{}
-*/
-func (a *OAuthApiService) AuthorizeClient(ctx context.Context, responseType string, clientId string, redirectUri string, keyRules string) (interface{}, *http.Response, error) {
-	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
-		localVarReturnValue interface{}
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/oauth/authorize-client/"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{"application/x-www-form-urlencoded"}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	localVarFormParams.Add("response_type", parameterToString(responseType, ""))
-	localVarFormParams.Add("client_id", parameterToString(clientId, ""))
-	localVarFormParams.Add("redirect_uri", parameterToString(redirectUri, ""))
-	localVarFormParams.Add("key_rules", parameterToString(keyRules, ""))
-	if ctx != nil {
-		// API Key Authentication
-		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
-			var key string
-			if auth.Prefix != "" {
-				key = auth.Prefix + " " + auth.Key
-			} else {
-				key = auth.Key
-			}
-			localVarHeaderParams["X-Tyk-Authorization"] = key
-			
-		}
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body: localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v interface{}
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
-				return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-/*
-OAuthApiService Create new OAuth client
-Any OAuth keys must be generated with the help of a client ID. These need to be pre-registered with Tyk before they can be used (in a similar vein to how you would register your app with Twitter before attempting to ask user permissions using their API). &lt;br/&gt;&lt;br/&gt; &lt;h3&gt;Creating OAuth clients with Access to Multiple APIs&lt;/h3&gt; New from Tyk Gateway 2.6.0 is the ability to create OAuth clients with access to more than one API. If you provide the api_id it works the same as in previous releases. If you don&#x27;t provide the api_id the request uses policy access rights and enumerates APIs from their setting in the newly created OAuth-client.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *OAuthApiCreateOAuthClientOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of NewClientRequest) - 
-@return NewClientRequest
+ * @param optional nil or *OASAPIsApiCreateApiOASOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of Schema) - 
+@return ApiModifyKeySuccess
 */
 
-type OAuthApiCreateOAuthClientOpts struct {
+type OASAPIsApiCreateApiOASOpts struct {
     Body optional.Interface
 }
 
-func (a *OAuthApiService) CreateOAuthClient(ctx context.Context, localVarOptionals *OAuthApiCreateOAuthClientOpts) (NewClientRequest, *http.Response, error) {
+func (a *OASAPIsApiService) CreateApiOAS(ctx context.Context, localVarOptionals *OASAPIsApiCreateApiOASOpts) (ApiModifyKeySuccess, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue NewClientRequest
+		localVarReturnValue ApiModifyKeySuccess
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/oauth/clients/create"
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/oas"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -224,7 +120,17 @@ func (a *OAuthApiService) CreateOAuthClient(ctx context.Context, localVarOptiona
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v NewClientRequest
+			var v ApiModifyKeySuccess
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ApiStatusMessage
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -239,34 +145,28 @@ func (a *OAuthApiService) CreateOAuthClient(ctx context.Context, localVarOptiona
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-OAuthApiService Delete OAuth client
-Please note that tokens issued with the client ID will still be valid until they expire.
+OASAPIsApiService
+Deleting an API definition will remove the file from the file store, the API definition will NOT be unloaded, a separate reload request will need to be made to disable the API endpoint.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param apiID The API ID
- * @param keyName The Client ID
-@return ApiModifyKeySuccess
+@return ApiStatusMessage
 */
-func (a *OAuthApiService) DeleteOAuthClient(ctx context.Context, apiID string, keyName string) (ApiModifyKeySuccess, *http.Response, error) {
+func (a *OASAPIsApiService) DeleteOASApi(ctx context.Context, apiID string) (ApiStatusMessage, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ApiModifyKeySuccess
+		localVarReturnValue ApiStatusMessage
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/oauth/clients/{apiID}/{keyName}"
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/oas/{apiID}"
 	localVarPath = strings.Replace(localVarPath, "{"+"apiID"+"}", fmt.Sprintf("%v", apiID), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"keyName"+"}", fmt.Sprintf("%v", keyName), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	apiIDTxt, err := atoi(apiID)
-	if apiIDTxt < 1 {
-		return localVarReturnValue, nil, reportError("apiID must be greater than 1")
-	}
 
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -284,6 +184,374 @@ func (a *OAuthApiService) DeleteOAuthClient(ctx context.Context, apiID string, k
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["X-Tyk-Authorization"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v ApiStatusMessage
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ApiStatusMessage
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+OASAPIsApiService
+Download all OAS format APIs, when used without the Tyk Dashboard.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param apiID The API ID
+ * @param optional nil or *OASAPIsApiDownloadApiOASPublicOpts - Optional Parameters:
+     * @param "Mode" (optional.String) -  Mode of OAS export, by default mode could be empty which means to export OAS spec including OAS Tyk extension.  When mode&#x3D;public, OAS spec excluding Tyk extension is exported
+@return OasSchemaResponse
+*/
+
+type OASAPIsApiDownloadApiOASPublicOpts struct {
+    Mode optional.String
+}
+
+func (a *OASAPIsApiService) DownloadApiOASPublic(ctx context.Context, apiID string, localVarOptionals *OASAPIsApiDownloadApiOASPublicOpts) (OasSchemaResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue OasSchemaResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/oas/{apiID}/export"
+	localVarPath = strings.Replace(localVarPath, "{"+"apiID"+"}", fmt.Sprintf("%v", apiID), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Mode.IsSet() {
+		localVarQueryParams.Add("mode", parameterToString(localVarOptionals.Mode.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["X-Tyk-Authorization"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v OasSchemaResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+OASAPIsApiService
+Download all OAS format APIs, when used without the Tyk Dashboard.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *OASAPIsApiDownloadApisOASPublicOpts - Optional Parameters:
+     * @param "Mode" (optional.String) -  The mode of OAS export. By default the mode is not set which means the OAS spec is exported including the OAS Tyk extension.   If the mode is set to public, the OAS spec excluding the Tyk extension is exported.
+@return []OasSchemaResponse
+*/
+
+type OASAPIsApiDownloadApisOASPublicOpts struct {
+    Mode optional.String
+}
+
+func (a *OASAPIsApiService) DownloadApisOASPublic(ctx context.Context, localVarOptionals *OASAPIsApiDownloadApisOASPublicOpts) ([]OasSchemaResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue []OasSchemaResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/oas/export"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Mode.IsSet() {
+		localVarQueryParams.Add("mode", parameterToString(localVarOptionals.Mode.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["X-Tyk-Authorization"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []OasSchemaResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+OASAPIsApiService
+Create a new OAS format API, without x-tyk-gateway. For use with an existing OAS API that you want to expose via your Tyk Gateway. (New)
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *OASAPIsApiImportOASOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of Schema) - 
+     * @param "UpstreamURL" (optional.String) -  Upstream URL for the API
+     * @param "ListenPath" (optional.String) -  Listen path for the API
+     * @param "CustomDomain" (optional.String) -  Custom domain for the API
+     * @param "ApiID" (optional.String) -  ID of the API
+     * @param "AllowList" (optional.Interface of BooleanQueryParam) -  Enable allowList middleware for all endpoints
+     * @param "ValidateRequest" (optional.Interface of BooleanQueryParam) -  Enable validateRequest middleware for all endpoints having a request body with media type application/json
+     * @param "Authentication" (optional.Interface of BooleanQueryParam) -  Enable or disable authentication in your Tyk Gateway as per your OAS document.
+@return ApiModifyKeySuccess
+*/
+
+type OASAPIsApiImportOASOpts struct {
+    Body optional.Interface
+    UpstreamURL optional.String
+    ListenPath optional.String
+    CustomDomain optional.String
+    ApiID optional.String
+    AllowList optional.Interface
+    ValidateRequest optional.Interface
+    Authentication optional.Interface
+}
+
+func (a *OASAPIsApiService) ImportOAS(ctx context.Context, localVarOptionals *OASAPIsApiImportOASOpts) (ApiModifyKeySuccess, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue ApiModifyKeySuccess
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/oas/import"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.UpstreamURL.IsSet() {
+		localVarQueryParams.Add("upstreamURL", parameterToString(localVarOptionals.UpstreamURL.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ListenPath.IsSet() {
+		localVarQueryParams.Add("listenPath", parameterToString(localVarOptionals.ListenPath.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.CustomDomain.IsSet() {
+		localVarQueryParams.Add("customDomain", parameterToString(localVarOptionals.CustomDomain.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ApiID.IsSet() {
+		localVarQueryParams.Add("apiID", parameterToString(localVarOptionals.ApiID.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.AllowList.IsSet() {
+		localVarQueryParams.Add("allowList", parameterToString(localVarOptionals.AllowList.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ValidateRequest.IsSet() {
+		localVarQueryParams.Add("validateRequest", parameterToString(localVarOptionals.ValidateRequest.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Authentication.IsSet() {
+		localVarQueryParams.Add("authentication", parameterToString(localVarOptionals.Authentication.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		
+		localVarOptionalBody:= localVarOptionals.Body.Value()
+		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
 		// API Key Authentication
@@ -337,40 +605,65 @@ func (a *OAuthApiService) DeleteOAuthClient(ctx context.Context, apiID string, k
 				newErr.model = v
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ApiStatusMessage
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 500 {
+			var v ApiStatusMessage
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-OAuthApiService Get OAuth client
+OASAPIsApiService
+Get API definition in OAS format Only if used without the Tyk Dashboard
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param apiID The API ID
- * @param keyName The Client ID
-@return NewClientRequest
+ * @param optional nil or *OASAPIsApiListApiOASOpts - Optional Parameters:
+     * @param "Mode" (optional.String) -  Mode of OAS get, by default mode could be empty which means to get OAS spec including OAS Tyk extension.  When mode&#x3D;public, OAS spec excluding Tyk extension will be returned in the response
+@return OasSchemaResponse
 */
-func (a *OAuthApiService) GetOAuthClient(ctx context.Context, apiID string, keyName string) (NewClientRequest, *http.Response, error) {
+
+type OASAPIsApiListApiOASOpts struct {
+    Mode optional.String
+}
+
+func (a *OASAPIsApiService) ListApiOAS(ctx context.Context, apiID string, localVarOptionals *OASAPIsApiListApiOASOpts) (OasSchemaResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue NewClientRequest
+		localVarReturnValue OasSchemaResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/oauth/clients/{apiID}/{keyName}"
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/oas/{apiID}"
 	localVarPath = strings.Replace(localVarPath, "{"+"apiID"+"}", fmt.Sprintf("%v", apiID), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"keyName"+"}", fmt.Sprintf("%v", keyName), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	apiIDTxt, err := atoi(apiID)
-	if apiIDTxt < 1 {
-		return localVarReturnValue, nil, reportError("apiID must be greater than 1")
-	}
 
+	if localVarOptionals != nil && localVarOptionals.Mode.IsSet() {
+		localVarQueryParams.Add("mode", parameterToString(localVarOptionals.Mode.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -431,7 +724,7 @@ func (a *OAuthApiService) GetOAuthClient(ctx context.Context, apiID string, keyN
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v NewClientRequest
+			var v OasSchemaResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -446,35 +739,37 @@ func (a *OAuthApiService) GetOAuthClient(ctx context.Context, apiID string, keyN
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-OAuthApiService List tokens
-This endpoint allows you to retrieve a list of all current tokens and their expiry date for a provided API ID and OAuth-client ID in the following format. This endpoint will work only for newly created tokens. &lt;br/&gt; &lt;br/&gt; You can control how long you want to store expired tokens in this list using &#x60;oauth_token_expired_retain_period&#x60; gateway option, which specifies retain period for expired tokens stored in Redis. By default expired token not get removed. See &lt;a href&#x3D;\&quot;https://tyk.io/docs/configure/tyk-gateway-configuration-options/#a-name-oauth-token-expired-retain-period-a-oauth-token-expired-retain-period\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt; for more details.
+OASAPIsApiService
+List all OAS format APIs, when used without the Tyk Dashboard.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param apiID The API ID
- * @param keyName The Client ID
-@return []string
+ * @param optional nil or *OASAPIsApiListApisOASOpts - Optional Parameters:
+     * @param "Mode" (optional.String) -  Mode of OAS get, by default mode could be empty which means to get OAS spec including OAS Tyk extension.  When mode&#x3D;public, OAS spec excluding Tyk extension will be returned in the response
+@return []OasSchemaResponse
 */
-func (a *OAuthApiService) GetOAuthClientTokens(ctx context.Context, apiID string, keyName string) ([]string, *http.Response, error) {
+
+type OASAPIsApiListApisOASOpts struct {
+    Mode optional.String
+}
+
+func (a *OASAPIsApiService) ListApisOAS(ctx context.Context, localVarOptionals *OASAPIsApiListApisOASOpts) ([]OasSchemaResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue []string
+		localVarReturnValue []OasSchemaResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/oauth/clients/{apiID}/{keyName}/tokens"
-	localVarPath = strings.Replace(localVarPath, "{"+"apiID"+"}", fmt.Sprintf("%v", apiID), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"keyName"+"}", fmt.Sprintf("%v", keyName), -1)
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/oas"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	apiIDTxt, err := atoi(apiID)
-	if apiIDTxt < 1 {
-		return localVarReturnValue, nil, reportError("apiID must be greater than 1")
-	}
 
+	if localVarOptionals != nil && localVarOptionals.Mode.IsSet() {
+		localVarQueryParams.Add("mode", parameterToString(localVarOptionals.Mode.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -535,7 +830,7 @@ func (a *OAuthApiService) GetOAuthClientTokens(ctx context.Context, apiID string
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []string
+			var v []OasSchemaResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -550,16 +845,34 @@ func (a *OAuthApiService) GetOAuthClientTokens(ctx context.Context, apiID string
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-OAuthApiService Invalidate OAuth refresh token
-It is possible to invalidate refresh tokens in order to manage OAuth client access more robustly.
+OASAPIsApiService Patch a single OAS API by ID
+Update API with OAS format. You can use this endpoint to update OAS part of the tyk API definition. This endpoint allows you to configure tyk OAS extension based on query params provided(similar to import)
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param apiId The API id
- * @param keyName Refresh token
+ * @param apiID The API ID
+ * @param optional nil or *OASAPIsApiPatchApiOASOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of Schema) - 
+     * @param "UpstreamURL" (optional.String) -  Upstream URL for the API
+     * @param "ListenPath" (optional.String) -  Listen path for the API
+     * @param "CustomDomain" (optional.String) -  Custom domain for the API
+     * @param "ValidateRequest" (optional.Interface of BooleanQueryParam) -  Enable validateRequest middleware for all endpoints having a request body with media type application/json
+     * @param "AllowList" (optional.Interface of BooleanQueryParam) -  Enable allowList middleware for all endpoints
+     * @param "Authentication" (optional.Interface of BooleanQueryParam) -  Enable or disable authentication in your Tyk Gateway as per your OAS document.
 @return ApiModifyKeySuccess
 */
-func (a *OAuthApiService) InvalidateOAuthRefresh(ctx context.Context, apiId string, keyName string) (ApiModifyKeySuccess, *http.Response, error) {
+
+type OASAPIsApiPatchApiOASOpts struct {
+    Body optional.Interface
+    UpstreamURL optional.String
+    ListenPath optional.String
+    CustomDomain optional.String
+    ValidateRequest optional.Interface
+    AllowList optional.Interface
+    Authentication optional.Interface
+}
+
+func (a *OASAPIsApiService) PatchApiOAS(ctx context.Context, apiID string, localVarOptionals *OASAPIsApiPatchApiOASOpts) (ApiModifyKeySuccess, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Delete")
+		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
@@ -567,16 +880,33 @@ func (a *OAuthApiService) InvalidateOAuthRefresh(ctx context.Context, apiId stri
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/oauth/refresh/{keyName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"keyName"+"}", fmt.Sprintf("%v", keyName), -1)
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/oas/{apiID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"apiID"+"}", fmt.Sprintf("%v", apiID), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	localVarQueryParams.Add("api_id", parameterToString(apiId, ""))
+	if localVarOptionals != nil && localVarOptionals.UpstreamURL.IsSet() {
+		localVarQueryParams.Add("upstreamURL", parameterToString(localVarOptionals.UpstreamURL.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ListenPath.IsSet() {
+		localVarQueryParams.Add("listenPath", parameterToString(localVarOptionals.ListenPath.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.CustomDomain.IsSet() {
+		localVarQueryParams.Add("customDomain", parameterToString(localVarOptionals.CustomDomain.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ValidateRequest.IsSet() {
+		localVarQueryParams.Add("validateRequest", parameterToString(localVarOptionals.ValidateRequest.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.AllowList.IsSet() {
+		localVarQueryParams.Add("allowList", parameterToString(localVarOptionals.AllowList.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Authentication.IsSet() {
+		localVarQueryParams.Add("authentication", parameterToString(localVarOptionals.Authentication.Value(), ""))
+	}
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -591,6 +921,12 @@ func (a *OAuthApiService) InvalidateOAuthRefresh(ctx context.Context, apiId stri
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		
+		localVarOptionalBody:= localVarOptionals.Body.Value()
+		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
 		// API Key Authentication
@@ -644,96 +980,18 @@ func (a *OAuthApiService) InvalidateOAuthRefresh(ctx context.Context, apiId stri
 				newErr.model = v
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-/*
-OAuthApiService List oAuth clients
-OAuth Clients are organised by API ID, and therefore are queried as such.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param apiID The API ID
-@return []NewClientRequest
-*/
-func (a *OAuthApiService) ListOAuthClients(ctx context.Context, apiID string) ([]NewClientRequest, *http.Response, error) {
-	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
-		localVarReturnValue []NewClientRequest
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/oauth/clients/{apiID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"apiID"+"}", fmt.Sprintf("%v", apiID), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	if ctx != nil {
-		// API Key Authentication
-		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
-			var key string
-			if auth.Prefix != "" {
-				key = auth.Prefix + " " + auth.Key
-			} else {
-				key = auth.Key
-			}
-			localVarHeaderParams["X-Tyk-Authorization"] = key
-			
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ApiStatusMessage
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
 		}
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body: localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v []NewClientRequest
+		if localVarHttpResponse.StatusCode == 500 {
+			var v ApiStatusMessage
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -748,191 +1006,30 @@ func (a *OAuthApiService) ListOAuthClients(ctx context.Context, apiID string) ([
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-OAuthApiService revoke all client&#x27;s tokens
-revoke all the tokens for a given oauth client
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param clientId
- * @param clientSecret
-
-*/
-func (a *OAuthApiService) RevokeAllTokens(ctx context.Context, clientId string, clientSecret string) (*http.Response, error) {
-	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
-		
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/oauth/revoke_all"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{"application/x-www-form-urlencoded"}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	localVarFormParams.Add("client_id", parameterToString(clientId, ""))
-	localVarFormParams.Add("client_secret", parameterToString(clientSecret, ""))
-	if ctx != nil {
-		// API Key Authentication
-		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
-			var key string
-			if auth.Prefix != "" {
-				key = auth.Prefix + " " + auth.Key
-			} else {
-				key = auth.Key
-			}
-			localVarHeaderParams["X-Tyk-Authorization"] = key
-			
-		}
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarHttpResponse, err
-	}
-
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body: localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		return localVarHttpResponse, newErr
-	}
-
-	return localVarHttpResponse, nil
-}
-/*
-OAuthApiService revoke token
-revoke a single token
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param token
- * @param clientId
- * @param tokenTypeHint
-
-*/
-func (a *OAuthApiService) RevokeSingleToken(ctx context.Context, token string, clientId string, tokenTypeHint string) (*http.Response, error) {
-	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
-		
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/oauth/revoke"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{"application/x-www-form-urlencoded"}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	localVarFormParams.Add("token", parameterToString(token, ""))
-	localVarFormParams.Add("client_id", parameterToString(clientId, ""))
-	localVarFormParams.Add("token_type_hint", parameterToString(tokenTypeHint, ""))
-	if ctx != nil {
-		// API Key Authentication
-		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
-			var key string
-			if auth.Prefix != "" {
-				key = auth.Prefix + " " + auth.Key
-			} else {
-				key = auth.Key
-			}
-			localVarHeaderParams["X-Tyk-Authorization"] = key
-			
-		}
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarHttpResponse, err
-	}
-
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body: localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		return localVarHttpResponse, newErr
-	}
-
-	return localVarHttpResponse, nil
-}
-/*
-OAuthApiService Update OAuth metadata and Policy ID
-Allows you to update the metadata and Policy ID for an OAuth client.
+OASAPIsApiService
+Updating an API definition uses the same signature an object as a &#x60;POST&#x60;, however it will first ensure that the API ID that is being updated is the same as the one in the object being &#x60;PUT&#x60;.   Updating will completely replace the file descriptor and will not change an API Definition that has already been loaded, the hot-reload endpoint will need to be called to push the new definition to live. 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param apiID The API ID
-@return []NewClientRequest
+ * @param optional nil or *OASAPIsApiUpdateApiOASOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of Schema) - 
+@return ApiModifyKeySuccess
 */
-func (a *OAuthApiService) UpdateoAuthClient(ctx context.Context, apiID string) ([]NewClientRequest, *http.Response, error) {
+
+type OASAPIsApiUpdateApiOASOpts struct {
+    Body optional.Interface
+}
+
+func (a *OASAPIsApiService) UpdateApiOAS(ctx context.Context, apiID string, localVarOptionals *OASAPIsApiUpdateApiOASOpts) (ApiModifyKeySuccess, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue []NewClientRequest
+		localVarReturnValue ApiModifyKeySuccess
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/tyk/oauth/clients/{apiID}"
+	localVarPath := a.client.cfg.BasePath + "/tyk/apis/oas/{apiID}"
 	localVarPath = strings.Replace(localVarPath, "{"+"apiID"+"}", fmt.Sprintf("%v", apiID), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -940,7 +1037,7 @@ func (a *OAuthApiService) UpdateoAuthClient(ctx context.Context, apiID string) (
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -955,6 +1052,12 @@ func (a *OAuthApiService) UpdateoAuthClient(ctx context.Context, apiID string) (
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		
+		localVarOptionalBody:= localVarOptionals.Body.Value()
+		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
 		// API Key Authentication
@@ -999,7 +1102,17 @@ func (a *OAuthApiService) UpdateoAuthClient(ctx context.Context, apiID string) (
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []NewClientRequest
+			var v ApiModifyKeySuccess
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ApiStatusMessage
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
