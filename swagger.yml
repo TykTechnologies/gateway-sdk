@@ -2872,7 +2872,7 @@ components:
         _id:
           $ref: '#/components/schemas/ObjectId'
           type: object
-          x-go-name: ID
+          x-go-name: MID
         id:
           type: string
           x-go-name: ID
