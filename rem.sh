@@ -1,0 +1,1 @@
+[ -e gateway ] && rm gateway

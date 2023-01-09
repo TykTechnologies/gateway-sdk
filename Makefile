@@ -4,6 +4,8 @@ codegen-sdk:
         --additional-properties=packageName=gateway \
         -l go \
         -o /local/gateway
+rm-gateway:
+	bash rem.sh
 
 gen:
 	oapi-codegen -generate types,client -package spec swagger.yaml > ./oapi/gen.go
