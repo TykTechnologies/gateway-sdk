@@ -1,5 +1,5 @@
 codegen-sdk:
-	 docker run --rm -v "${PWD}:/local" swaggerapi/swagger-codegen-cli-v3 generate \
+	 docker run --rm -v "${PWD}:/local" swaggerapi/swagger-codegen-cli-v3:3.0.22 generate \
         -i /local/swagger.yml \
         --additional-properties=packageName=gateway \
         -l go \
