@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Generate gateway sdks and commit them
         run: |
-          rm gateway
+          rm -r gateway
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
