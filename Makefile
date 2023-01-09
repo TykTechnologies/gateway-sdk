@@ -19,6 +19,6 @@ gateway-sdks:
          --additional-properties=isGoSubmodule=false,hideGenerationTimestamp=false,outputAsLibrary=true \
         -i /local/swagger.yml \
         -g go \
-        -o /local/gateway-dev
+        -o /local/gate
 
 
