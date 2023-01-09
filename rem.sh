@@ -1,2 +1,2 @@
 echo "hello"
-[ -e gateway ] && rm gateway
+[ ! -e file ] || rm file
