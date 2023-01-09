@@ -9,10 +9,6 @@ To install the sdk run
 
 `go get github.com/TykTechnologies/gateway-sdk`
 
-## Documentation
-
-For documentation please [look here](https://github.com/TykTechnologies/gateway-sdk/blob/main/gateway/README.md).
-
 ## Sample Usage
 In these samples tyk is running on localhost  port 8080 .[The BaseUrl is](http://localhost:8080) and the secret key is foo(change this to your actual key).
 
@@ -70,4 +66,7 @@ func main() {
   
   ```
 
+## Documentation
+
+For documentation please [look here](https://github.com/TykTechnologies/gateway-sdk/blob/main/gateway/README.md).
 
