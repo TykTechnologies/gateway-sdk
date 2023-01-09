@@ -1,1 +1,2 @@
-[ -e gateway ] && rm gateway
+echo "hello"
+#[ -e gateway ] && rm gateway
