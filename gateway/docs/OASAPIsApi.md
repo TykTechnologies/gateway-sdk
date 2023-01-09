@@ -15,23 +15,13 @@ Method | HTTP request | Description
 [**UpdateApiOAS**](OASAPIsApi.md#UpdateApiOAS) | **Put** /tyk/apis/oas/{apiID} | 
 
 # **CreateApiOAS**
-> ApiModifyKeySuccess CreateApiOAS(ctx, optional)
+> ApiModifyKeySuccess CreateApiOAS(ctx, )
 
 
 Create API with OAS format  A single Tyk node can have its API Definitions queried, deleted and updated remotely. This functionality enables you to remotely update your Tyk definitions without having to manage the files manually.
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***OASAPIsApiCreateApiOASOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a OASAPIsApiCreateApiOASOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**optional.Interface of Schema**](Schema.md)|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -49,17 +39,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteOASApi**
-> ApiStatusMessage DeleteOASApi(ctx, apiID)
+> ApiStatusMessage DeleteOASApi(ctx, )
 
 
 Deleting an API definition will remove the file from the file store, the API definition will NOT be unloaded, a separate reload request will need to be made to disable the API endpoint.
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **apiID** | **string**| The API ID | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -163,11 +149,10 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a pointer to a OASAPIsApiImportOASOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**optional.Interface of Schema**](Schema.md)|  | 
- **upstreamURL** | **optional.**| Upstream URL for the API | 
- **listenPath** | **optional.**| Listen path for the API | 
- **customDomain** | **optional.**| Custom domain for the API | 
- **apiID** | **optional.**| ID of the API | 
+ **upstreamURL** | **optional.String**| Upstream URL for the API | 
+ **listenPath** | **optional.String**| Listen path for the API | 
+ **customDomain** | **optional.String**| Custom domain for the API | 
+ **apiID** | **optional.String**| ID of the API | 
  **allowList** | [**optional.Interface of BooleanQueryParam**](.md)| Enable allowList middleware for all endpoints | 
  **validateRequest** | [**optional.Interface of BooleanQueryParam**](.md)| Enable validateRequest middleware for all endpoints having a request body with media type application/json | 
  **authentication** | [**optional.Interface of BooleanQueryParam**](.md)| Enable or disable authentication in your Tyk Gateway as per your OAS document. | 
@@ -276,10 +261,9 @@ Optional parameters are passed through a pointer to a OASAPIsApiPatchApiOASOpts 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | [**optional.Interface of Schema**](Schema.md)|  | 
- **upstreamURL** | **optional.**| Upstream URL for the API | 
- **listenPath** | **optional.**| Listen path for the API | 
- **customDomain** | **optional.**| Custom domain for the API | 
+ **upstreamURL** | **optional.String**| Upstream URL for the API | 
+ **listenPath** | **optional.String**| Listen path for the API | 
+ **customDomain** | **optional.String**| Custom domain for the API | 
  **validateRequest** | [**optional.Interface of BooleanQueryParam**](.md)| Enable validateRequest middleware for all endpoints having a request body with media type application/json | 
  **allowList** | [**optional.Interface of BooleanQueryParam**](.md)| Enable allowList middleware for all endpoints | 
  **authentication** | [**optional.Interface of BooleanQueryParam**](.md)| Enable or disable authentication in your Tyk Gateway as per your OAS document. | 
@@ -300,25 +284,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateApiOAS**
-> ApiModifyKeySuccess UpdateApiOAS(ctx, apiID, optional)
+> ApiModifyKeySuccess UpdateApiOAS(ctx, )
 
 
 Updating an API definition uses the same signature an object as a `POST`, however it will first ensure that the API ID that is being updated is the same as the one in the object being `PUT`.   Updating will completely replace the file descriptor and will not change an API Definition that has already been loaded, the hot-reload endpoint will need to be called to push the new definition to live. 
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **apiID** | **string**| The API ID | 
- **optional** | ***OASAPIsApiUpdateApiOASOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a OASAPIsApiUpdateApiOASOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **body** | [**optional.Interface of Schema**](Schema.md)|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 

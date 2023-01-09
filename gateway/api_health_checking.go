@@ -15,7 +15,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
 )
 
 // Linger please
@@ -124,10 +123,9 @@ func (a *HealthCheckingApiService) Hello(ctx context.Context) (string, *http.Res
 HealthCheckingApiService Check the Health of the API
 Should point to API domain if it has its own
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param listenPath Listen path of loaded API
 @return string
 */
-func (a *HealthCheckingApiService) HelloAPI(ctx context.Context, listenPath string) (string, *http.Response, error) {
+func (a *HealthCheckingApiService) HelloAPI(ctx context.Context) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -138,7 +136,6 @@ func (a *HealthCheckingApiService) HelloAPI(ctx context.Context, listenPath stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/tyk/{listenPath}/hello"
-	localVarPath = strings.Replace(localVarPath, "{"+"listenPath"+"}", fmt.Sprintf("%v", listenPath), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

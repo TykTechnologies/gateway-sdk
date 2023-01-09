@@ -7,15 +7,11 @@ Method | HTTP request | Description
 [**Batch**](BatchRequestsApi.md#Batch) | **Post** /{listen_path}/tyk/batch | Run batch request
 
 # **Batch**
-> Batch(ctx, listenPath)
+> Batch(ctx, )
 Run batch request
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **listenPath** | **string**| API listen path | 
+This endpoint does not need any parameter.
 
 ### Return type
 

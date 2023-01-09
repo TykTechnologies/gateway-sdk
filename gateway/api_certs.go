@@ -253,7 +253,7 @@ List All Certificates in the Tyk Gateway
  * @param optional nil or *CertsApiListCertsOpts - Optional Parameters:
      * @param "Mode" (optional.String) -  Mode to list the certificate details
      * @param "CertID" (optional.String) -  Comma separated list of certificates to list
-@return InlineResponse200
+@return Object
 */
 
 type CertsApiListCertsOpts struct {
@@ -261,13 +261,13 @@ type CertsApiListCertsOpts struct {
     CertID optional.String
 }
 
-func (a *CertsApiService) ListCerts(ctx context.Context, orgId string, localVarOptionals *CertsApiListCertsOpts) (InlineResponse200, *http.Response, error) {
+func (a *CertsApiService) ListCerts(ctx context.Context, orgId string, localVarOptionals *CertsApiListCertsOpts) (Object, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse200
+		localVarReturnValue Object
 	)
 
 	// create path and map variables
@@ -344,7 +344,7 @@ func (a *CertsApiService) ListCerts(ctx context.Context, orgId string, localVarO
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse200
+			var v Object
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

@@ -32,17 +32,13 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **HelloAPI**
-> string HelloAPI(ctx, listenPath)
+> string HelloAPI(ctx, )
 Check the Health of the API
 
 Should point to API domain if it has its own
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **listenPath** | **string**| Listen path of loaded API | 
+This endpoint does not need any parameter.
 
 ### Return type
 

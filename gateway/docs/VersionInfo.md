@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Paths** | [***VersionInfoPaths**](VersionInfo_paths.md) |  | [optional] [default to null]
+**Paths** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 **Expires** | **string** |  | [optional] [default to null]
 **ExtendedPaths** | [***ExtendedPathsSet**](ExtendedPathsSet.md) |  | [optional] [default to null]
 **GlobalHeaders** | **map[string]string** |  | [optional] [default to null]

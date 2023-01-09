@@ -16,7 +16,7 @@ type SessionState struct {
 	Allowance float64 `json:"allowance,omitempty"`
 	ApplyPolicies []string `json:"apply_policies,omitempty"`
 	ApplyPolicyId string `json:"apply_policy_id,omitempty"`
-	BasicAuthData *SessionStateBasicAuthData `json:"basic_auth_data,omitempty"`
+	BasicAuthData *interface{} `json:"basic_auth_data,omitempty"`
 	Certificate string `json:"certificate,omitempty"`
 	DataExpires int64 `json:"data_expires,omitempty"`
 	EnableDetailRecording bool `json:"enable_detail_recording,omitempty"`
@@ -25,11 +25,11 @@ type SessionState struct {
 	HmacString string `json:"hmac_string,omitempty"`
 	IdExtractorDeadline int64 `json:"id_extractor_deadline,omitempty"`
 	IsInactive bool `json:"is_inactive,omitempty"`
-	JwtData *SessionStateJwtData `json:"jwt_data,omitempty"`
+	JwtData *interface{} `json:"jwt_data,omitempty"`
 	LastCheck int64 `json:"last_check,omitempty"`
 	LastUpdated string `json:"last_updated,omitempty"`
 	MetaData map[string]interface{} `json:"meta_data,omitempty"`
-	Monitor *SessionStateMonitor `json:"monitor,omitempty"`
+	Monitor *interface{} `json:"monitor,omitempty"`
 	OauthClientId string `json:"oauth_client_id,omitempty"`
 	OauthKeys map[string]string `json:"oauth_keys,omitempty"`
 	OrgId string `json:"org_id,omitempty"`

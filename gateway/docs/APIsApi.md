@@ -45,17 +45,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteApi**
-> ApiStatusMessage DeleteApi(ctx, apiID)
+> ApiStatusMessage DeleteApi(ctx, )
 
 
 Deleting an API definition will remove the file from the file store, the API definition will NOT be unloaded, a separate reload request will need to be made to disable the API endpoint.
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **apiID** | **string**| The API ID | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -73,17 +69,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetApi**
-> ApiDefinition GetApi(ctx, apiID)
+> ApiDefinition GetApi(ctx, )
 
 
 Get API definition Only if used without the Tyk Dashboard
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **apiID** | **string**| The API ID | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -125,7 +117,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateApi**
-> ApiModifyKeySuccess UpdateApi(ctx, apiID, optional)
+> ApiModifyKeySuccess UpdateApi(ctx, optional)
 
 
 Updating an API definition uses the same signature an object as a `POST`, however it will first ensure that the API ID that is being updated is the same as the one in the object being `PUT`.   Updating will completely replace the file descriptor and will not change an API Definition that has already been loaded, the hot-reload endpoint will need to be called to push the new definition to live. 
@@ -135,14 +127,12 @@ Updating an API definition uses the same signature an object as a `POST`, howeve
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **apiID** | **string**| The API ID | 
  **optional** | ***APIsApiUpdateApiOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a APIsApiUpdateApiOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
  **body** | [**optional.Interface of ApiDefinition**](ApiDefinition.md)|  | 
 
 ### Return type

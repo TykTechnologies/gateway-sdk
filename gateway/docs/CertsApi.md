@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListCerts**
-> InlineResponse200 ListCerts(ctx, orgId, optional)
+> Object ListCerts(ctx, orgId, optional)
 List Certificates
 
 List All Certificates in the Tyk Gateway
@@ -97,7 +97,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](inline_response_200.md)
+**Object**
 
 ### Authorization
 

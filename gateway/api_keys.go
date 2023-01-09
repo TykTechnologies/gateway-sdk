@@ -274,10 +274,9 @@ func (a *KeysApiService) CreateCustomKey(ctx context.Context, keyID string, loca
 KeysApiService Delete Key
 Deleting a key will remove it permanently from the system, however analytics relating to that key will still be available.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param keyID The Key ID
 @return ApiStatusMessage
 */
-func (a *KeysApiService) DeleteKey(ctx context.Context, keyID string) (ApiStatusMessage, *http.Response, error) {
+func (a *KeysApiService) DeleteKey(ctx context.Context) (ApiStatusMessage, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -288,7 +287,6 @@ func (a *KeysApiService) DeleteKey(ctx context.Context, keyID string) (ApiStatus
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/tyk/keys/{keyID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"keyID"+"}", fmt.Sprintf("%v", keyID), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -372,10 +370,9 @@ func (a *KeysApiService) DeleteKey(ctx context.Context, keyID string) (ApiStatus
 KeysApiService Get a Key
 Get session info about the specified key. Should return up to date rate limit and quota usage numbers.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param keyID The Key ID
 @return SessionState
 */
-func (a *KeysApiService) GetKey(ctx context.Context, keyID string) (SessionState, *http.Response, error) {
+func (a *KeysApiService) GetKey(ctx context.Context) (SessionState, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -386,7 +383,6 @@ func (a *KeysApiService) GetKey(ctx context.Context, keyID string) (SessionState
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/tyk/keys/{keyID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"keyID"+"}", fmt.Sprintf("%v", keyID), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

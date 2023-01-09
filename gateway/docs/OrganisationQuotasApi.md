@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**UpdateOrgKey**](OrganisationQuotasApi.md#UpdateOrgKey) | **Put** /tyk/org/keys/{keyID} | Update Organisation Key
 
 # **AddOrgKey**
-> ApiModifyKeySuccess AddOrgKey(ctx, keyID, optional)
+> ApiModifyKeySuccess AddOrgKey(ctx, optional)
 Create an organisation key
 
 This work similar to Keys API except that Key ID is always equals Organisation ID
@@ -21,14 +21,12 @@ This work similar to Keys API except that Key ID is always equals Organisation I
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **keyID** | **string**| The Key ID | 
  **optional** | ***OrganisationQuotasApiAddOrgKeyOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a OrganisationQuotasApiAddOrgKeyOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
  **body** | [**optional.Interface of SessionState**](SessionState.md)|  | 
 
 ### Return type
@@ -47,17 +45,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteOrgKey**
-> ApiStatusMessage DeleteOrgKey(ctx, keyID)
+> ApiStatusMessage DeleteOrgKey(ctx, )
 Delete Organisation Key
 
 Deleting a key will remove all limits from organisation. It does not affects regualar keys created within organisation.
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **keyID** | **string**| The Key ID | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -75,17 +69,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetOrgKey**
-> SessionState GetOrgKey(ctx, keyID)
+> SessionState GetOrgKey(ctx, )
 Get an Organisation Key
 
 Get session info about specified orgnanisation key. Should return up to date rate limit and quota usage numbers.
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **keyID** | **string**| The Key ID | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -103,7 +93,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListOrgKeys**
-> InlineResponse2001 ListOrgKeys(ctx, )
+> interface{} ListOrgKeys(ctx, )
 List Organisation Keys
 
 You can now set rate limits at the organisation level by using the following fields - allowance and rate. These are the number of allowed requests for the specified per value, and need to be set to the same value. If you don't want to have organisation level rate limiting, set 'rate' or 'per' to zero, or don't add them to your request.
@@ -113,7 +103,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2001**](inline_response_200_1.md)
+[**interface{}**](interface{}.md)
 
 ### Authorization
 

@@ -15,7 +15,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
 )
 
 // Linger please
@@ -27,10 +26,9 @@ type BatchRequestsApiService service
 /*
 BatchRequestsApiService Run batch request
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param listenPath API listen path
 
 */
-func (a *BatchRequestsApiService) Batch(ctx context.Context, listenPath string) (*http.Response, error) {
+func (a *BatchRequestsApiService) Batch(ctx context.Context) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -41,7 +39,6 @@ func (a *BatchRequestsApiService) Batch(ctx context.Context, listenPath string) 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/{listen_path}/tyk/batch"
-	localVarPath = strings.Replace(localVarPath, "{"+"listen_path"+"}", fmt.Sprintf("%v", listenPath), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

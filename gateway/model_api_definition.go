@@ -10,14 +10,14 @@ package gateway
 
 type ApiDefinition struct {
 	Tags []string `json:"tags,omitempty"`
-	CORS *ApiDefinitionCors `json:"CORS,omitempty"`
+	CORS *interface{} `json:"CORS,omitempty"`
 	Active bool `json:"active,omitempty"`
 	AllowedIps []string `json:"allowed_ips,omitempty"`
 	ApiId string `json:"api_id,omitempty"`
 	Auth *Auth `json:"auth,omitempty"`
 	AuthProvider *AuthProviderMeta `json:"auth_provider,omitempty"`
 	BaseIdentityProvidedBy string `json:"base_identity_provided_by,omitempty"`
-	BasicAuth *ApiDefinitionBasicAuth `json:"basic_auth,omitempty"`
+	BasicAuth *interface{} `json:"basic_auth,omitempty"`
 	BlacklistedIps []string `json:"blacklisted_ips,omitempty"`
 	CacheOptions *CacheOptions `json:"cache_options,omitempty"`
 	Certificates []string `json:"certificates,omitempty"`
@@ -25,7 +25,7 @@ type ApiDefinition struct {
 	ConfigData map[string]interface{} `json:"config_data,omitempty"`
 	CustomMiddleware *MiddlewareSection `json:"custom_middleware,omitempty"`
 	CustomMiddlewareBundle string `json:"custom_middleware_bundle,omitempty"`
-	Definition *ApiDefinitionDefinition `json:"definition,omitempty"`
+	Definition *interface{} `json:"definition,omitempty"`
 	DisableQuota bool `json:"disable_quota,omitempty"`
 	DisableRateLimit bool `json:"disable_rate_limit,omitempty"`
 	DoNotTrack bool `json:"do_not_track,omitempty"`
@@ -58,11 +58,11 @@ type ApiDefinition struct {
 	JwtSource string `json:"jwt_source,omitempty"`
 	Name string `json:"name,omitempty"`
 	Notifications *NotificationsManager `json:"notifications,omitempty"`
-	OauthMeta *ApiDefinitionOauthMeta `json:"oauth_meta,omitempty"`
+	OauthMeta *interface{} `json:"oauth_meta,omitempty"`
 	OpenidOptions *OpenIdOptions `json:"openid_options,omitempty"`
 	OrgId string `json:"org_id,omitempty"`
 	PinnedPublicKeys map[string]string `json:"pinned_public_keys,omitempty"`
-	Proxy *ApiDefinitionProxy `json:"proxy,omitempty"`
+	Proxy *interface{} `json:"proxy,omitempty"`
 	ResponseProcessors []ResponseProcessor `json:"response_processors,omitempty"`
 	SessionLifetime int64 `json:"session_lifetime,omitempty"`
 	SessionProvider *SessionProviderMeta `json:"session_provider,omitempty"`
@@ -70,12 +70,12 @@ type ApiDefinition struct {
 	StripAuthData bool `json:"strip_auth_data,omitempty"`
 	TagHeaders []string `json:"tag_headers,omitempty"`
 	UpstreamCertificates map[string]string `json:"upstream_certificates,omitempty"`
-	UptimeTests *ApiDefinitionUptimeTests `json:"uptime_tests,omitempty"`
+	UptimeTests *interface{} `json:"uptime_tests,omitempty"`
 	UseBasicAuth bool `json:"use_basic_auth,omitempty"`
 	UseKeyless bool `json:"use_keyless,omitempty"`
 	UseMutualTlsAuth bool `json:"use_mutual_tls_auth,omitempty"`
 	UseOauth2 bool `json:"use_oauth2,omitempty"`
 	UseOpenid bool `json:"use_openid,omitempty"`
 	UseStandardAuth bool `json:"use_standard_auth,omitempty"`
-	VersionData *ApiDefinitionVersionData `json:"version_data,omitempty"`
+	VersionData *interface{} `json:"version_data,omitempty"`
 }

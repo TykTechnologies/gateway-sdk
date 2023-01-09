@@ -9,7 +9,7 @@
 package gateway
 
 type VersionInfo struct {
-	Paths *VersionInfoPaths `json:"paths,omitempty"`
+	Paths *interface{} `json:"paths,omitempty"`
 	Expires string `json:"expires,omitempty"`
 	ExtendedPaths *ExtendedPathsSet `json:"extended_paths,omitempty"`
 	GlobalHeaders map[string]string `json:"global_headers,omitempty"`

@@ -29,7 +29,6 @@ type OrganisationQuotasApiService service
 OrganisationQuotasApiService Create an organisation key
 This work similar to Keys API except that Key ID is always equals Organisation ID
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param keyID The Key ID
  * @param optional nil or *OrganisationQuotasApiAddOrgKeyOpts - Optional Parameters:
      * @param "Body" (optional.Interface of SessionState) - 
 @return ApiModifyKeySuccess
@@ -39,7 +38,7 @@ type OrganisationQuotasApiAddOrgKeyOpts struct {
     Body optional.Interface
 }
 
-func (a *OrganisationQuotasApiService) AddOrgKey(ctx context.Context, keyID string, localVarOptionals *OrganisationQuotasApiAddOrgKeyOpts) (ApiModifyKeySuccess, *http.Response, error) {
+func (a *OrganisationQuotasApiService) AddOrgKey(ctx context.Context, localVarOptionals *OrganisationQuotasApiAddOrgKeyOpts) (ApiModifyKeySuccess, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -50,7 +49,6 @@ func (a *OrganisationQuotasApiService) AddOrgKey(ctx context.Context, keyID stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/tyk/org/keys/{keyID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"keyID"+"}", fmt.Sprintf("%v", keyID), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -140,10 +138,9 @@ func (a *OrganisationQuotasApiService) AddOrgKey(ctx context.Context, keyID stri
 OrganisationQuotasApiService Delete Organisation Key
 Deleting a key will remove all limits from organisation. It does not affects regualar keys created within organisation.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param keyID The Key ID
 @return ApiStatusMessage
 */
-func (a *OrganisationQuotasApiService) DeleteOrgKey(ctx context.Context, keyID string) (ApiStatusMessage, *http.Response, error) {
+func (a *OrganisationQuotasApiService) DeleteOrgKey(ctx context.Context) (ApiStatusMessage, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -154,7 +151,6 @@ func (a *OrganisationQuotasApiService) DeleteOrgKey(ctx context.Context, keyID s
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/tyk/org/keys/{keyID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"keyID"+"}", fmt.Sprintf("%v", keyID), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -238,10 +234,9 @@ func (a *OrganisationQuotasApiService) DeleteOrgKey(ctx context.Context, keyID s
 OrganisationQuotasApiService Get an Organisation Key
 Get session info about specified orgnanisation key. Should return up to date rate limit and quota usage numbers.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param keyID The Key ID
 @return SessionState
 */
-func (a *OrganisationQuotasApiService) GetOrgKey(ctx context.Context, keyID string) (SessionState, *http.Response, error) {
+func (a *OrganisationQuotasApiService) GetOrgKey(ctx context.Context) (SessionState, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -252,7 +247,6 @@ func (a *OrganisationQuotasApiService) GetOrgKey(ctx context.Context, keyID stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/tyk/org/keys/{keyID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"keyID"+"}", fmt.Sprintf("%v", keyID), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -336,15 +330,15 @@ func (a *OrganisationQuotasApiService) GetOrgKey(ctx context.Context, keyID stri
 OrganisationQuotasApiService List Organisation Keys
 You can now set rate limits at the organisation level by using the following fields - allowance and rate. These are the number of allowed requests for the specified per value, and need to be set to the same value. If you don&#x27;t want to have organisation level rate limiting, set &#x27;rate&#x27; or &#x27;per&#x27; to zero, or don&#x27;t add them to your request.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return InlineResponse2001
+@return interface{}
 */
-func (a *OrganisationQuotasApiService) ListOrgKeys(ctx context.Context) (InlineResponse2001, *http.Response, error) {
+func (a *OrganisationQuotasApiService) ListOrgKeys(ctx context.Context) (interface{}, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue InlineResponse2001
+		localVarReturnValue interface{}
 	)
 
 	// create path and map variables
@@ -414,7 +408,7 @@ func (a *OrganisationQuotasApiService) ListOrgKeys(ctx context.Context) (InlineR
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v InlineResponse2001
+			var v interface{}
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

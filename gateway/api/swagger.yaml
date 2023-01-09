@@ -32,19 +32,19 @@ security:
 - api_key: []
 tags:
 - name: Keys
-  description: "All keys that are used to access services via Tyk correspond to a\
-    \ session object that informs Tyk about the context of this particular token,\
-    \ like access rules and rate/quota allowance."
+  description: All keys that are used to access services via Tyk correspond to a session
+    object that informs Tyk about the context of this particular token, like access
+    rules and rate/quota allowance.
 - name: Policies
   description: A Tyk security policy incorporates several security options that can
     be applied to an API key. It acts as a template that can override individual sections
     of an API key (or identity) in Tyk.
 - name: OAuth
-  description: "Manage OAuth clients, and manage their tokens"
+  description: Manage OAuth clients, and manage their tokens
 - name: Cache Invalidation
-  description: "Sometimes a cache might contain stale data, or it may just need to\
-    \ be cleared because of an invalid configuration. This call will purge all keys\
-    \ associated with a cache on an API-by-API basis."
+  description: Sometimes a cache might contain stale data, or it may just need to
+    be cleared because of an invalid configuration. This call will purge all keys
+    associated with a cache on an API-by-API basis.
 - name: Hot Reload
   description: Force restart of the Gateway or whole cluster
 - name: Health Checking
@@ -301,7 +301,7 @@ paths:
               example:
                 status: ok
                 action: created
-                key: "{...API JSON definition...}"
+                key: '{...API JSON definition...}'
         "400":
           description: Malformed data
           content:
@@ -315,7 +315,7 @@ paths:
     get:
       tags:
       - OASAPIs
-      description: "List all OAS format APIs, when used without the Tyk Dashboard."
+      description: List all OAS format APIs, when used without the Tyk Dashboard.
       operationId: listApisOAS
       parameters:
       - name: mode
@@ -350,7 +350,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/schema'
+              $ref: https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json
       responses:
         "200":
           description: API created
@@ -361,7 +361,7 @@ paths:
               example:
                 status: ok
                 action: created
-                key: "{...API JSON definition...}"
+                key: '{...API JSON definition...}'
         "400":
           description: Malformed data
           content:
@@ -379,15 +379,6 @@ paths:
         Get API definition
         Only if used without the Tyk Dashboard
       operationId: getApi
-      parameters:
-      - name: apiID
-        in: path
-        description: The API ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           description: API definition
@@ -417,15 +408,6 @@ paths:
 
         Updating will completely replace the file descriptor and will not change an API Definition that has already been loaded, the hot-reload endpoint will need to be called to push the new definition to live.
       operationId: updateApi
-      parameters:
-      - name: apiID
-        in: path
-        description: The API ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
@@ -447,7 +429,7 @@ paths:
               example:
                 status: ok
                 action: updated
-                key: "{...API JSON definition...}"
+                key: '{...API JSON definition...}'
         "400":
           description: Malformed data
           content:
@@ -460,19 +442,10 @@ paths:
     delete:
       tags:
       - APIs
-      description: "Deleting an API definition will remove the file from the file\
-        \ store, the API definition will NOT be unloaded, a separate reload request\
-        \ will need to be made to disable the API endpoint."
+      description: Deleting an API definition will remove the file from the file store,
+        the API definition will NOT be unloaded, a separate reload request will need
+        to be made to disable the API endpoint.
       operationId: deleteApi
-      parameters:
-      - name: apiID
-        in: path
-        description: The API ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           description: API deleted
@@ -492,6 +465,15 @@ paths:
               example:
                 message: API ID not specified
                 status: error
+    parameters:
+    - name: apiID
+      in: path
+      description: The API ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
   /tyk/apis/oas/{apiID}:
     get:
       tags:
@@ -501,14 +483,6 @@ paths:
         Only if used without the Tyk Dashboard
       operationId: listApiOAS
       parameters:
-      - name: apiID
-        in: path
-        description: The API ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       - name: mode
         in: query
         description: "Mode of OAS get, by default mode could be empty which means\
@@ -520,6 +494,14 @@ paths:
         schema:
           type: string
         example: public
+      - name: apiID
+        in: path
+        description: The API ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
         "200":
           description: API definition
@@ -543,20 +525,11 @@ paths:
 
         Updating will completely replace the file descriptor and will not change an API Definition that has already been loaded, the hot-reload endpoint will need to be called to push the new definition to live.
       operationId: updateApiOAS
-      parameters:
-      - name: apiID
-        in: path
-        description: The API ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/schema'
+              $ref: https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json
       responses:
         "200":
           description: API updated
@@ -567,7 +540,7 @@ paths:
               example:
                 status: ok
                 action: updated
-                key: "{...API JSON definition...}"
+                key: '{...API JSON definition...}'
         "400":
           description: Malformed data
           content:
@@ -580,19 +553,10 @@ paths:
     delete:
       tags:
       - OASAPIs
-      description: "Deleting an API definition will remove the file from the file\
-        \ store, the API definition will NOT be unloaded, a separate reload request\
-        \ will need to be made to disable the API endpoint."
+      description: Deleting an API definition will remove the file from the file store,
+        the API definition will NOT be unloaded, a separate reload request will need
+        to be made to disable the API endpoint.
       operationId: deleteOASApi
-      parameters:
-      - name: apiID
-        in: path
-        description: The API ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           description: API deleted
@@ -621,6 +585,12 @@ paths:
         This endpoint allows you to configure tyk OAS extension based on query params provided(similar to import)
       operationId: patchApiOAS
       parameters:
+      - $ref: '#/components/parameters/UpstreamURL'
+      - $ref: '#/components/parameters/ListenPath'
+      - $ref: '#/components/parameters/CustomDomain'
+      - $ref: '#/components/parameters/ValidateRequest'
+      - $ref: '#/components/parameters/AllowList'
+      - $ref: '#/components/parameters/Authentication'
       - name: apiID
         in: path
         description: The API ID
@@ -629,61 +599,11 @@ paths:
         explode: false
         schema:
           type: string
-      - name: upstreamURL
-        in: query
-        description: Upstream URL for the API
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: listenPath
-        in: query
-        description: Listen path for the API
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: customDomain
-        in: query
-        description: Custom domain for the API
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: validateRequest
-        in: query
-        description: Enable validateRequest middleware for all endpoints having a
-          request body with media type application/json
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/BooleanQueryParam'
-      - name: allowList
-        in: query
-        description: Enable allowList middleware for all endpoints
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/BooleanQueryParam'
-      - name: authentication
-        in: query
-        description: Enable or disable authentication in your Tyk Gateway as per your
-          OAS document.
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/BooleanQueryParam'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/schema'
+              $ref: https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json
       responses:
         "200":
           description: API patched
@@ -694,7 +614,7 @@ paths:
               example:
                 status: ok
                 action: modified
-                key: "{updated APIID}"
+                key: '{updated APIID}'
         "400":
           description: Bad request
           content:
@@ -716,7 +636,7 @@ paths:
                   summary: When the client sends and APIID which doesn't exists in
                     tyk gw
                   value:
-                    message: "No API found for APIID {APIID}"
+                    message: No API found for APIID {APIID}
                     status: error
                 invalidUpstreamURL:
                   summary: When the client sends query param upstreamURL which isn't
@@ -733,24 +653,25 @@ paths:
               example:
                 summary: dashboard app configs is used for tyk api definitions
                 value:
-                  message: "Due to enabled use_db_app_configs, please use the Dashboard\
-                    \ API"
+                  message: Due to enabled use_db_app_configs, please use the Dashboard
+                    API
                   status: error
+    parameters:
+    - name: apiID
+      in: path
+      description: The API ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
   /tyk/apis/oas/{apiID}/export:
     get:
       tags:
       - OASAPIs
-      description: "Download all OAS format APIs, when used without the Tyk Dashboard."
+      description: Download all OAS format APIs, when used without the Tyk Dashboard.
       operationId: downloadApiOASPublic
       parameters:
-      - name: apiID
-        in: path
-        description: The API ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       - name: mode
         in: query
         description: "Mode of OAS export, by default mode could be empty which means\
@@ -762,6 +683,14 @@ paths:
         schema:
           type: string
         example: public
+      - name: apiID
+        in: path
+        description: The API ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
         "200":
           description: API definition
@@ -769,11 +698,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OASSchemaResponse'
+    parameters:
+    - name: apiID
+      in: path
+      description: The API ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
   /tyk/apis/oas/export:
     get:
       tags:
       - OASAPIs
-      description: "Download all OAS format APIs, when used without the Tyk Dashboard."
+      description: Download all OAS format APIs, when used without the Tyk Dashboard.
       operationId: downloadApisOASPublic
       parameters:
       - name: mode
@@ -807,69 +745,18 @@ paths:
         For use with an existing OAS API that you want to expose via your Tyk Gateway. (New)
       operationId: importOAS
       parameters:
-      - name: upstreamURL
-        in: query
-        description: Upstream URL for the API
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: listenPath
-        in: query
-        description: Listen path for the API
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: customDomain
-        in: query
-        description: Custom domain for the API
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: apiID
-        in: query
-        description: ID of the API
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: allowList
-        in: query
-        description: Enable allowList middleware for all endpoints
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/BooleanQueryParam'
-      - name: validateRequest
-        in: query
-        description: Enable validateRequest middleware for all endpoints having a
-          request body with media type application/json
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/BooleanQueryParam'
-      - name: authentication
-        in: query
-        description: Enable or disable authentication in your Tyk Gateway as per your
-          OAS document.
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/BooleanQueryParam'
+      - $ref: '#/components/parameters/UpstreamURL'
+      - $ref: '#/components/parameters/ListenPath'
+      - $ref: '#/components/parameters/CustomDomain'
+      - $ref: '#/components/parameters/ApiID'
+      - $ref: '#/components/parameters/AllowList'
+      - $ref: '#/components/parameters/ValidateRequest'
+      - $ref: '#/components/parameters/Authentication'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/schema'
+              $ref: https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json
       responses:
         "200":
           description: API definition created
@@ -880,7 +767,7 @@ paths:
               example:
                 status: ok
                 action: added
-                key: "{created APIID}"
+                key: '{created APIID}'
         "400":
           description: Bad request
           content:
@@ -909,8 +796,8 @@ paths:
               example:
                 summary: Tyk Dashboard app configs are being used for Tyk API definitions
                 value:
-                  message: "Due to enabled use_db_app_configs, please use the Dashboard\
-                    \ API"
+                  message: Due to enabled use_db_app_configs, please use the Dashboard
+                    API
                   status: error
   /tyk/cache/{apiID}:
     delete:
@@ -919,15 +806,6 @@ paths:
       summary: Invalidate cache
       description: Invalidate cache for the given API
       operationId: invalidateCache
-      parameters:
-      - name: apiID
-        in: path
-        description: The API ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           description: Invalidate cache
@@ -938,15 +816,24 @@ paths:
               example:
                 message: cache invalidated
                 status: ok
+    parameters:
+    - name: apiID
+      in: path
+      description: The API ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
   /tyk/reload/:
     get:
       tags:
       - Hot Reload
       summary: Hot-reload a single node
-      description: "Tyk is capable of reloading configurations without having to stop\
-        \ serving requests. This means that API configurations can be added at runtime,\
-        \ or even modified at runtime and those rules applied immediately without\
-        \ any downtime."
+      description: Tyk is capable of reloading configurations without having to stop
+        serving requests. This means that API configurations can be added at runtime,
+        or even modified at runtime and those rules applied immediately without any
+        downtime.
       operationId: hotReload
       parameters:
       - name: block
@@ -974,11 +861,11 @@ paths:
       tags:
       - Hot Reload
       summary: Hot-reload a Tyk group
-      description: "To reload a whole group of Tyk nodes (without using the Dashboard\
-        \ or host manager). You can send an API request to a single node, this node\
-        \ will then send a notification through the pub/sub infrastructure to all\
-        \ other listening nodes (including the host manager if it is being used to\
-        \ manage NginX) which will then trigger a global reload."
+      description: To reload a whole group of Tyk nodes (without using the Dashboard
+        or host manager). You can send an API request to a single node, this node
+        will then send a notification through the pub/sub infrastructure to all other
+        listening nodes (including the host manager if it is being used to manage
+        NginX) which will then trigger a global reload.
       operationId: hotReloadGroup
       responses:
         "200":
@@ -1015,15 +902,6 @@ paths:
       summary: Check the Health of the API
       description: Should point to API domain if it has its own
       operationId: helloAPI
-      parameters:
-      - name: listenPath
-        in: path
-        description: Listen path of loaded API
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           description: Success
@@ -1033,6 +911,15 @@ paths:
                 type: string
                 x-content-type: text/html
               example: Hello Tiki
+    parameters:
+    - name: listenPath
+      in: path
+      description: Listen path of loaded API
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
   /tyk/certs:
     get:
       tags:
@@ -1066,14 +953,20 @@ paths:
         explode: true
         schema:
           type: string
-        example: "e6ce2b49-3e31-44de-95a7-12f054724283,234a37ac-28d1-4f12-b936-ffb4211b79f1"
+        example: e6ce2b49-3e31-44de-95a7-12f054724283,234a37ac-28d1-4f12-b936-ffb4211b79f1
       responses:
         "200":
           description: List of all Certificates
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                oneOf:
+                - $ref: '#/components/schemas/APIAllCertificates'
+                - $ref: '#/components/schemas/APIAllCertificateBasics'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/CertificateMeta'
+                x-content-type: application/json
     post:
       tags:
       - Certs
@@ -1193,7 +1086,7 @@ paths:
                 $ref: '#/components/schemas/apiModifyKeySuccess'
               example:
                 action: created
-                key: "{...KEY JSON definition...}"
+                key: '{...KEY JSON definition...}'
                 status: ok
         "400":
           description: Malformed data
@@ -1212,15 +1105,6 @@ paths:
       description: Get session info about the specified key. Should return up to date
         rate limit and quota usage numbers.
       operationId: getKey
-      parameters:
-      - name: keyID
-        in: path
-        description: The Key ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           description: Key object
@@ -1246,6 +1130,20 @@ paths:
         not try to prepend or manage the key in any way.
       operationId: updateKey
       parameters:
+      - name: suppress_reset
+        in: query
+        description: Adding the suppress_reset parameter and setting it to 1, will
+          cause Tyk not to reset the quota limit that is in the current live quota
+          manager. By default Tyk will reset the quota in the live quota manager (initialising
+          it) when adding a key. Adding the `suppress_reset` flag to the URL parameters
+          will avoid this behaviour.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - "1"
       - name: keyID
         in: path
         description: The Key ID
@@ -1254,20 +1152,6 @@ paths:
         explode: false
         schema:
           type: string
-      - name: suppress_reset
-        in: query
-        description: "Adding the suppress_reset parameter and setting it to 1, will\
-          \ cause Tyk not to reset the quota limit that is in the current live quota\
-          \ manager. By default Tyk will reset the quota in the live quota manager\
-          \ (initialising it) when adding a key. Adding the `suppress_reset` flag\
-          \ to the URL parameters will avoid this behaviour."
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - "1"
       requestBody:
         content:
           application/json:
@@ -1366,6 +1250,20 @@ paths:
         ```
       operationId: createCustomKey
       parameters:
+      - name: suppress_reset
+        in: query
+        description: Adding the suppress_reset parameter and setting it to 1, will
+          cause Tyk not to reset the quota limit that is in the current live quota
+          manager. By default Tyk will reset the quota in the live quota manager (initialising
+          it) when adding a key. Adding the `suppress_reset` flag to the URL parameters
+          will avoid this behaviour.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - "1"
       - name: keyID
         in: path
         description: The Key ID
@@ -1374,20 +1272,6 @@ paths:
         explode: false
         schema:
           type: string
-      - name: suppress_reset
-        in: query
-        description: "Adding the suppress_reset parameter and setting it to 1, will\
-          \ cause Tyk not to reset the quota limit that is in the current live quota\
-          \ manager. By default Tyk will reset the quota in the live quota manager\
-          \ (initialising it) when adding a key. Adding the `suppress_reset` flag\
-          \ to the URL parameters will avoid this behaviour."
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - "1"
       requestBody:
         content:
           application/json:
@@ -1424,18 +1308,9 @@ paths:
       tags:
       - Keys
       summary: Delete Key
-      description: "Deleting a key will remove it permanently from the system, however\
-        \ analytics relating to that key will still be available."
+      description: Deleting a key will remove it permanently from the system, however
+        analytics relating to that key will still be available.
       operationId: deleteKey
-      parameters:
-      - name: keyID
-        in: path
-        description: The Key ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           description: Key deleted
@@ -1446,6 +1321,15 @@ paths:
               example:
                 action: Key deleted
                 status: ok
+    parameters:
+    - name: keyID
+      in: path
+      description: The Key ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
   /tyk/policies:
     get:
       tags:
@@ -1519,15 +1403,6 @@ paths:
       description: You can retrieve details of a single policy by ID in your Tyk instance.
         Returns an array policies.
       operationId: getPolicy
-      parameters:
-      - name: polID
-        in: path
-        description: The policy ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           description: Get details of a single Policy
@@ -1550,15 +1425,6 @@ paths:
       summary: Update a Policy
       description: You can update a Policy in your Tyk Instance by ID
       operationId: updatePolicy
-      parameters:
-      - name: polID
-        in: path
-        description: The policy ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
@@ -1606,15 +1472,6 @@ paths:
       summary: Delete a Policy
       description: Delete a policy by ID in your Tyk instance.
       operationId: deletePolicy
-      parameters:
-      - name: polID
-        in: path
-        description: The policy ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           description: Delete policy by ID
@@ -1634,6 +1491,15 @@ paths:
               example:
                 message: Delete failed
                 status: error
+    parameters:
+    - name: polID
+      in: path
+      description: The policy ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
   /tyk/oauth/clients/create:
     post:
       tags:
@@ -1674,8 +1540,8 @@ paths:
       tags:
       - OAuth
       summary: List oAuth clients
-      description: "OAuth Clients are organised by API ID, and therefore are queried\
-        \ as such."
+      description: OAuth Clients are organised by API ID, and therefore are queried
+        as such.
       operationId: listOAuthClients
       parameters:
       - name: apiID
@@ -1796,14 +1662,14 @@ paths:
       tags:
       - OAuth
       summary: List tokens
-      description: "This endpoint allows you to retrieve a list of all current tokens\
-        \ and their expiry date for a provided API ID and OAuth-client ID in the following\
-        \ format. This endpoint will work only for newly created tokens. <br/> <br/>\
-        \ You can control how long you want to store expired tokens in this list using\
-        \ `oauth_token_expired_retain_period` gateway option, which specifies retain\
-        \ period for expired tokens stored in Redis. By default expired token not\
-        \ get removed. See <a href=\"https://tyk.io/docs/configure/tyk-gateway-configuration-options/#a-name-oauth-token-expired-retain-period-a-oauth-token-expired-retain-period\"\
-        \ target=\"_blank\">here</a> for more details."
+      description: This endpoint allows you to retrieve a list of all current tokens
+        and their expiry date for a provided API ID and OAuth-client ID in the following
+        format. This endpoint will work only for newly created tokens. <br/> <br/>
+        You can control how long you want to store expired tokens in this list using
+        `oauth_token_expired_retain_period` gateway option, which specifies retain
+        period for expired tokens stored in Redis. By default expired token not get
+        removed. See <a href="https://tyk.io/docs/configure/tyk-gateway-configuration-options/#a-name-oauth-token-expired-retain-period-a-oauth-token-expired-retain-period"
+        target="_blank">here</a> for more details.
       operationId: getOAuthClientTokens
       parameters:
       - name: apiID
@@ -1847,7 +1713,20 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/oauth_revoke_body'
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: token to be revoked
+                client_id:
+                  type: string
+                  description: id of oauth client
+                token_type_hint:
+                  type: string
+                  description: type of token to be revoked, if sent then the accepted
+                    values are access_token and refresh_token. String value and optional,
+                    of not provided then it will attempt to remove access and refresh
+                    tokens that matchs
             example:
               token: eyJvcmciOiI1ZTIwOTFjNGQ0YWVmY2U2MGMwNGZiOTIiLCJpZCI6ImJlMjlhYjVkODc1OTRhZDJhYTBhNjAwNzFlNzE1ZmQxIiwiaCI6Im11cm11cjY0In0=
               client_id: 411f0800957c4a3e81fe181141dbc22a
@@ -1866,7 +1745,14 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/oauth_revoke_all_body'
+              type: object
+              properties:
+                client_id:
+                  type: string
+                  description: id of oauth client
+                client_secret:
+                  type: string
+                  description: OAuth client secret to ensure that its a valid operation
             example:
               client_id: 411f0800957c4a3e81fe181141dbc22a
               client_secret: N2Y0YjgzMjctMTEwNi00YWExLWJjM2MtYjg1NWZhM2M1NmNj
@@ -1875,8 +1761,8 @@ paths:
         "200":
           description: Succesful response
         "400":
-          description: "Bad request, form malformed or client secret and client id\
-            \ doesn't match"
+          description: Bad request, form malformed or client secret and client id
+            doesn't match
         "404":
           description: oauth client doesn't have any api related
   /tyk/oauth/refresh/{keyName}:
@@ -1916,16 +1802,36 @@ paths:
       tags:
       - OAuth
       summary: Authorize client
-      description: "With the OAuth flow you will need to create authorisation or access\
-        \ tokens for your clients, in order to do this, Tyk provides a private API\
-        \ endpoint for your application to generate these codes and redirect the end-user\
-        \ back to the API Client."
+      description: With the OAuth flow you will need to create authorisation or access
+        tokens for your clients, in order to do this, Tyk provides a private API endpoint
+        for your application to generate these codes and redirect the end-user back
+        to the API Client.
       operationId: authorizeClient
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/oauth_authorizeclient_body'
+              type: object
+              properties:
+                response_type:
+                  type: string
+                  description: Should be provided by requesting client as part of
+                    authorisation request, this should be either `code` or `token`
+                    depending on the methods you have specified for the API.
+                client_id:
+                  type: string
+                  description: Should be provided by requesting client as part of
+                    authorisation request. The Client ID that is making the request.
+                redirect_uri:
+                  type: string
+                  description: Should be provided by requesting client as part of
+                    authorisation request. Must match with the record stored with
+                    Tyk.
+                key_rules:
+                  type: string
+                  description: A string representation of a Session Object (form-encoded).
+                    This should be provided by your application in order to apply
+                    any quotas or rules to the key.
             example:
               response_type: code
               client_id: 21e2baf424674f6461faca6d45285bbb
@@ -1948,11 +1854,11 @@ paths:
       tags:
       - Organisation Quotas
       summary: List Organisation Keys
-      description: "You can now set rate limits at the organisation level by using\
-        \ the following fields - allowance and rate. These are the number of allowed\
-        \ requests for the specified per value, and need to be set to the same value.\
-        \ If you don't want to have organisation level rate limiting, set 'rate' or\
-        \ 'per' to zero, or don't add them to your request."
+      description: You can now set rate limits at the organisation level by using
+        the following fields - allowance and rate. These are the number of allowed
+        requests for the specified per value, and need to be set to the same value.
+        If you don't want to have organisation level rate limiting, set 'rate' or
+        'per' to zero, or don't add them to your request.
       operationId: listOrgKeys
       responses:
         "200":
@@ -1960,7 +1866,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                type: object
+                properties:
+                  keys:
+                    type: array
+                    items:
+                      type: string
+                example:
+                  keys:
+                  - keys
+                  - keys
+                x-content-type: application/json
               example:
                 keys:
                 - key1
@@ -1973,15 +1889,6 @@ paths:
       description: Get session info about specified orgnanisation key. Should return
         up to date rate limit and quota usage numbers.
       operationId: getOrgKey
-      parameters:
-      - name: keyID
-        in: path
-        description: The Key ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           description: Key object
@@ -1999,6 +1906,19 @@ paths:
         For Gateway v2.6.0 onwards, you can now set rate limits at the organisation level by using the following fields - allowance and rate. These are the number of allowed requests for the specified per value, and need to be set to the same value. If you don't want to have organisation level rate limiting, set `rate` or `per` to zero, or don't add them to your request.
       operationId: updateOrgKey
       parameters:
+      - name: reset_quota
+        in: query
+        description: Adding the `reset_quota` parameter and setting it to 1, will
+          cause Tyk reset the organisations quota in the live quota manager, it is
+          recommended to use this mechanism to reset organisation-level access if
+          a monthly subscription is in place.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - "1"
       - name: keyID
         in: path
         description: The Key ID
@@ -2007,19 +1927,6 @@ paths:
         explode: false
         schema:
           type: string
-      - name: reset_quota
-        in: query
-        description: "Adding the `reset_quota` parameter and setting it to 1, will\
-          \ cause Tyk reset the organisations quota in the live quota manager, it\
-          \ is recommended to use this mechanism to reset organisation-level access\
-          \ if a monthly subscription is in place."
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - "1"
       requestBody:
         content:
           application/json:
@@ -2050,15 +1957,6 @@ paths:
       description: This work similar to Keys API except that Key ID is always equals
         Organisation ID
       operationId: addOrgKey
-      parameters:
-      - name: keyID
-        in: path
-        description: The Key ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
@@ -2081,7 +1979,7 @@ paths:
                 $ref: '#/components/schemas/apiModifyKeySuccess'
               example:
                 action: created
-                key: "{...KEY JSON definition...}"
+                key: '{...KEY JSON definition...}'
                 status: ok
     delete:
       tags:
@@ -2090,15 +1988,6 @@ paths:
       description: Deleting a key will remove all limits from organisation. It does
         not affects regualar keys created within organisation.
       operationId: deleteOrgKey
-      parameters:
-      - name: keyID
-        in: path
-        description: The Key ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           description: Key deleted
@@ -2109,24 +1998,33 @@ paths:
               example:
                 action: Key deleted
                 status: ok
+    parameters:
+    - name: keyID
+      in: path
+      description: The Key ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
   /{listen_path}/tyk/batch:
     post:
       tags:
       - Batch requests
       summary: Run batch request
       operationId: batch
-      parameters:
-      - name: listen_path
-        in: path
-        description: API listen path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
       responses:
         "200":
           $ref: '#/components/schemas/apiStatusMessage'
+    parameters:
+    - name: listen_path
+      in: path
+      description: API listen path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
   /tyk/schema:
     get:
       tags:
@@ -2183,7 +2081,62 @@ components:
             type: string
           x-go-name: Tags
         CORS:
-          $ref: '#/components/schemas/APIDefinition_CORS'
+          type: object
+          properties:
+            allow_credentials:
+              type: boolean
+              x-go-name: AllowCredentials
+            allowed_headers:
+              type: array
+              items:
+                type: string
+              x-go-name: AllowedHeaders
+            allowed_methods:
+              type: array
+              items:
+                type: string
+              x-go-name: AllowedMethods
+            allowed_origins:
+              type: array
+              items:
+                type: string
+              x-go-name: AllowedOrigins
+            debug:
+              type: boolean
+              x-go-name: Debug
+            enable:
+              type: boolean
+              x-go-name: Enable
+            exposed_headers:
+              type: array
+              items:
+                type: string
+              x-go-name: ExposedHeaders
+            max_age:
+              type: integer
+              format: int64
+              x-go-name: MaxAge
+            options_passthrough:
+              type: boolean
+              x-go-name: OptionsPassthrough
+          example:
+            max_age: 0
+            allowed_methods:
+            - allowed_methods
+            - allowed_methods
+            allowed_headers:
+            - allowed_headers
+            - allowed_headers
+            debug: true
+            enable: true
+            options_passthrough: true
+            allow_credentials: true
+            exposed_headers:
+            - exposed_headers
+            - exposed_headers
+            allowed_origins:
+            - allowed_origins
+            - allowed_origins
         active:
           type: boolean
           x-go-name: Active
@@ -2202,7 +2155,31 @@ components:
         base_identity_provided_by:
           $ref: '#/components/schemas/AuthTypeEnum'
         basic_auth:
-          $ref: '#/components/schemas/APIDefinition_basic_auth'
+          type: object
+          properties:
+            body_password_regexp:
+              type: string
+              x-go-name: BodyPasswordRegexp
+            body_user_regexp:
+              type: string
+              x-go-name: BodyUserRegexp
+            cache_ttl:
+              type: integer
+              format: int64
+              x-go-name: CacheTTL
+            disable_caching:
+              type: boolean
+              x-go-name: DisableCaching
+            extract_from_body:
+              type: boolean
+              x-go-name: ExtractFromBody
+          example:
+            body_user_regexp: body_user_regexp
+            cache_ttl: 5
+            body_password_regexp: body_password_regexp
+            disable_caching: true
+            extract_from_body: true
+          x-go-name: BasicAuth
         blacklisted_ips:
           type: array
           items:
@@ -2231,7 +2208,22 @@ components:
           type: string
           x-go-name: CustomMiddlewareBundle
         definition:
-          $ref: '#/components/schemas/APIDefinition_definition'
+          type: object
+          properties:
+            key:
+              type: string
+              x-go-name: Key
+            location:
+              type: string
+              x-go-name: Location
+            strip_path:
+              type: boolean
+              x-go-name: StripPath
+          example:
+            location: location
+            key: key
+            strip_path: true
+          x-go-name: VersionDefinition
         disable_quota:
           type: boolean
           x-go-name: DisableQuota
@@ -2334,7 +2326,30 @@ components:
         notifications:
           $ref: '#/components/schemas/NotificationsManager'
         oauth_meta:
-          $ref: '#/components/schemas/APIDefinition_oauth_meta'
+          type: object
+          properties:
+            allowed_access_types:
+              type: array
+              items:
+                $ref: '#/components/schemas/AccessRequestType'
+              x-go-name: AllowedAccessTypes
+            allowed_authorize_types:
+              type: array
+              items:
+                $ref: '#/components/schemas/AuthorizeRequestType'
+              x-go-name: AllowedAuthorizeTypes
+            auth_login_redirect:
+              type: string
+              x-go-name: AuthorizeLoginRedirect
+          example:
+            allowed_authorize_types:
+            - allowed_authorize_types
+            - allowed_authorize_types
+            auth_login_redirect: auth_login_redirect
+            allowed_access_types:
+            - allowed_access_types
+            - allowed_access_types
+          x-go-name: Oauth2Meta
         openid_options:
           $ref: '#/components/schemas/OpenIDOptions'
         org_id:
@@ -2346,7 +2361,92 @@ components:
             type: string
           x-go-name: PinnedPublicKeys
         proxy:
-          $ref: '#/components/schemas/APIDefinition_proxy'
+          type: object
+          properties:
+            check_host_against_uptime_tests:
+              type: boolean
+              x-go-name: CheckHostAgainstUptimeTests
+            disable_strip_slash:
+              type: boolean
+              x-go-name: DisableStripSlash
+            enable_load_balancing:
+              type: boolean
+              x-go-name: EnableLoadBalancing
+            listen_path:
+              type: string
+              x-go-name: ListenPath
+            preserve_host_header:
+              type: boolean
+              x-go-name: PreserveHostHeader
+            service_discovery:
+              $ref: '#/components/schemas/ServiceDiscoveryConfiguration'
+            strip_listen_path:
+              type: boolean
+              x-go-name: StripListenPath
+            target_list:
+              type: array
+              items:
+                type: string
+              x-go-name: Targets
+            target_url:
+              type: string
+              x-go-name: TargetURL
+            transport:
+              type: object
+              properties:
+                proxy_url:
+                  type: string
+                  x-go-name: ProxyURL
+                ssl_ciphers:
+                  type: array
+                  items:
+                    type: string
+                  x-go-name: SSLCipherSuites
+                ssl_insecure_skip_verify:
+                  type: boolean
+                  x-go-name: SSLInsecureSkipVerify
+                ssl_min_version:
+                  type: integer
+                  format: uint16
+                  x-go-name: SSLMinVersion
+              example:
+                ssl_min_version: 1
+                ssl_insecure_skip_verify: true
+                proxy_url: proxy_url
+                ssl_ciphers:
+                - ssl_ciphers
+                - ssl_ciphers
+              x-go-name: Transport
+          example:
+            check_host_against_uptime_tests: true
+            enable_load_balancing: true
+            target_list:
+            - target_list
+            - target_list
+            preserve_host_header: true
+            disable_strip_slash: true
+            listen_path: listen_path
+            target_url: target_url
+            service_discovery:
+              parent_data_path: parent_data_path
+              query_endpoint: query_endpoint
+              use_nested_query: true
+              cache_timeout: 1
+              use_discovery_service: true
+              port_data_path: port_data_path
+              use_target_list: true
+              endpoint_returns_list: true
+              target_path: target_path
+              data_path: data_path
+            strip_listen_path: true
+            transport:
+              ssl_min_version: 1
+              ssl_insecure_skip_verify: true
+              proxy_url: proxy_url
+              ssl_ciphers:
+              - ssl_ciphers
+              - ssl_ciphers
+          x-go-name: Proxy
         response_processors:
           type: array
           items:
@@ -2375,7 +2475,48 @@ components:
             type: string
           x-go-name: UpstreamCertificates
         uptime_tests:
-          $ref: '#/components/schemas/APIDefinition_uptime_tests'
+          type: object
+          properties:
+            check_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/HostCheckObject'
+              x-go-name: CheckList
+            config:
+              type: object
+              properties:
+                expire_utime_after:
+                  type: integer
+                  format: int64
+                  x-go-name: ExpireUptimeAnalyticsAfter
+                recheck_wait:
+                  type: integer
+                  format: int64
+                  x-go-name: RecheckWait
+                service_discovery:
+                  $ref: '#/components/schemas/ServiceDiscoveryConfiguration'
+              example:
+                expire_utime_after: 7
+                service_discovery: null
+                recheck_wait: 1
+              x-go-name: Config
+          example:
+            check_list:
+            - headers:
+                key: headers
+              method: method
+              body: body
+              url: url
+            - headers:
+                key: headers
+              method: method
+              body: body
+              url: url
+            config:
+              expire_utime_after: 7
+              service_discovery: null
+              recheck_wait: 1
+          x-go-name: UptimeTests
         use_basic_auth:
           type: boolean
           x-go-name: UseBasicAuth
@@ -2395,7 +2536,285 @@ components:
           type: boolean
           x-go-name: UseStandardAuth
         version_data:
-          $ref: '#/components/schemas/APIDefinition_version_data'
+          type: object
+          properties:
+            default_version:
+              type: string
+              x-go-name: DefaultVersion
+            not_versioned:
+              type: boolean
+              x-go-name: NotVersioned
+            versions:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/VersionInfo'
+              x-go-name: Versions
+          example:
+            versions:
+              key:
+                extended_paths:
+                  circuit_breakers:
+                  - path: path
+                    threshold_percent: 6.683562403749608
+                    method: method
+                    return_to_service_after: 9
+                    samples: 9
+                  - path: path
+                    threshold_percent: 6.683562403749608
+                    method: method
+                    return_to_service_after: 9
+                    samples: 9
+                  do_not_track_endpoints:
+                  - path: path
+                    method: method
+                  - path: path
+                    method: method
+                  ignored:
+                  - null
+                  - null
+                  cache:
+                  - cache
+                  - cache
+                  internal:
+                  - path: path
+                    method: method
+                  - path: path
+                    method: method
+                  method_transforms:
+                  - path: path
+                    method: method
+                    to_method: to_method
+                  - path: path
+                    method: method
+                    to_method: to_method
+                  transform_jq:
+                  - filter: filter
+                    path: path
+                    method: method
+                  - filter: filter
+                    path: path
+                    method: method
+                  virtual:
+                  - path: path
+                    proxy_on_error: true
+                    method: method
+                    response_function_name: response_function_name
+                    function_source_uri: function_source_uri
+                    use_session: true
+                    function_source_type: function_source_type
+                  - path: path
+                    proxy_on_error: true
+                    method: method
+                    response_function_name: response_function_name
+                    function_source_uri: function_source_uri
+                    use_session: true
+                    function_source_type: function_source_type
+                  transform_jq_response:
+                  - null
+                  - null
+                  validate_json:
+                  - schema:
+                      key: {}
+                    path: path
+                    error_response_code: 6
+                    method: method
+                    schema_b64: schema_b64
+                  - schema:
+                      key: {}
+                    path: path
+                    error_response_code: 6
+                    method: method
+                    schema_b64: schema_b64
+                  black_list:
+                  - path: path
+                    method_actions:
+                      key:
+                        headers:
+                          key: headers
+                        code: 5
+                        data: data
+                        action: action
+                  - path: path
+                    method_actions:
+                      key:
+                        headers:
+                          key: headers
+                        code: 5
+                        data: data
+                        action: action
+                  transform_headers:
+                  - path: path
+                    add_headers:
+                      key: add_headers
+                    act_on: true
+                    method: method
+                    delete_headers:
+                    - delete_headers
+                    - delete_headers
+                  - path: path
+                    add_headers:
+                      key: add_headers
+                    act_on: true
+                    method: method
+                    delete_headers:
+                    - delete_headers
+                    - delete_headers
+                  advance_cache_config:
+                  - cache_key_regex: cache_key_regex
+                    path: path
+                    method: method
+                    cache_response_codes:
+                    - 4
+                    - 4
+                  - cache_key_regex: cache_key_regex
+                    path: path
+                    method: method
+                    cache_response_codes:
+                    - 4
+                    - 4
+                  transform_response_headers:
+                  - null
+                  - null
+                  white_list:
+                  - null
+                  - null
+                  transform:
+                  - path: path
+                    template_data:
+                      template_source: template_source
+                      input_type: input_type
+                      template_mode: template_mode
+                      enable_session: true
+                    method: method
+                  - path: path
+                    template_data:
+                      template_source: template_source
+                      input_type: input_type
+                      template_mode: template_mode
+                      enable_session: true
+                    method: method
+                  size_limits:
+                  - path: path
+                    method: method
+                    size_limit: 9
+                  - path: path
+                    method: method
+                    size_limit: 9
+                  transform_response:
+                  - null
+                  - null
+                  track_endpoints:
+                  - null
+                  - null
+                  hard_timeouts:
+                  - path: path
+                    method: method
+                    timeout: 8
+                  - path: path
+                    method: method
+                    timeout: 8
+                  url_rewrites:
+                  - match_pattern: match_pattern
+                    path: path
+                    method: method
+                    MatchRegexp:
+                      FromCache: true
+                    rewrite_to: rewrite_to
+                    triggers:
+                    - options:
+                        path_part_matches:
+                          key: null
+                        query_val_matches:
+                          key: null
+                        header_matches:
+                          key:
+                            match_rx: match_rx
+                            reverse: true
+                        request_context_matches:
+                          key: null
+                        session_meta_matches:
+                          key: null
+                        payload_matches: null
+                      rewrite_to: rewrite_to
+                      "on": "on"
+                    - options:
+                        path_part_matches:
+                          key: null
+                        query_val_matches:
+                          key: null
+                        header_matches:
+                          key:
+                            match_rx: match_rx
+                            reverse: true
+                        request_context_matches:
+                          key: null
+                        session_meta_matches:
+                          key: null
+                        payload_matches: null
+                      rewrite_to: rewrite_to
+                      "on": "on"
+                  - match_pattern: match_pattern
+                    path: path
+                    method: method
+                    MatchRegexp:
+                      FromCache: true
+                    rewrite_to: rewrite_to
+                    triggers:
+                    - options:
+                        path_part_matches:
+                          key: null
+                        query_val_matches:
+                          key: null
+                        header_matches:
+                          key:
+                            match_rx: match_rx
+                            reverse: true
+                        request_context_matches:
+                          key: null
+                        session_meta_matches:
+                          key: null
+                        payload_matches: null
+                      rewrite_to: rewrite_to
+                      "on": "on"
+                    - options:
+                        path_part_matches:
+                          key: null
+                        query_val_matches:
+                          key: null
+                        header_matches:
+                          key:
+                            match_rx: match_rx
+                            reverse: true
+                        request_context_matches:
+                          key: null
+                        session_meta_matches:
+                          key: null
+                        payload_matches: null
+                      rewrite_to: rewrite_to
+                      "on": "on"
+                expires: expires
+                global_headers:
+                  key: global_headers
+                paths:
+                  ignored:
+                  - ignored
+                  - ignored
+                  white_list:
+                  - white_list
+                  - white_list
+                  black_list:
+                  - black_list
+                  - black_list
+                override_target: override_target
+                name: name
+                global_headers_remove:
+                - global_headers_remove
+                - global_headers_remove
+                global_size_limit: 3
+                use_extended_paths: true
+            default_version: default_version
+            not_versioned: true
+          x-go-name: VersionData
       example:
         api_id: api_id
         session_lifetime: 6
@@ -3847,7 +4266,7 @@ components:
         shared_secret:
           type: string
           x-go-name: SharedSecret
-      description: "TODO: Make this more generic"
+      description: 'TODO: Make this more generic'
       example:
         oauth_on_keychange_url: oauth_on_keychange_url
         shared_secret: shared_secret
@@ -4248,8 +4667,8 @@ components:
         storage_engine: null
       x-go-package: github.com/TykTechnologies/tyk/apidef
     SessionState:
-      title: "SessionState objects represent a current API session, mainly used for\
-        \ rate limiting."
+      title: SessionState objects represent a current API session, mainly used for
+        rate limiting.
       type: object
       properties:
         tags:
@@ -4278,7 +4697,17 @@ components:
           type: string
           x-go-name: ApplyPolicyID
         basic_auth_data:
-          $ref: '#/components/schemas/SessionState_basic_auth_data'
+          type: object
+          properties:
+            hash_type:
+              $ref: '#/components/schemas/HashType'
+            password:
+              type: string
+              x-go-name: Password
+          example:
+            password: password
+            hash_type: hash_type
+          x-go-name: BasicAuthData
         certificate:
           type: string
           x-go-name: Certificate
@@ -4307,7 +4736,14 @@ components:
           type: boolean
           x-go-name: IsInactive
         jwt_data:
-          $ref: '#/components/schemas/SessionState_jwt_data'
+          type: object
+          properties:
+            secret:
+              type: string
+              x-go-name: Secret
+          example:
+            secret: secret
+          x-go-name: JWTData
         last_check:
           type: integer
           format: int64
@@ -4321,7 +4757,19 @@ components:
             type: object
           x-go-name: MetaData
         monitor:
-          $ref: '#/components/schemas/SessionState_monitor'
+          type: object
+          properties:
+            trigger_limits:
+              type: array
+              items:
+                type: number
+                format: double
+              x-go-name: TriggerLimits
+          example:
+            trigger_limits:
+            - 1.0246457001441578
+            - 1.0246457001441578
+          x-go-name: Monitor
         oauth_client_id:
           type: string
           x-go-name: OauthClientID
@@ -4369,9 +4817,9 @@ components:
           type: integer
           format: int64
           x-go-name: ThrottleRetryLimit
-      description: "There's a data structure that's based on this and it's used for\
-        \ Protocol Buffer support, make sure to update \"coprocess/proto/coprocess_session_state.proto\"\
-        \ and generate the bindings using: cd coprocess/proto && ./update_bindings.sh"
+      description: 'There''s a data structure that''s based on this and it''s used
+        for Protocol Buffer support, make sure to update "coprocess/proto/coprocess_session_state.proto"
+        and generate the bindings using: cd coprocess/proto && ./update_bindings.sh'
       example:
         expires: 4
         session_lifetime: 9
@@ -4660,7 +5108,34 @@ components:
       type: object
       properties:
         paths:
-          $ref: '#/components/schemas/VersionInfo_paths'
+          type: object
+          properties:
+            black_list:
+              type: array
+              items:
+                type: string
+              x-go-name: BlackList
+            ignored:
+              type: array
+              items:
+                type: string
+              x-go-name: Ignored
+            white_list:
+              type: array
+              items:
+                type: string
+              x-go-name: WhiteList
+          example:
+            ignored:
+            - ignored
+            - ignored
+            white_list:
+            - white_list
+            - white_list
+            black_list:
+            - black_list
+            - black_list
+          x-go-name: Paths
         expires:
           type: string
           x-go-name: Expires
@@ -5164,8 +5639,8 @@ components:
             type: integer
         Value:
           type: object
-      description: "AttributeTypeAndValue mirrors the ASN.1 structure of the same\
-        \ name in RFC 5280, Section 4.1.2.4."
+      description: AttributeTypeAndValue mirrors the ASN.1 structure of the same name
+        in RFC 5280, Section 4.1.2.4.
     pkixAttributeTypeAndValueSET:
       properties:
         Type:
@@ -5232,808 +5707,28 @@ components:
           pattern: ^3\.0\.\d(-.+)?$
           type: string
         info:
-          $ref: '#/components/schemas/Info'
+          $ref: '#/definitions/Info'
         externalDocs:
-          $ref: '#/components/schemas/ExternalDocumentation'
+          $ref: '#/definitions/ExternalDocumentation'
         servers:
           type: array
           items:
-            $ref: '#/components/schemas/Server'
+            $ref: '#/definitions/Server'
         security:
           type: array
           items:
-            $ref: '#/components/schemas/SecurityRequirement'
+            $ref: '#/definitions/SecurityRequirement'
         tags:
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: '#/definitions/Tag'
         paths:
-          $ref: '#/components/schemas/Paths'
+          $ref: '#/definitions/Paths'
         components:
-          $ref: '#/components/schemas/Components'
+          $ref: '#/definitions/Components'
       additionalProperties: false
-      description: "The description of OpenAPI v3.0.x documents, as defined by https://spec.openapis.org/oas/v3.0.3"
-    Info:
-      required:
-      - title
-      - version
-      type: object
-      properties:
-        title:
-          type: string
-        description:
-          type: string
-        termsOfService:
-          type: string
-          format: uri-reference
-        contact:
-          $ref: '#/components/schemas/Contact'
-        license:
-          $ref: '#/components/schemas/License'
-        version:
-          type: string
-      additionalProperties: false
-    Contact:
-      type: object
-      properties:
-        name:
-          type: string
-        url:
-          type: string
-          format: uri-reference
-        email:
-          type: string
-          format: email
-      additionalProperties: false
-    License:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          type: string
-        url:
-          type: string
-          format: uri-reference
-      additionalProperties: false
-    ExternalDocumentation:
-      required:
-      - url
-      type: object
-      properties:
-        description:
-          type: string
-        url:
-          type: string
-          format: uri-reference
-      additionalProperties: false
-    Server:
-      required:
-      - url
-      type: object
-      properties:
-        url:
-          type: string
-        description:
-          type: string
-        variables:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ServerVariable'
-      additionalProperties: false
-    ServerVariable:
-      required:
-      - default
-      type: object
-      properties:
-        enum:
-          type: array
-          items:
-            type: string
-        default:
-          type: string
-        description:
-          type: string
-      additionalProperties: false
-    SecurityRequirement:
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          type: string
-      x-schema-name: SecurityRequirement
-    Tag:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        externalDocs:
-          $ref: '#/components/schemas/ExternalDocumentation'
-      additionalProperties: false
-    Paths:
-      type: object
-      additionalProperties: false
-    Components:
-      type: object
-      properties:
-        schemas:
-          type: object
-        responses:
-          type: object
-        parameters:
-          type: object
-        examples:
-          type: object
-        requestBodies:
-          type: object
-        headers:
-          type: object
-        securitySchemes:
-          type: object
-        links:
-          type: object
-        callbacks:
-          type: object
-      additionalProperties: false
-    inline_response_200:
-      oneOf:
-      - $ref: '#/components/schemas/APIAllCertificates'
-      - $ref: '#/components/schemas/APIAllCertificateBasics'
-      - type: array
-        items:
-          $ref: '#/components/schemas/CertificateMeta'
-    oauth_revoke_body:
-      type: object
-      properties:
-        token:
-          type: string
-          description: token to be revoked
-        client_id:
-          type: string
-          description: id of oauth client
-        token_type_hint:
-          type: string
-          description: "type of token to be revoked, if sent then the accepted values\
-            \ are access_token and refresh_token. String value and optional, of not\
-            \ provided then it will attempt to remove access and refresh tokens that\
-            \ matchs"
-    oauth_revoke_all_body:
-      type: object
-      properties:
-        client_id:
-          type: string
-          description: id of oauth client
-        client_secret:
-          type: string
-          description: OAuth client secret to ensure that its a valid operation
-    oauth_authorizeclient_body:
-      type: object
-      properties:
-        response_type:
-          type: string
-          description: "Should be provided by requesting client as part of authorisation\
-            \ request, this should be either `code` or `token` depending on the methods\
-            \ you have specified for the API."
-        client_id:
-          type: string
-          description: Should be provided by requesting client as part of authorisation
-            request. The Client ID that is making the request.
-        redirect_uri:
-          type: string
-          description: Should be provided by requesting client as part of authorisation
-            request. Must match with the record stored with Tyk.
-        key_rules:
-          type: string
-          description: A string representation of a Session Object (form-encoded).
-            This should be provided by your application in order to apply any quotas
-            or rules to the key.
-    inline_response_200_1:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            type: string
-      example:
-        keys:
-        - keys
-        - keys
-    APIDefinition_CORS:
-      type: object
-      properties:
-        allow_credentials:
-          type: boolean
-          x-go-name: AllowCredentials
-        allowed_headers:
-          type: array
-          items:
-            type: string
-          x-go-name: AllowedHeaders
-        allowed_methods:
-          type: array
-          items:
-            type: string
-          x-go-name: AllowedMethods
-        allowed_origins:
-          type: array
-          items:
-            type: string
-          x-go-name: AllowedOrigins
-        debug:
-          type: boolean
-          x-go-name: Debug
-        enable:
-          type: boolean
-          x-go-name: Enable
-        exposed_headers:
-          type: array
-          items:
-            type: string
-          x-go-name: ExposedHeaders
-        max_age:
-          type: integer
-          format: int64
-          x-go-name: MaxAge
-        options_passthrough:
-          type: boolean
-          x-go-name: OptionsPassthrough
-      example:
-        max_age: 0
-        allowed_methods:
-        - allowed_methods
-        - allowed_methods
-        allowed_headers:
-        - allowed_headers
-        - allowed_headers
-        debug: true
-        enable: true
-        options_passthrough: true
-        allow_credentials: true
-        exposed_headers:
-        - exposed_headers
-        - exposed_headers
-        allowed_origins:
-        - allowed_origins
-        - allowed_origins
-    APIDefinition_basic_auth:
-      type: object
-      properties:
-        body_password_regexp:
-          type: string
-          x-go-name: BodyPasswordRegexp
-        body_user_regexp:
-          type: string
-          x-go-name: BodyUserRegexp
-        cache_ttl:
-          type: integer
-          format: int64
-          x-go-name: CacheTTL
-        disable_caching:
-          type: boolean
-          x-go-name: DisableCaching
-        extract_from_body:
-          type: boolean
-          x-go-name: ExtractFromBody
-      example:
-        body_user_regexp: body_user_regexp
-        cache_ttl: 5
-        body_password_regexp: body_password_regexp
-        disable_caching: true
-        extract_from_body: true
-    APIDefinition_definition:
-      type: object
-      properties:
-        key:
-          type: string
-          x-go-name: Key
-        location:
-          type: string
-          x-go-name: Location
-        strip_path:
-          type: boolean
-          x-go-name: StripPath
-      example:
-        location: location
-        key: key
-        strip_path: true
-    APIDefinition_oauth_meta:
-      type: object
-      properties:
-        allowed_access_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessRequestType'
-          x-go-name: AllowedAccessTypes
-        allowed_authorize_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthorizeRequestType'
-          x-go-name: AllowedAuthorizeTypes
-        auth_login_redirect:
-          type: string
-          x-go-name: AuthorizeLoginRedirect
-      example:
-        allowed_authorize_types:
-        - allowed_authorize_types
-        - allowed_authorize_types
-        auth_login_redirect: auth_login_redirect
-        allowed_access_types:
-        - allowed_access_types
-        - allowed_access_types
-    APIDefinition_proxy_transport:
-      type: object
-      properties:
-        proxy_url:
-          type: string
-          x-go-name: ProxyURL
-        ssl_ciphers:
-          type: array
-          items:
-            type: string
-          x-go-name: SSLCipherSuites
-        ssl_insecure_skip_verify:
-          type: boolean
-          x-go-name: SSLInsecureSkipVerify
-        ssl_min_version:
-          type: integer
-          format: uint16
-          x-go-name: SSLMinVersion
-      example:
-        ssl_min_version: 1
-        ssl_insecure_skip_verify: true
-        proxy_url: proxy_url
-        ssl_ciphers:
-        - ssl_ciphers
-        - ssl_ciphers
-    APIDefinition_proxy:
-      type: object
-      properties:
-        check_host_against_uptime_tests:
-          type: boolean
-          x-go-name: CheckHostAgainstUptimeTests
-        disable_strip_slash:
-          type: boolean
-          x-go-name: DisableStripSlash
-        enable_load_balancing:
-          type: boolean
-          x-go-name: EnableLoadBalancing
-        listen_path:
-          type: string
-          x-go-name: ListenPath
-        preserve_host_header:
-          type: boolean
-          x-go-name: PreserveHostHeader
-        service_discovery:
-          $ref: '#/components/schemas/ServiceDiscoveryConfiguration'
-        strip_listen_path:
-          type: boolean
-          x-go-name: StripListenPath
-        target_list:
-          type: array
-          items:
-            type: string
-          x-go-name: Targets
-        target_url:
-          type: string
-          x-go-name: TargetURL
-        transport:
-          $ref: '#/components/schemas/APIDefinition_proxy_transport'
-      example:
-        check_host_against_uptime_tests: true
-        enable_load_balancing: true
-        target_list:
-        - target_list
-        - target_list
-        preserve_host_header: true
-        disable_strip_slash: true
-        listen_path: listen_path
-        target_url: target_url
-        service_discovery:
-          parent_data_path: parent_data_path
-          query_endpoint: query_endpoint
-          use_nested_query: true
-          cache_timeout: 1
-          use_discovery_service: true
-          port_data_path: port_data_path
-          use_target_list: true
-          endpoint_returns_list: true
-          target_path: target_path
-          data_path: data_path
-        strip_listen_path: true
-        transport:
-          ssl_min_version: 1
-          ssl_insecure_skip_verify: true
-          proxy_url: proxy_url
-          ssl_ciphers:
-          - ssl_ciphers
-          - ssl_ciphers
-    APIDefinition_uptime_tests_config:
-      type: object
-      properties:
-        expire_utime_after:
-          type: integer
-          format: int64
-          x-go-name: ExpireUptimeAnalyticsAfter
-        recheck_wait:
-          type: integer
-          format: int64
-          x-go-name: RecheckWait
-        service_discovery:
-          $ref: '#/components/schemas/ServiceDiscoveryConfiguration'
-      example:
-        expire_utime_after: 7
-        service_discovery: null
-        recheck_wait: 1
-    APIDefinition_uptime_tests:
-      type: object
-      properties:
-        check_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/HostCheckObject'
-          x-go-name: CheckList
-        config:
-          $ref: '#/components/schemas/APIDefinition_uptime_tests_config'
-      example:
-        check_list:
-        - headers:
-            key: headers
-          method: method
-          body: body
-          url: url
-        - headers:
-            key: headers
-          method: method
-          body: body
-          url: url
-        config:
-          expire_utime_after: 7
-          service_discovery: null
-          recheck_wait: 1
-    APIDefinition_version_data:
-      type: object
-      properties:
-        default_version:
-          type: string
-          x-go-name: DefaultVersion
-        not_versioned:
-          type: boolean
-          x-go-name: NotVersioned
-        versions:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/VersionInfo'
-          x-go-name: Versions
-      example:
-        versions:
-          key:
-            extended_paths:
-              circuit_breakers:
-              - path: path
-                threshold_percent: 6.683562403749608
-                method: method
-                return_to_service_after: 9
-                samples: 9
-              - path: path
-                threshold_percent: 6.683562403749608
-                method: method
-                return_to_service_after: 9
-                samples: 9
-              do_not_track_endpoints:
-              - path: path
-                method: method
-              - path: path
-                method: method
-              ignored:
-              - null
-              - null
-              cache:
-              - cache
-              - cache
-              internal:
-              - path: path
-                method: method
-              - path: path
-                method: method
-              method_transforms:
-              - path: path
-                method: method
-                to_method: to_method
-              - path: path
-                method: method
-                to_method: to_method
-              transform_jq:
-              - filter: filter
-                path: path
-                method: method
-              - filter: filter
-                path: path
-                method: method
-              virtual:
-              - path: path
-                proxy_on_error: true
-                method: method
-                response_function_name: response_function_name
-                function_source_uri: function_source_uri
-                use_session: true
-                function_source_type: function_source_type
-              - path: path
-                proxy_on_error: true
-                method: method
-                response_function_name: response_function_name
-                function_source_uri: function_source_uri
-                use_session: true
-                function_source_type: function_source_type
-              transform_jq_response:
-              - null
-              - null
-              validate_json:
-              - schema:
-                  key: {}
-                path: path
-                error_response_code: 6
-                method: method
-                schema_b64: schema_b64
-              - schema:
-                  key: {}
-                path: path
-                error_response_code: 6
-                method: method
-                schema_b64: schema_b64
-              black_list:
-              - path: path
-                method_actions:
-                  key:
-                    headers:
-                      key: headers
-                    code: 5
-                    data: data
-                    action: action
-              - path: path
-                method_actions:
-                  key:
-                    headers:
-                      key: headers
-                    code: 5
-                    data: data
-                    action: action
-              transform_headers:
-              - path: path
-                add_headers:
-                  key: add_headers
-                act_on: true
-                method: method
-                delete_headers:
-                - delete_headers
-                - delete_headers
-              - path: path
-                add_headers:
-                  key: add_headers
-                act_on: true
-                method: method
-                delete_headers:
-                - delete_headers
-                - delete_headers
-              advance_cache_config:
-              - cache_key_regex: cache_key_regex
-                path: path
-                method: method
-                cache_response_codes:
-                - 4
-                - 4
-              - cache_key_regex: cache_key_regex
-                path: path
-                method: method
-                cache_response_codes:
-                - 4
-                - 4
-              transform_response_headers:
-              - null
-              - null
-              white_list:
-              - null
-              - null
-              transform:
-              - path: path
-                template_data:
-                  template_source: template_source
-                  input_type: input_type
-                  template_mode: template_mode
-                  enable_session: true
-                method: method
-              - path: path
-                template_data:
-                  template_source: template_source
-                  input_type: input_type
-                  template_mode: template_mode
-                  enable_session: true
-                method: method
-              size_limits:
-              - path: path
-                method: method
-                size_limit: 9
-              - path: path
-                method: method
-                size_limit: 9
-              transform_response:
-              - null
-              - null
-              track_endpoints:
-              - null
-              - null
-              hard_timeouts:
-              - path: path
-                method: method
-                timeout: 8
-              - path: path
-                method: method
-                timeout: 8
-              url_rewrites:
-              - match_pattern: match_pattern
-                path: path
-                method: method
-                MatchRegexp:
-                  FromCache: true
-                rewrite_to: rewrite_to
-                triggers:
-                - options:
-                    path_part_matches:
-                      key: null
-                    query_val_matches:
-                      key: null
-                    header_matches:
-                      key:
-                        match_rx: match_rx
-                        reverse: true
-                    request_context_matches:
-                      key: null
-                    session_meta_matches:
-                      key: null
-                    payload_matches: null
-                  rewrite_to: rewrite_to
-                  "on": "on"
-                - options:
-                    path_part_matches:
-                      key: null
-                    query_val_matches:
-                      key: null
-                    header_matches:
-                      key:
-                        match_rx: match_rx
-                        reverse: true
-                    request_context_matches:
-                      key: null
-                    session_meta_matches:
-                      key: null
-                    payload_matches: null
-                  rewrite_to: rewrite_to
-                  "on": "on"
-              - match_pattern: match_pattern
-                path: path
-                method: method
-                MatchRegexp:
-                  FromCache: true
-                rewrite_to: rewrite_to
-                triggers:
-                - options:
-                    path_part_matches:
-                      key: null
-                    query_val_matches:
-                      key: null
-                    header_matches:
-                      key:
-                        match_rx: match_rx
-                        reverse: true
-                    request_context_matches:
-                      key: null
-                    session_meta_matches:
-                      key: null
-                    payload_matches: null
-                  rewrite_to: rewrite_to
-                  "on": "on"
-                - options:
-                    path_part_matches:
-                      key: null
-                    query_val_matches:
-                      key: null
-                    header_matches:
-                      key:
-                        match_rx: match_rx
-                        reverse: true
-                    request_context_matches:
-                      key: null
-                    session_meta_matches:
-                      key: null
-                    payload_matches: null
-                  rewrite_to: rewrite_to
-                  "on": "on"
-            expires: expires
-            global_headers:
-              key: global_headers
-            paths:
-              ignored:
-              - ignored
-              - ignored
-              white_list:
-              - white_list
-              - white_list
-              black_list:
-              - black_list
-              - black_list
-            override_target: override_target
-            name: name
-            global_headers_remove:
-            - global_headers_remove
-            - global_headers_remove
-            global_size_limit: 3
-            use_extended_paths: true
-        default_version: default_version
-        not_versioned: true
-    SessionState_basic_auth_data:
-      type: object
-      properties:
-        hash_type:
-          $ref: '#/components/schemas/HashType'
-        password:
-          type: string
-          x-go-name: Password
-      example:
-        password: password
-        hash_type: hash_type
-    SessionState_jwt_data:
-      type: object
-      properties:
-        secret:
-          type: string
-          x-go-name: Secret
-      example:
-        secret: secret
-    SessionState_monitor:
-      type: object
-      properties:
-        trigger_limits:
-          type: array
-          items:
-            type: number
-            format: double
-          x-go-name: TriggerLimits
-      example:
-        trigger_limits:
-        - 1.0246457001441578
-        - 1.0246457001441578
-    VersionInfo_paths:
-      type: object
-      properties:
-        black_list:
-          type: array
-          items:
-            type: string
-          x-go-name: BlackList
-        ignored:
-          type: array
-          items:
-            type: string
-          x-go-name: Ignored
-        white_list:
-          type: array
-          items:
-            type: string
-          x-go-name: WhiteList
-      example:
-        ignored:
-        - ignored
-        - ignored
-        white_list:
-        - white_list
-        - white_list
-        black_list:
-        - black_list
-        - black_list
+      description: The description of OpenAPI v3.0.x documents, as defined by https://spec.openapis.org/oas/v3.0.3
   responses:
     parameterBodies:
       description: parameterBodies

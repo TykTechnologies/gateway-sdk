@@ -7,17 +7,13 @@ Method | HTTP request | Description
 [**InvalidateCache**](CacheInvalidationApi.md#InvalidateCache) | **Delete** /tyk/cache/{apiID} | Invalidate cache
 
 # **InvalidateCache**
-> ApiStatusMessage InvalidateCache(ctx, apiID)
+> ApiStatusMessage InvalidateCache(ctx, )
 Invalidate cache
 
 Invalidate cache for the given API
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **apiID** | **string**| The API ID | 
+This endpoint does not need any parameter.
 
 ### Return type
 

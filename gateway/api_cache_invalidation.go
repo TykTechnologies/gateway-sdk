@@ -15,7 +15,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
 )
 
 // Linger please
@@ -28,10 +27,9 @@ type CacheInvalidationApiService service
 CacheInvalidationApiService Invalidate cache
 Invalidate cache for the given API
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param apiID The API ID
 @return ApiStatusMessage
 */
-func (a *CacheInvalidationApiService) InvalidateCache(ctx context.Context, apiID string) (ApiStatusMessage, *http.Response, error) {
+func (a *CacheInvalidationApiService) InvalidateCache(ctx context.Context) (ApiStatusMessage, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -42,7 +40,6 @@ func (a *CacheInvalidationApiService) InvalidateCache(ctx context.Context, apiID
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/tyk/cache/{apiID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"apiID"+"}", fmt.Sprintf("%v", apiID), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -45,17 +45,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeletePolicy**
-> ApiModifyKeySuccess DeletePolicy(ctx, polID)
+> ApiModifyKeySuccess DeletePolicy(ctx, )
 Delete a Policy
 
 Delete a policy by ID in your Tyk instance.
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **polID** | **string**| The policy ID | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -73,17 +69,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPolicy**
-> Policy GetPolicy(ctx, polID)
+> Policy GetPolicy(ctx, )
 Get a Policy
 
 You can retrieve details of a single policy by ID in your Tyk instance. Returns an array policies.
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **polID** | **string**| The policy ID | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -125,7 +117,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdatePolicy**
-> ApiModifyKeySuccess UpdatePolicy(ctx, polID, optional)
+> ApiModifyKeySuccess UpdatePolicy(ctx, optional)
 Update a Policy
 
 You can update a Policy in your Tyk Instance by ID
@@ -135,14 +127,12 @@ You can update a Policy in your Tyk Instance by ID
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **polID** | **string**| The policy ID | 
  **optional** | ***PoliciesApiUpdatePolicyOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a PoliciesApiUpdatePolicyOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
  **body** | [**optional.Interface of Policy**](Policy.md)|  | 
 
 ### Return type

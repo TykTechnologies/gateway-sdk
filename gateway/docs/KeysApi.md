@@ -83,17 +83,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteKey**
-> ApiStatusMessage DeleteKey(ctx, keyID)
+> ApiStatusMessage DeleteKey(ctx, )
 Delete Key
 
 Deleting a key will remove it permanently from the system, however analytics relating to that key will still be available.
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **keyID** | **string**| The Key ID | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -111,17 +107,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetKey**
-> SessionState GetKey(ctx, keyID)
+> SessionState GetKey(ctx, )
 Get a Key
 
 Get session info about the specified key. Should return up to date rate limit and quota usage numbers.
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **keyID** | **string**| The Key ID | 
+This endpoint does not need any parameter.
 
 ### Return type
 
