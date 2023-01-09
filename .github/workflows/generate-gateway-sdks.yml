@@ -15,7 +15,6 @@ jobs:
       - name: Generate gateway sdks and commit them
         run: |
           rm -r gateway
-
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: save generated gateway sdks
