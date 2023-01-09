@@ -9,5 +9,5 @@
 package gateway
 
 type EventHandlerMetaConfig struct {
-	Events *Object `json:"events,omitempty"`
+	Events *interface{} `json:"events,omitempty"`
 }
