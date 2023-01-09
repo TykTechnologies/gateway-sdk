@@ -15,6 +15,7 @@ jobs:
       - name: Generate gateway sdks and commit them
         run: |
           bash rem.sh
+          make codegen-sdk
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: save generated gateway sdks
