@@ -8,12 +8,12 @@ rm-gateway:
 	bash rem.sh
 
 gen:
-	oapi-codegen -generate types,client -package spec swagger.yaml > ./oapi/gen.go
+	oapi-codegen -generate types,client -package spec swagger.yml > ./oapi/gen.go
 
 
 
 gateway-sdks:
-	 docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v6.2.0 generate \
+	 docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v6.2.1 generate \
          --git-user-id TykTechnologies --git-repo-id gateway-sdk \
          --package-name gate \
          --additional-properties=isGoSubmodule=false,hideGenerationTimestamp=false,outputAsLibrary=true \

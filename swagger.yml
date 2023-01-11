@@ -1237,6 +1237,7 @@ paths:
         - Policies
       operationId: addPolicy
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1829,7 +1830,11 @@ paths:
       operationId: batch
       responses:
         '200':
-          $ref: '#/components/schemas/apiStatusMessage'
+          description: "Batch"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiStatusMessage'
   '/tyk/schema':
     get:
       description: |-

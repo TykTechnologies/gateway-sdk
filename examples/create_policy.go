@@ -31,6 +31,7 @@ func main() {
 
 func CreatePolicy(ctx context.Context, client *gateway.APIClient) (*gateway.ApiModifyKeySuccess, error) {
 	addPolicyOpt := gateway.PoliciesApiAddPolicyOpts{}
+	client.PoliciesApi.DeletePolicy()
 	policy, resp, err := client.PoliciesApi.AddPolicy(ctx, &addPolicyOpt)
 	if err != nil {
 		return nil, err
