@@ -16,7 +16,6 @@ jobs:
         run: |
           bash rem.sh
           make codegen-sdk
-          python3 file_replace.py
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: save generated gateway sdks
