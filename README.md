@@ -1,4 +1,4 @@
-# Gateway SDK (Alpha )
+# Gateway SDK ( Alpha )
 
 - This is the gateway sdk generated from the open Api specs.
 - Report any issue you may encounter will using this Sdk as we plan to perfect them before making them public.
@@ -10,12 +10,13 @@ To install the sdk run
 `go get github.com/TykTechnologies/gateway-sdk`
 
 ## Sample Usage
-In these samples tyk is running on localhost  port 8080 .The BaseUrl is: http://localhost:8080 and the secret key is foo(change this to your actual key).
+In these samples Tyk Gateway is running on localhost port 8080.
+The BaseUrl is: `http://localhost:8080` and the secret key is `secret`, you should change this to your actual key.
 
 ## Creating the Api client
 
-In this sample we are going to client a and then send a request to the reload endpoint.(Hot Reload
-/tyk/reload/)
+In this sample we are going to client a and then send a request to the reload endpoint.
+Hot Reload endpoint path is at `/tyk/reload/`.
 
  ```go 
 package main
@@ -23,9 +24,11 @@ package main
 import (
 	"context"
 	"errors"
-	"github.com/TykTechnologies/gateway-sdk/gateway"
-	"github.com/antihax/optional"
 	"log"
+
+	"github.com/antihax/optional"
+
+	"github.com/TykTechnologies/gateway-sdk/gateway"
 )
 
 var (
@@ -33,38 +36,43 @@ var (
 )
 
 func main() {
-	///You can set the baseurl and headers in the configuration.
+	// You can set the base url and headers in the configuration.
 	conf := gateway.Configuration{
 		BasePath: BaseUrl,
 		Host:     "",
 		Scheme:   "",
 		DefaultHeader: map[string]string{
-			"X-Tyk-Authorization": "foo",
+			"X-Tyk-Authorization": "secret",
 		},
 		UserAgent:  "",
 		HTTPClient: nil,
 	}
-	///here we create our client and pass the config file we created above.
-	///you can use this client to make any request to the gateway
+
+	// Create Tyk gateway SDK client and pass configuration we created.
+	// You can use this client now, to make any request to the gateway.
 	client := gateway.NewAPIClient(&conf)
-	////for example in this case we use the client to call the reload endpoint.
+
+	// For example, in bellow case we use the client to call the reload endpoint.
 	status, resp, err := client.HotReloadApi.HotReload(context.Background(), &gateway.HotReloadApiHotReloadOpts{
 		Block: optional.NewBool(true),
 	})
 	if err != nil {
 		log.Println(err)
+
 		return
 	}
+
 	if resp.StatusCode != 200 {
-		//Do something here
+		// Do something here.
 		log.Println(errors.New(resp.Status))
+
 		return
 	}
+
 	log.Println(status.Status)
 	log.Println(status.Message)
 }
-  
-  ```
+```
 
 ## List Policies
 ```go
@@ -74,12 +82,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/TykTechnologies/gateway-sdk/gateway"
 	"log"
+
+	"github.com/TykTechnologies/gateway-sdk/gateway"
 )
 
 func main() {
-	ctx := context.Background()
+	// You can set the base url and headers in the configuration.
 	conf := gateway.Configuration{
 		BasePath: "http://localhost:8080",
 		Host:     "",
@@ -90,14 +99,19 @@ func main() {
 		UserAgent:  "",
 		HTTPClient: nil,
 	}
-	///here we create our client and pass the config file we created above.
-	///you can use this client to make any request to the gateway
+
+	// Create Tyk gateway SDK client and pass configuration we created.
+	// You can use this client now, to make any request to the gateway.
 	client := gateway.NewAPIClient(&conf)
-	policy, err := ListPolicy(ctx, client)
+
+	// For example, in bellow case we use the client to list policies.
+	policy, err := ListPolicy(context.Background(), client)
 	if err != nil {
 		log.Println(err)
+
 		return
 	}
+
 	fmt.Printf("%+v\n", policy)
 }
 
@@ -105,22 +119,21 @@ func ListPolicy(ctx context.Context, client *gateway.APIClient) ([]gateway.Polic
 	policies, resp, err := client.PoliciesApi.ListPolicies(ctx)
 	if err != nil {
 		log.Println(err)
+		
 		return nil, err
 	}
-	if resp.StatusCode != 200 {
-		//Do something here
-		return nil, errors.New(resp.Status)
 
+	if resp.StatusCode != 200 {
+		// Do something here.
+		log.Println(errors.New(resp.Status))
+
+		return nil, errors.New(resp.Status)
 	}
 
 	return policies, nil
 }
-
-
-
 ```
 
 ## Documentation
 
 For documentation please [look here](https://github.com/TykTechnologies/gateway-sdk/blob/main/gateway/README.md).
-
