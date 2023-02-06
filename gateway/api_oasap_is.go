@@ -28,8 +28,7 @@ type OASAPIsApiService service
 /*
 OASAPIsApiService
 Create API with OAS format  A single Tyk node can have its API Definitions queried, deleted and updated remotely. This functionality enables you to remotely update your Tyk definitions without having to manage the files manually.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiModifyKeySuccess
 */
 func (a *OASAPIsApiService) CreateApiOAS(ctx context.Context) (ApiModifyKeySuccess, *http.Response, error) {
@@ -136,8 +135,7 @@ func (a *OASAPIsApiService) CreateApiOAS(ctx context.Context) (ApiModifyKeySucce
 /*
 OASAPIsApiService
 Deleting an API definition will remove the file from the file store, the API definition will NOT be unloaded, a separate reload request will need to be made to disable the API endpoint.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiStatusMessage
 */
 func (a *OASAPIsApiService) DeleteOASApi(ctx context.Context) (ApiStatusMessage, *http.Response, error) {
@@ -987,8 +985,7 @@ func (a *OASAPIsApiService) PatchApiOAS(ctx context.Context, apiID string, local
 /*
 OASAPIsApiService
 Updating an API definition uses the same signature an object as a &#x60;POST&#x60;, however it will first ensure that the API ID that is being updated is the same as the one in the object being &#x60;PUT&#x60;.   Updating will completely replace the file descriptor and will not change an API Definition that has already been loaded, the hot-reload endpoint will need to be called to push the new definition to live.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiModifyKeySuccess
 */
 func (a *OASAPIsApiService) UpdateApiOAS(ctx context.Context) (ApiModifyKeySuccess, *http.Response, error) {

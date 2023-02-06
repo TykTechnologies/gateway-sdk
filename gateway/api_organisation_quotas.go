@@ -138,8 +138,7 @@ func (a *OrganisationQuotasApiService) AddOrgKey(ctx context.Context, localVarOp
 /*
 OrganisationQuotasApiService Delete Organisation Key
 Deleting a key will remove all limits from organisation. It does not affects regualar keys created within organisation.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiStatusMessage
 */
 func (a *OrganisationQuotasApiService) DeleteOrgKey(ctx context.Context) (ApiStatusMessage, *http.Response, error) {
@@ -236,8 +235,7 @@ func (a *OrganisationQuotasApiService) DeleteOrgKey(ctx context.Context) (ApiSta
 /*
 OrganisationQuotasApiService Get an Organisation Key
 Get session info about specified orgnanisation key. Should return up to date rate limit and quota usage numbers.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return SessionState
 */
 func (a *OrganisationQuotasApiService) GetOrgKey(ctx context.Context) (SessionState, *http.Response, error) {
@@ -334,8 +332,7 @@ func (a *OrganisationQuotasApiService) GetOrgKey(ctx context.Context) (SessionSt
 /*
 OrganisationQuotasApiService List Organisation Keys
 You can now set rate limits at the organisation level by using the following fields - allowance and rate. These are the number of allowed requests for the specified per value, and need to be set to the same value. If you don&#x27;t want to have organisation level rate limiting, set &#x27;rate&#x27; or &#x27;per&#x27; to zero, or don&#x27;t add them to your request.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return interface{}
 */
 func (a *OrganisationQuotasApiService) ListOrgKeys(ctx context.Context) (interface{}, *http.Response, error) {

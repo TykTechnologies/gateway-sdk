@@ -25,8 +25,7 @@ type BatchRequestsApiService service
 
 /*
 BatchRequestsApiService Run batch request
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiStatusMessage
 */
 func (a *BatchRequestsApiService) Batch(ctx context.Context) (ApiStatusMessage, *http.Response, error) {

@@ -275,8 +275,7 @@ func (a *KeysApiService) CreateCustomKey(ctx context.Context, keyID string, loca
 /*
 KeysApiService Delete Key
 Deleting a key will remove it permanently from the system, however analytics relating to that key will still be available.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiStatusMessage
 */
 func (a *KeysApiService) DeleteKey(ctx context.Context) (ApiStatusMessage, *http.Response, error) {
@@ -373,8 +372,7 @@ func (a *KeysApiService) DeleteKey(ctx context.Context) (ApiStatusMessage, *http
 /*
 KeysApiService Get a Key
 Get session info about the specified key. Should return up to date rate limit and quota usage numbers.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return SessionState
 */
 func (a *KeysApiService) GetKey(ctx context.Context) (SessionState, *http.Response, error) {
@@ -471,8 +469,7 @@ func (a *KeysApiService) GetKey(ctx context.Context) (SessionState, *http.Respon
 /*
 KeysApiService List Keys
 You can retrieve all the keys in your Tyk instance. Returns an array of Key IDs.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiAllKeys
 */
 func (a *KeysApiService) ListKeys(ctx context.Context) (ApiAllKeys, *http.Response, error) {

@@ -27,12 +27,11 @@ type OAuthApiService service
 /*
 OAuthApiService Authorize client
 With the OAuth flow you will need to create authorisation or access tokens for your clients, in order to do this, Tyk provides a private API endpoint for your application to generate these codes and redirect the end-user back to the API Client.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param responseType
-  - @param clientId
-  - @param redirectUri
-  - @param keyRules
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param responseType
+ * @param clientId
+ * @param redirectUri
+ * @param keyRules
 @return interface{}
 */
 func (a *OAuthApiService) AuthorizeClient(ctx context.Context, responseType string, clientId string, redirectUri string, keyRules string) (interface{}, *http.Response, error) {
@@ -243,10 +242,9 @@ func (a *OAuthApiService) CreateOAuthClient(ctx context.Context, localVarOptiona
 /*
 OAuthApiService Delete OAuth client
 Please note that tokens issued with the client ID will still be valid until they expire.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param apiID The API ID
-  - @param keyName The Client ID
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param apiID The API ID
+ * @param keyName The Client ID
 @return ApiModifyKeySuccess
 */
 func (a *OAuthApiService) DeleteOAuthClient(ctx context.Context, apiID string, keyName string) (ApiModifyKeySuccess, *http.Response, error) {
@@ -348,10 +346,9 @@ func (a *OAuthApiService) DeleteOAuthClient(ctx context.Context, apiID string, k
 
 /*
 OAuthApiService Get OAuth client
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param apiID The API ID
-  - @param keyName The Client ID
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param apiID The API ID
+ * @param keyName The Client ID
 @return NewClientRequest
 */
 func (a *OAuthApiService) GetOAuthClient(ctx context.Context, apiID string, keyName string) (NewClientRequest, *http.Response, error) {
@@ -454,10 +451,9 @@ func (a *OAuthApiService) GetOAuthClient(ctx context.Context, apiID string, keyN
 /*
 OAuthApiService List tokens
 This endpoint allows you to retrieve a list of all current tokens and their expiry date for a provided API ID and OAuth-client ID in the following format. This endpoint will work only for newly created tokens. &lt;br/&gt; &lt;br/&gt; You can control how long you want to store expired tokens in this list using &#x60;oauth_token_expired_retain_period&#x60; gateway option, which specifies retain period for expired tokens stored in Redis. By default expired token not get removed. See &lt;a href&#x3D;\&quot;https://tyk.io/docs/configure/tyk-gateway-configuration-options/#a-name-oauth-token-expired-retain-period-a-oauth-token-expired-retain-period\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt; for more details.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param apiID The API ID
-  - @param keyName The Client ID
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param apiID The API ID
+ * @param keyName The Client ID
 @return []string
 */
 func (a *OAuthApiService) GetOAuthClientTokens(ctx context.Context, apiID string, keyName string) ([]string, *http.Response, error) {
@@ -560,10 +556,9 @@ func (a *OAuthApiService) GetOAuthClientTokens(ctx context.Context, apiID string
 /*
 OAuthApiService Invalidate OAuth refresh token
 It is possible to invalidate refresh tokens in order to manage OAuth client access more robustly.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param apiId The API id
-  - @param keyName Refresh token
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param apiId The API id
+ * @param keyName Refresh token
 @return ApiModifyKeySuccess
 */
 func (a *OAuthApiService) InvalidateOAuthRefresh(ctx context.Context, apiId string, keyName string) (ApiModifyKeySuccess, *http.Response, error) {
@@ -662,9 +657,8 @@ func (a *OAuthApiService) InvalidateOAuthRefresh(ctx context.Context, apiId stri
 /*
 OAuthApiService List oAuth clients
 OAuth Clients are organised by API ID, and therefore are queried as such.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param apiID The API ID
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param apiID The API ID
 @return []NewClientRequest
 */
 func (a *OAuthApiService) ListOAuthClients(ctx context.Context, apiID string) ([]NewClientRequest, *http.Response, error) {
@@ -762,9 +756,10 @@ func (a *OAuthApiService) ListOAuthClients(ctx context.Context, apiID string) ([
 /*
 OAuthApiService revoke all client&#x27;s tokens
 revoke all the tokens for a given oauth client
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param clientId
-  - @param clientSecret
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param clientId
+ * @param clientSecret
+
 */
 func (a *OAuthApiService) RevokeAllTokens(ctx context.Context, clientId string, clientSecret string) (*http.Response, error) {
 	var (
@@ -843,10 +838,11 @@ func (a *OAuthApiService) RevokeAllTokens(ctx context.Context, clientId string, 
 /*
 OAuthApiService revoke token
 revoke a single token
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param token
-  - @param clientId
-  - @param tokenTypeHint
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param token
+ * @param clientId
+ * @param tokenTypeHint
+
 */
 func (a *OAuthApiService) RevokeSingleToken(ctx context.Context, token string, clientId string, tokenTypeHint string) (*http.Response, error) {
 	var (
@@ -926,9 +922,8 @@ func (a *OAuthApiService) RevokeSingleToken(ctx context.Context, token string, c
 /*
 OAuthApiService Update OAuth metadata and Policy ID
 Allows you to update the metadata and Policy ID for an OAuth client.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param apiID The API ID
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param apiID The API ID
 @return []NewClientRequest
 */
 func (a *OAuthApiService) UpdateoAuthClient(ctx context.Context, apiID string) ([]NewClientRequest, *http.Response, error) {

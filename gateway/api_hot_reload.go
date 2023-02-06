@@ -134,8 +134,7 @@ func (a *HotReloadApiService) HotReload(ctx context.Context, localVarOptionals *
 /*
 HotReloadApiService Hot-reload a Tyk group
 To reload a whole group of Tyk nodes (without using the Dashboard or host manager). You can send an API request to a single node, this node will then send a notification through the pub/sub infrastructure to all other listening nodes (including the host manager if it is being used to manage NginX) which will then trigger a global reload.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiStatusMessage
 */
 func (a *HotReloadApiService) HotReloadGroup(ctx context.Context) (ApiStatusMessage, *http.Response, error) {

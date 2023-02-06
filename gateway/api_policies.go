@@ -26,9 +26,8 @@ type PoliciesApiService service
 /*
 PoliciesApiService Create a Policy
 You can create a Policy in your Tyk Instance
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param body
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body
 @return ApiModifyKeySuccess
 */
 func (a *PoliciesApiService) AddPolicy(ctx context.Context, body Policy) (ApiModifyKeySuccess, *http.Response, error) {
@@ -147,8 +146,7 @@ func (a *PoliciesApiService) AddPolicy(ctx context.Context, body Policy) (ApiMod
 /*
 PoliciesApiService Delete a Policy
 Delete a policy by ID in your Tyk instance.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiModifyKeySuccess
 */
 func (a *PoliciesApiService) DeletePolicy(ctx context.Context) (ApiModifyKeySuccess, *http.Response, error) {
@@ -255,8 +253,7 @@ func (a *PoliciesApiService) DeletePolicy(ctx context.Context) (ApiModifyKeySucc
 /*
 PoliciesApiService Get a Policy
 You can retrieve details of a single policy by ID in your Tyk instance. Returns an array policies.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return Policy
 */
 func (a *PoliciesApiService) GetPolicy(ctx context.Context) (Policy, *http.Response, error) {
@@ -363,8 +360,7 @@ func (a *PoliciesApiService) GetPolicy(ctx context.Context) (Policy, *http.Respo
 /*
 PoliciesApiService List Policies
 You can retrieve all the policies in your Tyk instance. Returns an array policies.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return []Policy
 */
 func (a *PoliciesApiService) ListPolicies(ctx context.Context) ([]Policy, *http.Response, error) {

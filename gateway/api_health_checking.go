@@ -26,8 +26,7 @@ type HealthCheckingApiService service
 /*
 HealthCheckingApiService Check the Health of the Tyk Gateway
 From v2.7.5 you can now rename the &#x60;/hello&#x60;  endpoint by using the &#x60;health_check_endpoint_name&#x60; option  Returns 200 response in case of success
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return string
 */
 func (a *HealthCheckingApiService) Hello(ctx context.Context) (string, *http.Response, error) {
@@ -124,8 +123,7 @@ func (a *HealthCheckingApiService) Hello(ctx context.Context) (string, *http.Res
 /*
 HealthCheckingApiService Check the Health of the API
 Should point to API domain if it has its own
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return string
 */
 func (a *HealthCheckingApiService) HelloAPI(ctx context.Context) (string, *http.Response, error) {

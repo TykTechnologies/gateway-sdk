@@ -146,8 +146,7 @@ func (a *APIsApiService) CreateApi(ctx context.Context, localVarOptionals *APIsA
 /*
 APIsApiService
 Deleting an API definition will remove the file from the file store, the API definition will NOT be unloaded, a separate reload request will need to be made to disable the API endpoint.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiStatusMessage
 */
 func (a *APIsApiService) DeleteApi(ctx context.Context) (ApiStatusMessage, *http.Response, error) {
@@ -254,8 +253,7 @@ func (a *APIsApiService) DeleteApi(ctx context.Context) (ApiStatusMessage, *http
 /*
 APIsApiService
 Get API definition Only if used without the Tyk Dashboard
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiDefinition
 */
 func (a *APIsApiService) GetApi(ctx context.Context) (ApiDefinition, *http.Response, error) {
@@ -352,8 +350,7 @@ func (a *APIsApiService) GetApi(ctx context.Context) (ApiDefinition, *http.Respo
 /*
 APIsApiService
 List APIs  Only if used without the Tyk Dashboard
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return []ApiDefinition
 */
 func (a *APIsApiService) ListApis(ctx context.Context) ([]ApiDefinition, *http.Response, error) {

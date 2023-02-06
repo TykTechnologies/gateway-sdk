@@ -26,8 +26,7 @@ type CacheInvalidationApiService service
 /*
 CacheInvalidationApiService Invalidate cache
 Invalidate cache for the given API
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApiStatusMessage
 */
 func (a *CacheInvalidationApiService) InvalidateCache(ctx context.Context) (ApiStatusMessage, *http.Response, error) {

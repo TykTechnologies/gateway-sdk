@@ -149,10 +149,9 @@ func (a *CertsApiService) AddCert(ctx context.Context, orgId string, localVarOpt
 /*
 CertsApiService Delete Certificate
 Delete certificate by id
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param certID Certifiicate ID to be deleted
-  - @param orgId Organisation ID to list the certificates
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param certID Certifiicate ID to be deleted
+ * @param orgId Organisation ID to list the certificates
 @return ApiStatusMessage
 */
 func (a *CertsApiService) DeleteCerts(ctx context.Context, certID string, orgId string) (ApiStatusMessage, *http.Response, error) {
