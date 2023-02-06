@@ -9,7 +9,7 @@
 package gateway
 
 type MiddlewareDefinition struct {
-	Name string `json:"name,omitempty"`
-	Path string `json:"path,omitempty"`
-	RequireSession bool `json:"require_session,omitempty"`
+	Name           string `json:"name,omitempty"`
+	Path           string `json:"path,omitempty"`
+	RequireSession bool   `json:"require_session,omitempty"`
 }

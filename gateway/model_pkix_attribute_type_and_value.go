@@ -10,6 +10,6 @@ package gateway
 
 // AttributeTypeAndValue mirrors the ASN.1 structure of the same name in RFC 5280, Section 4.1.2.4.
 type PkixAttributeTypeAndValue struct {
-	Type_ []int32 `json:"Type,omitempty"`
+	Type_ []int32      `json:"Type,omitempty"`
 	Value *interface{} `json:"Value,omitempty"`
 }

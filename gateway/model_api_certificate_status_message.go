@@ -10,7 +10,7 @@ package gateway
 
 // Status message when certificate is added
 type ApiCertificateStatusMessage struct {
-	Id string `json:"id,omitempty"`
-	Status string `json:"status,omitempty"`
+	Id      string `json:"id,omitempty"`
+	Status  string `json:"status,omitempty"`
 	Message string `json:"message,omitempty"`
 }

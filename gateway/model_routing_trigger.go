@@ -9,7 +9,7 @@
 package gateway
 
 type RoutingTrigger struct {
-	On string `json:"on,omitempty"`
-	Options *RoutingTriggerOptions `json:"options,omitempty"`
-	RewriteTo string `json:"rewrite_to,omitempty"`
+	On        string                 `json:"on,omitempty"`
+	Options   *RoutingTriggerOptions `json:"options,omitempty"`
+	RewriteTo string                 `json:"rewrite_to,omitempty"`
 }

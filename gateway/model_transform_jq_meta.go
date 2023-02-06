@@ -11,5 +11,5 @@ package gateway
 type TransformJqMeta struct {
 	Filter string `json:"filter,omitempty"`
 	Method string `json:"method,omitempty"`
-	Path string `json:"path,omitempty"`
+	Path   string `json:"path,omitempty"`
 }

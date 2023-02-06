@@ -9,10 +9,10 @@
 package gateway
 
 type SignatureConfig struct {
-	Algorithm string `json:"algorithm,omitempty"`
-	AllowedClockSkew int64 `json:"allowed_clock_skew,omitempty"`
-	ErrorCode int64 `json:"error_code,omitempty"`
-	ErrorMessage string `json:"error_message,omitempty"`
-	Header string `json:"header,omitempty"`
-	Secret string `json:"secret,omitempty"`
+	Algorithm        string `json:"algorithm,omitempty"`
+	AllowedClockSkew int64  `json:"allowed_clock_skew,omitempty"`
+	ErrorCode        int64  `json:"error_code,omitempty"`
+	ErrorMessage     string `json:"error_message,omitempty"`
+	Header           string `json:"header,omitempty"`
+	Secret           string `json:"secret,omitempty"`
 }

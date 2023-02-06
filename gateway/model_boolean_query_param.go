@@ -12,6 +12,6 @@ type BooleanQueryParam string
 
 // List of BooleanQueryParam
 const (
-	TRUE_BooleanQueryParam BooleanQueryParam = "true"
+	TRUE_BooleanQueryParam  BooleanQueryParam = "true"
 	FALSE_BooleanQueryParam BooleanQueryParam = "false"
 )

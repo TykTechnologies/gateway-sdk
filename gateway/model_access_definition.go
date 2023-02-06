@@ -11,8 +11,8 @@ package gateway
 // AccessDefinition defines which versions of an API a key has access to
 type AccessDefinition struct {
 	AllowedUrls []AccessSpec `json:"allowed_urls,omitempty"`
-	ApiId string `json:"api_id,omitempty"`
-	ApiName string `json:"api_name,omitempty"`
-	Limit *ApiLimit `json:"limit,omitempty"`
-	Versions []string `json:"versions,omitempty"`
+	ApiId       string       `json:"api_id,omitempty"`
+	ApiName     string       `json:"api_name,omitempty"`
+	Limit       *ApiLimit    `json:"limit,omitempty"`
+	Versions    []string     `json:"versions,omitempty"`
 }

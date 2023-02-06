@@ -10,12 +10,12 @@ package gateway
 
 // CertificateBasics represents basic details of a certificate
 type CertificateMeta struct {
-	Id string `json:"id,omitempty"`
-	Fingerprint string `json:"fingerprint,omitempty"`
-	HasPrivate string `json:"has_private,omitempty"`
-	Issuer *PkixName `json:"issuer,omitempty"`
-	Subject *PkixName `json:"subject,omitempty"`
-	NotBefore string `json:"not_before,omitempty"`
-	NotAfter string `json:"not_after,omitempty"`
-	DnsNames []string `json:"dns_names,omitempty"`
+	Id          string    `json:"id,omitempty"`
+	Fingerprint string    `json:"fingerprint,omitempty"`
+	HasPrivate  string    `json:"has_private,omitempty"`
+	Issuer      *PkixName `json:"issuer,omitempty"`
+	Subject     *PkixName `json:"subject,omitempty"`
+	NotBefore   string    `json:"not_before,omitempty"`
+	NotAfter    string    `json:"not_after,omitempty"`
+	DnsNames    []string  `json:"dns_names,omitempty"`
 }

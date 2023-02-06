@@ -1,4 +1,3 @@
-
 /*
  * Tyk Gateway API
  *
@@ -11,12 +10,12 @@ package gateway
 
 import (
 	"context"
+	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -25,25 +24,26 @@ var (
 )
 
 type KeysApiService service
+
 /*
 KeysApiService Create a key
 Tyk will generate the access token based on the OrgID specified in the API Definition and a random UUID. This ensures that keys can be \&quot;owned\&quot; by different API Owners should segmentation be needed at an organisational level. &lt;br/&gt;&lt;br/&gt; API keys without access_rights data will be written to all APIs on the system (this also means that they will be created across all SessionHandlers and StorageHandlers, it is recommended to always embed access_rights data in a key to ensure that only targeted APIs and their back-ends are written to.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *KeysApiAddKeyOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of SessionState) - 
+     * @param "Body" (optional.Interface of SessionState) -
 @return ApiModifyKeySuccess
 */
 
 type KeysApiAddKeyOpts struct {
-    Body optional.Interface
+	Body optional.Interface
 }
 
 func (a *KeysApiService) AddKey(ctx context.Context, localVarOptionals *KeysApiAddKeyOpts) (ApiModifyKeySuccess, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue ApiModifyKeySuccess
 	)
 
@@ -73,8 +73,8 @@ func (a *KeysApiService) AddKey(ctx context.Context, localVarOptionals *KeysApiA
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -87,7 +87,7 @@ func (a *KeysApiService) AddKey(ctx context.Context, localVarOptionals *KeysApiA
 				key = auth.Key
 			}
 			localVarHeaderParams["X-Tyk-Authorization"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -108,64 +108,65 @@ func (a *KeysApiService) AddKey(ctx context.Context, localVarOptionals *KeysApiA
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v ApiModifyKeySuccess
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
 			var v ApiStatusMessage
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 KeysApiService Create Custom Key / Import Key
 You can use the &#x60;POST /tyk/keys/{KEY_ID}&#x60; endpoint as defined below to import existing keys into Tyk.  This example uses standard &#x60;authorization&#x60; header authentication, and assumes that the Gateway is located at &#x60;127.0.0.1:8080&#x60; and the Tyk secret is &#x60;352d20ee67be67f6340b4c0605b044b7&#x60; - update these as necessary to match your environment.  To import a key called &#x60;mycustomkey&#x60;, save the JSON contents as &#x60;token.json&#x60; (see example below), then run the following Curl command.  &#x60;&#x60;&#x60; curl http://127.0.0.1:8080/tyk/keys/mycustomkey -H &#x27;x-tyk-authorization: 352d20ee67be67f6340b4c0605b044b7&#x27; -H &#x27;Content-Type: application/json&#x27;  -d @token.json &#x60;&#x60;&#x60;  The following request will fail as the key doesn&#x27;t exist.  &#x60;&#x60;&#x60; curl http://127.0.0.1:8080/quickstart/headers -H &#x27;Authorization. invalid123&#x27; &#x60;&#x60;&#x60;  But this request will now work, using the imported key.  &#x60;&#x60;&#x60; curl http://127.0.0.1:8080/quickstart/headers -H &#x27;Authorization: mycustomkey&#x27; &#x60;&#x60;&#x60;  &lt;h4&gt;Example token.json file&lt;h4&gt;  &#x60;&#x60;&#x60; {   \&quot;allowance\&quot;: 1000,   \&quot;rate\&quot;: 1000,   \&quot;per\&quot;: 60,   \&quot;expires\&quot;: -1,   \&quot;quota_max\&quot;: -1,   \&quot;quota_renews\&quot;: 1406121006,   \&quot;quota_remaining\&quot;: 0,   \&quot;quota_renewal_rate\&quot;: 60,   \&quot;access_rights\&quot;: {     \&quot;3\&quot;: {       \&quot;api_name\&quot;: \&quot;Tyk Test API\&quot;,       \&quot;api_id\&quot;: \&quot;3\&quot;     }   },   \&quot;org_id\&quot;: \&quot;53ac07777cbb8c2d53000002\&quot;,   \&quot;basic_auth_data\&quot;: {     \&quot;password\&quot;: \&quot;\&quot;,     \&quot;hash_type\&quot;: \&quot;\&quot;   },   \&quot;hmac_enabled\&quot;: false,   \&quot;hmac_string\&quot;: \&quot;\&quot;,   \&quot;is_inactive\&quot;: false,   \&quot;apply_policy_id\&quot;: \&quot;\&quot;,   \&quot;apply_policies\&quot;: [     \&quot;59672779fa4387000129507d\&quot;,     \&quot;53222349fa4387004324324e\&quot;,     \&quot;543534s9fa4387004324324d\&quot;     ],   \&quot;monitor\&quot;: {     \&quot;trigger_limits\&quot;: []   } } &#x60;&#x60;&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param keyID The Key ID
  * @param optional nil or *KeysApiCreateCustomKeyOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of SessionState) - 
+     * @param "Body" (optional.Interface of SessionState) -
      * @param "SuppressReset" (optional.String) -  Adding the suppress_reset parameter and setting it to 1, will cause Tyk not to reset the quota limit that is in the current live quota manager. By default Tyk will reset the quota in the live quota manager (initialising it) when adding a key. Adding the &#x60;suppress_reset&#x60; flag to the URL parameters will avoid this behaviour.
 @return ApiModifyKeySuccess
 */
 
 type KeysApiCreateCustomKeyOpts struct {
-    Body optional.Interface
-    SuppressReset optional.String
+	Body          optional.Interface
+	SuppressReset optional.String
 }
 
 func (a *KeysApiService) CreateCustomKey(ctx context.Context, keyID string, localVarOptionals *KeysApiCreateCustomKeyOpts) (ApiModifyKeySuccess, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue ApiModifyKeySuccess
 	)
 
@@ -199,8 +200,8 @@ func (a *KeysApiService) CreateCustomKey(ctx context.Context, keyID string, loca
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -213,7 +214,7 @@ func (a *KeysApiService) CreateCustomKey(ctx context.Context, keyID string, loca
 				key = auth.Key
 			}
 			localVarHeaderParams["X-Tyk-Authorization"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -234,54 +235,56 @@ func (a *KeysApiService) CreateCustomKey(ctx context.Context, keyID string, loca
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v ApiModifyKeySuccess
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
 			var v ApiStatusMessage
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 KeysApiService Delete Key
 Deleting a key will remove it permanently from the system, however analytics relating to that key will still be available.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return ApiStatusMessage
 */
 func (a *KeysApiService) DeleteKey(ctx context.Context) (ApiStatusMessage, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Delete")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Delete")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue ApiStatusMessage
 	)
 
@@ -319,7 +322,7 @@ func (a *KeysApiService) DeleteKey(ctx context.Context) (ApiStatusMessage, *http
 				key = auth.Key
 			}
 			localVarHeaderParams["X-Tyk-Authorization"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -340,44 +343,46 @@ func (a *KeysApiService) DeleteKey(ctx context.Context) (ApiStatusMessage, *http
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v ApiStatusMessage
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 KeysApiService Get a Key
 Get session info about the specified key. Should return up to date rate limit and quota usage numbers.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return SessionState
 */
 func (a *KeysApiService) GetKey(ctx context.Context) (SessionState, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue SessionState
 	)
 
@@ -415,7 +420,7 @@ func (a *KeysApiService) GetKey(ctx context.Context) (SessionState, *http.Respon
 				key = auth.Key
 			}
 			localVarHeaderParams["X-Tyk-Authorization"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -436,44 +441,46 @@ func (a *KeysApiService) GetKey(ctx context.Context) (SessionState, *http.Respon
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v SessionState
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 KeysApiService List Keys
 You can retrieve all the keys in your Tyk instance. Returns an array of Key IDs.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return ApiAllKeys
 */
 func (a *KeysApiService) ListKeys(ctx context.Context) (ApiAllKeys, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue ApiAllKeys
 	)
 
@@ -511,7 +518,7 @@ func (a *KeysApiService) ListKeys(ctx context.Context) (ApiAllKeys, *http.Respon
 				key = auth.Key
 			}
 			localVarHeaderParams["X-Tyk-Authorization"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -532,54 +539,55 @@ func (a *KeysApiService) ListKeys(ctx context.Context) (ApiAllKeys, *http.Respon
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v ApiAllKeys
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
 /*
 KeysApiService Update Key
 You can also manually add keys to Tyk using your own key-generation algorithm. It is recommended if using this approach to ensure that the OrgID being used in the API Definition and the key data is blank so that Tyk does not try to prepend or manage the key in any way.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param keyID The Key ID
  * @param optional nil or *KeysApiUpdateKeyOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of SessionState) - 
+     * @param "Body" (optional.Interface of SessionState) -
      * @param "SuppressReset" (optional.String) -  Adding the suppress_reset parameter and setting it to 1, will cause Tyk not to reset the quota limit that is in the current live quota manager. By default Tyk will reset the quota in the live quota manager (initialising it) when adding a key. Adding the &#x60;suppress_reset&#x60; flag to the URL parameters will avoid this behaviour.
 @return ApiModifyKeySuccess
 */
 
 type KeysApiUpdateKeyOpts struct {
-    Body optional.Interface
-    SuppressReset optional.String
+	Body          optional.Interface
+	SuppressReset optional.String
 }
 
 func (a *KeysApiService) UpdateKey(ctx context.Context, keyID string, localVarOptionals *KeysApiUpdateKeyOpts) (ApiModifyKeySuccess, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Put")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Put")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
 		localVarReturnValue ApiModifyKeySuccess
 	)
 
@@ -613,8 +621,8 @@ func (a *KeysApiService) UpdateKey(ctx context.Context, keyID string, localVarOp
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	if ctx != nil {
@@ -627,7 +635,7 @@ func (a *KeysApiService) UpdateKey(ctx context.Context, keyID string, localVarOp
 				key = auth.Key
 			}
 			localVarHeaderParams["X-Tyk-Authorization"] = key
-			
+
 		}
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -648,36 +656,36 @@ func (a *KeysApiService) UpdateKey(ctx context.Context, keyID string, localVarOp
 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v ApiModifyKeySuccess
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
 			var v ApiStatusMessage
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-				if err != nil {
-					newErr.error = err.Error()
-					return localVarReturnValue, localVarHttpResponse, newErr
-				}
-				newErr.model = v
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
 				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}

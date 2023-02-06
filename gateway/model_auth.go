@@ -9,12 +9,12 @@
 package gateway
 
 type Auth struct {
-	AuthHeaderName string `json:"auth_header_name,omitempty"`
-	CookieName string `json:"cookie_name,omitempty"`
-	ParamName string `json:"param_name,omitempty"`
-	Signature *SignatureConfig `json:"signature,omitempty"`
-	UseCertificate bool `json:"use_certificate,omitempty"`
-	UseCookie bool `json:"use_cookie,omitempty"`
-	UseParam bool `json:"use_param,omitempty"`
-	ValidateSignature bool `json:"validate_signature,omitempty"`
+	AuthHeaderName    string           `json:"auth_header_name,omitempty"`
+	CookieName        string           `json:"cookie_name,omitempty"`
+	ParamName         string           `json:"param_name,omitempty"`
+	Signature         *SignatureConfig `json:"signature,omitempty"`
+	UseCertificate    bool             `json:"use_certificate,omitempty"`
+	UseCookie         bool             `json:"use_cookie,omitempty"`
+	UseParam          bool             `json:"use_param,omitempty"`
+	ValidateSignature bool             `json:"validate_signature,omitempty"`
 }

@@ -9,8 +9,8 @@
 package gateway
 
 type TemplateData struct {
-	EnableSession bool `json:"enable_session,omitempty"`
-	InputType string `json:"input_type,omitempty"`
-	TemplateMode string `json:"template_mode,omitempty"`
+	EnableSession  bool   `json:"enable_session,omitempty"`
+	InputType      string `json:"input_type,omitempty"`
+	TemplateMode   string `json:"template_mode,omitempty"`
 	TemplateSource string `json:"template_source,omitempty"`
 }

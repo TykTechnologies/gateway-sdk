@@ -9,10 +9,10 @@
 package gateway
 
 type UrlRewriteMeta struct {
-	MatchRegexp *Regexp `json:"MatchRegexp,omitempty"`
-	MatchPattern string `json:"match_pattern,omitempty"`
-	Method string `json:"method,omitempty"`
-	Path string `json:"path,omitempty"`
-	RewriteTo string `json:"rewrite_to,omitempty"`
-	Triggers []RoutingTrigger `json:"triggers,omitempty"`
+	MatchRegexp  *Regexp          `json:"MatchRegexp,omitempty"`
+	MatchPattern string           `json:"match_pattern,omitempty"`
+	Method       string           `json:"method,omitempty"`
+	Path         string           `json:"path,omitempty"`
+	RewriteTo    string           `json:"rewrite_to,omitempty"`
+	Triggers     []RoutingTrigger `json:"triggers,omitempty"`
 }

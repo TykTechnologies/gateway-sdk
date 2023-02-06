@@ -10,9 +10,9 @@ package gateway
 
 type ValidatePathMeta struct {
 	// Allows override of default 422 Unprocessible Entity response code for validation errors.
-	ErrorResponseCode int64 `json:"error_response_code,omitempty"`
-	Method string `json:"method,omitempty"`
-	Path string `json:"path,omitempty"`
-	Schema map[string]interface{} `json:"schema,omitempty"`
-	SchemaB64 string `json:"schema_b64,omitempty"`
+	ErrorResponseCode int64                  `json:"error_response_code,omitempty"`
+	Method            string                 `json:"method,omitempty"`
+	Path              string                 `json:"path,omitempty"`
+	Schema            map[string]interface{} `json:"schema,omitempty"`
+	SchemaB64         string                 `json:"schema_b64,omitempty"`
 }

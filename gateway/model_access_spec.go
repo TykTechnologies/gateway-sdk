@@ -11,5 +11,5 @@ package gateway
 // AccessSpecs define what URLS a user has access to an what methods are enabled
 type AccessSpec struct {
 	Methods []string `json:"methods,omitempty"`
-	Url string `json:"url,omitempty"`
+	Url     string   `json:"url,omitempty"`
 }

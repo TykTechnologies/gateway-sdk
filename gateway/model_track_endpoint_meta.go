@@ -10,5 +10,5 @@ package gateway
 
 type TrackEndpointMeta struct {
 	Method string `json:"method,omitempty"`
-	Path string `json:"path,omitempty"`
+	Path   string `json:"path,omitempty"`
 }

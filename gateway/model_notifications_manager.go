@@ -11,5 +11,5 @@ package gateway
 // TODO: Make this more generic
 type NotificationsManager struct {
 	OauthOnKeychangeUrl string `json:"oauth_on_keychange_url,omitempty"`
-	SharedSecret string `json:"shared_secret,omitempty"`
+	SharedSecret        string `json:"shared_secret,omitempty"`
 }

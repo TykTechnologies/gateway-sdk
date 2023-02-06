@@ -9,10 +9,10 @@
 package gateway
 
 type CacheOptions struct {
-	CacheAllSafeRequests bool `json:"cache_all_safe_requests,omitempty"`
-	CacheControlTtlHeader string `json:"cache_control_ttl_header,omitempty"`
-	CacheResponseCodes []int64 `json:"cache_response_codes,omitempty"`
-	CacheTimeout int64 `json:"cache_timeout,omitempty"`
-	EnableCache bool `json:"enable_cache,omitempty"`
-	EnableUpstreamCacheControl bool `json:"enable_upstream_cache_control,omitempty"`
+	CacheAllSafeRequests       bool    `json:"cache_all_safe_requests,omitempty"`
+	CacheControlTtlHeader      string  `json:"cache_control_ttl_header,omitempty"`
+	CacheResponseCodes         []int64 `json:"cache_response_codes,omitempty"`
+	CacheTimeout               int64   `json:"cache_timeout,omitempty"`
+	EnableCache                bool    `json:"enable_cache,omitempty"`
+	EnableUpstreamCacheControl bool    `json:"enable_upstream_cache_control,omitempty"`
 }

@@ -9,11 +9,11 @@
 package gateway
 
 type VirtualMeta struct {
-	FunctionSourceType string `json:"function_source_type,omitempty"`
-	FunctionSourceUri string `json:"function_source_uri,omitempty"`
-	Method string `json:"method,omitempty"`
-	Path string `json:"path,omitempty"`
-	ProxyOnError bool `json:"proxy_on_error,omitempty"`
+	FunctionSourceType   string `json:"function_source_type,omitempty"`
+	FunctionSourceUri    string `json:"function_source_uri,omitempty"`
+	Method               string `json:"method,omitempty"`
+	Path                 string `json:"path,omitempty"`
+	ProxyOnError         bool   `json:"proxy_on_error,omitempty"`
 	ResponseFunctionName string `json:"response_function_name,omitempty"`
-	UseSession bool `json:"use_session,omitempty"`
+	UseSession           bool   `json:"use_session,omitempty"`
 }

@@ -9,9 +9,9 @@
 package gateway
 
 type CircuitBreakerMeta struct {
-	Method string `json:"method,omitempty"`
-	Path string `json:"path,omitempty"`
-	ReturnToServiceAfter int64 `json:"return_to_service_after,omitempty"`
-	Samples int64 `json:"samples,omitempty"`
-	ThresholdPercent float64 `json:"threshold_percent,omitempty"`
+	Method               string  `json:"method,omitempty"`
+	Path                 string  `json:"path,omitempty"`
+	ReturnToServiceAfter int64   `json:"return_to_service_after,omitempty"`
+	Samples              int64   `json:"samples,omitempty"`
+	ThresholdPercent     float64 `json:"threshold_percent,omitempty"`
 }

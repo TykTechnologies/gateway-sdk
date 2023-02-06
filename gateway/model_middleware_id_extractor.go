@@ -9,7 +9,7 @@
 package gateway
 
 type MiddlewareIdExtractor struct {
-	ExtractFrom string `json:"extract_from,omitempty"`
-	ExtractWith string `json:"extract_with,omitempty"`
+	ExtractFrom     string                 `json:"extract_from,omitempty"`
+	ExtractWith     string                 `json:"extract_with,omitempty"`
 	ExtractorConfig map[string]interface{} `json:"extractor_config,omitempty"`
 }

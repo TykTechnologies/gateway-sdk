@@ -10,5 +10,5 @@ package gateway
 
 type OidProviderConfig struct {
 	ClientIds map[string]string `json:"client_ids,omitempty"`
-	Issuer string `json:"issuer,omitempty"`
+	Issuer    string            `json:"issuer,omitempty"`
 }

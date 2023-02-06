@@ -10,5 +10,5 @@ package gateway
 
 type StringRegexMap struct {
 	MatchRx string `json:"match_rx,omitempty"`
-	Reverse bool `json:"reverse,omitempty"`
+	Reverse bool   `json:"reverse,omitempty"`
 }

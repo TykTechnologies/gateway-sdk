@@ -9,11 +9,11 @@
 package gateway
 
 type MiddlewareSection struct {
-	AuthCheck *MiddlewareDefinition `json:"auth_check,omitempty"`
-	Driver string `json:"driver,omitempty"`
+	AuthCheck   *MiddlewareDefinition  `json:"auth_check,omitempty"`
+	Driver      string                 `json:"driver,omitempty"`
 	IdExtractor *MiddlewareIdExtractor `json:"id_extractor,omitempty"`
-	Post []MiddlewareDefinition `json:"post,omitempty"`
+	Post        []MiddlewareDefinition `json:"post,omitempty"`
 	PostKeyAuth []MiddlewareDefinition `json:"post_key_auth,omitempty"`
-	Pre []MiddlewareDefinition `json:"pre,omitempty"`
-	Response []MiddlewareDefinition `json:"response,omitempty"`
+	Pre         []MiddlewareDefinition `json:"pre,omitempty"`
+	Response    []MiddlewareDefinition `json:"response,omitempty"`
 }
