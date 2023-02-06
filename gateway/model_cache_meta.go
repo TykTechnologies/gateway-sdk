@@ -10,7 +10,7 @@ package gateway
 
 type CacheMeta struct {
 	CacheResponseCodes []int64 `json:"cache_response_codes,omitempty"`
-	CacheKeyRegex      string  `json:"cache_key_regex,omitempty"`
-	Method             string  `json:"method,omitempty"`
-	Path               string  `json:"path,omitempty"`
+	CacheKeyRegex string `json:"cache_key_regex,omitempty"`
+	Method string `json:"method,omitempty"`
+	Path string `json:"path,omitempty"`
 }

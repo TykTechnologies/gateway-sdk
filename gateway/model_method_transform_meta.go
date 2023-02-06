@@ -9,7 +9,7 @@
 package gateway
 
 type MethodTransformMeta struct {
-	Method   string `json:"method,omitempty"`
-	Path     string `json:"path,omitempty"`
+	Method string `json:"method,omitempty"`
+	Path string `json:"path,omitempty"`
 	ToMethod string `json:"to_method,omitempty"`
 }

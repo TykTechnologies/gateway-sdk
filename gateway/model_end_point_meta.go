@@ -10,5 +10,5 @@ package gateway
 
 type EndPointMeta struct {
 	MethodActions map[string]EndpointMethodMeta `json:"method_actions,omitempty"`
-	Path          string                        `json:"path,omitempty"`
+	Path string `json:"path,omitempty"`
 }

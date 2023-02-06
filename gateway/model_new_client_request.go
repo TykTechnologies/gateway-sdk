@@ -10,11 +10,11 @@ package gateway
 
 // NewClientRequest is an outward facing JSON object translated from osin OAuthClients
 type NewClientRequest struct {
-	ApiId       string       `json:"api_id,omitempty"`
-	ClientId    string       `json:"client_id,omitempty"`
-	Description string       `json:"description,omitempty"`
-	MetaData    *interface{} `json:"meta_data,omitempty"`
-	PolicyId    string       `json:"policy_id,omitempty"`
-	RedirectUri string       `json:"redirect_uri,omitempty"`
-	Secret      string       `json:"secret,omitempty"`
+	ApiId string `json:"api_id,omitempty"`
+	ClientId string `json:"client_id,omitempty"`
+	Description string `json:"description,omitempty"`
+	MetaData *interface{} `json:"meta_data,omitempty"`
+	PolicyId string `json:"policy_id,omitempty"`
+	RedirectUri string `json:"redirect_uri,omitempty"`
+	Secret string `json:"secret,omitempty"`
 }

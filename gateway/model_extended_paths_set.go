@@ -9,25 +9,25 @@
 package gateway
 
 type ExtendedPathsSet struct {
-	AdvanceCacheConfig       []CacheMeta           `json:"advance_cache_config,omitempty"`
-	BlackList                []EndPointMeta        `json:"black_list,omitempty"`
-	Cache                    []string              `json:"cache,omitempty"`
-	CircuitBreakers          []CircuitBreakerMeta  `json:"circuit_breakers,omitempty"`
-	DoNotTrackEndpoints      []TrackEndpointMeta   `json:"do_not_track_endpoints,omitempty"`
-	HardTimeouts             []HardTimeoutMeta     `json:"hard_timeouts,omitempty"`
-	Ignored                  []EndPointMeta        `json:"ignored,omitempty"`
-	Internal                 []InternalMeta        `json:"internal,omitempty"`
-	MethodTransforms         []MethodTransformMeta `json:"method_transforms,omitempty"`
-	SizeLimits               []RequestSizeMeta     `json:"size_limits,omitempty"`
-	TrackEndpoints           []TrackEndpointMeta   `json:"track_endpoints,omitempty"`
-	Transform                []TemplateMeta        `json:"transform,omitempty"`
-	TransformHeaders         []HeaderInjectionMeta `json:"transform_headers,omitempty"`
-	TransformJq              []TransformJqMeta     `json:"transform_jq,omitempty"`
-	TransformJqResponse      []TransformJqMeta     `json:"transform_jq_response,omitempty"`
-	TransformResponse        []TemplateMeta        `json:"transform_response,omitempty"`
+	AdvanceCacheConfig []CacheMeta `json:"advance_cache_config,omitempty"`
+	BlackList []EndPointMeta `json:"black_list,omitempty"`
+	Cache []string `json:"cache,omitempty"`
+	CircuitBreakers []CircuitBreakerMeta `json:"circuit_breakers,omitempty"`
+	DoNotTrackEndpoints []TrackEndpointMeta `json:"do_not_track_endpoints,omitempty"`
+	HardTimeouts []HardTimeoutMeta `json:"hard_timeouts,omitempty"`
+	Ignored []EndPointMeta `json:"ignored,omitempty"`
+	Internal []InternalMeta `json:"internal,omitempty"`
+	MethodTransforms []MethodTransformMeta `json:"method_transforms,omitempty"`
+	SizeLimits []RequestSizeMeta `json:"size_limits,omitempty"`
+	TrackEndpoints []TrackEndpointMeta `json:"track_endpoints,omitempty"`
+	Transform []TemplateMeta `json:"transform,omitempty"`
+	TransformHeaders []HeaderInjectionMeta `json:"transform_headers,omitempty"`
+	TransformJq []TransformJqMeta `json:"transform_jq,omitempty"`
+	TransformJqResponse []TransformJqMeta `json:"transform_jq_response,omitempty"`
+	TransformResponse []TemplateMeta `json:"transform_response,omitempty"`
 	TransformResponseHeaders []HeaderInjectionMeta `json:"transform_response_headers,omitempty"`
-	UrlRewrites              []UrlRewriteMeta      `json:"url_rewrites,omitempty"`
-	ValidateJson             []ValidatePathMeta    `json:"validate_json,omitempty"`
-	Virtual                  []VirtualMeta         `json:"virtual,omitempty"`
-	WhiteList                []EndPointMeta        `json:"white_list,omitempty"`
+	UrlRewrites []UrlRewriteMeta `json:"url_rewrites,omitempty"`
+	ValidateJson []ValidatePathMeta `json:"validate_json,omitempty"`
+	Virtual []VirtualMeta `json:"virtual,omitempty"`
+	WhiteList []EndPointMeta `json:"white_list,omitempty"`
 }

@@ -9,6 +9,6 @@
 package gateway
 
 type GlobalRateLimit struct {
-	Per  float64 `json:"per,omitempty"`
+	Per float64 `json:"per,omitempty"`
 	Rate float64 `json:"rate,omitempty"`
 }

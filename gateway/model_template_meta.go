@@ -9,7 +9,7 @@
 package gateway
 
 type TemplateMeta struct {
-	Method       string        `json:"method,omitempty"`
-	Path         string        `json:"path,omitempty"`
+	Method string `json:"method,omitempty"`
+	Path string `json:"path,omitempty"`
 	TemplateData *TemplateData `json:"template_data,omitempty"`
 }

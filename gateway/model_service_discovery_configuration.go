@@ -9,14 +9,14 @@
 package gateway
 
 type ServiceDiscoveryConfiguration struct {
-	CacheTimeout        int64  `json:"cache_timeout,omitempty"`
-	DataPath            string `json:"data_path,omitempty"`
-	EndpointReturnsList bool   `json:"endpoint_returns_list,omitempty"`
-	ParentDataPath      string `json:"parent_data_path,omitempty"`
-	PortDataPath        string `json:"port_data_path,omitempty"`
-	QueryEndpoint       string `json:"query_endpoint,omitempty"`
-	TargetPath          string `json:"target_path,omitempty"`
-	UseDiscoveryService bool   `json:"use_discovery_service,omitempty"`
-	UseNestedQuery      bool   `json:"use_nested_query,omitempty"`
-	UseTargetList       bool   `json:"use_target_list,omitempty"`
+	CacheTimeout int64 `json:"cache_timeout,omitempty"`
+	DataPath string `json:"data_path,omitempty"`
+	EndpointReturnsList bool `json:"endpoint_returns_list,omitempty"`
+	ParentDataPath string `json:"parent_data_path,omitempty"`
+	PortDataPath string `json:"port_data_path,omitempty"`
+	QueryEndpoint string `json:"query_endpoint,omitempty"`
+	TargetPath string `json:"target_path,omitempty"`
+	UseDiscoveryService bool `json:"use_discovery_service,omitempty"`
+	UseNestedQuery bool `json:"use_nested_query,omitempty"`
+	UseTargetList bool `json:"use_target_list,omitempty"`
 }

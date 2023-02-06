@@ -9,13 +9,13 @@
 package gateway
 
 type VersionInfo struct {
-	Paths               *interface{}      `json:"paths,omitempty"`
-	Expires             string            `json:"expires,omitempty"`
-	ExtendedPaths       *ExtendedPathsSet `json:"extended_paths,omitempty"`
-	GlobalHeaders       map[string]string `json:"global_headers,omitempty"`
-	GlobalHeadersRemove []string          `json:"global_headers_remove,omitempty"`
-	GlobalSizeLimit     int64             `json:"global_size_limit,omitempty"`
-	Name                string            `json:"name,omitempty"`
-	OverrideTarget      string            `json:"override_target,omitempty"`
-	UseExtendedPaths    bool              `json:"use_extended_paths,omitempty"`
+	Paths *interface{} `json:"paths,omitempty"`
+	Expires string `json:"expires,omitempty"`
+	ExtendedPaths *ExtendedPathsSet `json:"extended_paths,omitempty"`
+	GlobalHeaders map[string]string `json:"global_headers,omitempty"`
+	GlobalHeadersRemove []string `json:"global_headers_remove,omitempty"`
+	GlobalSizeLimit int64 `json:"global_size_limit,omitempty"`
+	Name string `json:"name,omitempty"`
+	OverrideTarget string `json:"override_target,omitempty"`
+	UseExtendedPaths bool `json:"use_extended_paths,omitempty"`
 }

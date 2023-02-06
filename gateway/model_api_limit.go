@@ -10,13 +10,13 @@ package gateway
 
 // APILimit stores quota and rate limit on ACL level (per API)
 type ApiLimit struct {
-	Per                float64 `json:"per,omitempty"`
-	QuotaMax           int64   `json:"quota_max,omitempty"`
-	QuotaRemaining     int64   `json:"quota_remaining,omitempty"`
-	QuotaRenewalRate   int64   `json:"quota_renewal_rate,omitempty"`
-	QuotaRenews        int64   `json:"quota_renews,omitempty"`
-	Rate               float64 `json:"rate,omitempty"`
-	SetByPolicy        bool    `json:"set_by_policy,omitempty"`
-	ThrottleInterval   float64 `json:"throttle_interval,omitempty"`
-	ThrottleRetryLimit int64   `json:"throttle_retry_limit,omitempty"`
+	Per float64 `json:"per,omitempty"`
+	QuotaMax int64 `json:"quota_max,omitempty"`
+	QuotaRemaining int64 `json:"quota_remaining,omitempty"`
+	QuotaRenewalRate int64 `json:"quota_renewal_rate,omitempty"`
+	QuotaRenews int64 `json:"quota_renews,omitempty"`
+	Rate float64 `json:"rate,omitempty"`
+	SetByPolicy bool `json:"set_by_policy,omitempty"`
+	ThrottleInterval float64 `json:"throttle_interval,omitempty"`
+	ThrottleRetryLimit int64 `json:"throttle_retry_limit,omitempty"`
 }

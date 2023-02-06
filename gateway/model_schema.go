@@ -10,12 +10,12 @@ package gateway
 
 // The description of OpenAPI v3.0.x documents, as defined by https://spec.openapis.org/oas/v3.0.3
 type Schema struct {
-	Openapi      string                            `json:"openapi"`
-	Info         *DefinitionsInfo                  `json:"info"`
+	Openapi string `json:"openapi"`
+	Info *DefinitionsInfo `json:"info"`
 	ExternalDocs *DefinitionsExternalDocumentation `json:"externalDocs,omitempty"`
-	Servers      []DefinitionsServer               `json:"servers,omitempty"`
-	Security     []DefinitionsSecurityRequirement  `json:"security,omitempty"`
-	Tags         []DefinitionsTag                  `json:"tags,omitempty"`
-	Paths        *DefinitionsPaths                 `json:"paths"`
-	Components   *DefinitionsComponents            `json:"components,omitempty"`
+	Servers []DefinitionsServer `json:"servers,omitempty"`
+	Security []DefinitionsSecurityRequirement `json:"security,omitempty"`
+	Tags []DefinitionsTag `json:"tags,omitempty"`
+	Paths *DefinitionsPaths `json:"paths"`
+	Components *DefinitionsComponents `json:"components,omitempty"`
 }

@@ -9,10 +9,10 @@
 package gateway
 
 type RoutingTriggerOptions struct {
-	HeaderMatches         map[string]StringRegexMap `json:"header_matches,omitempty"`
-	PathPartMatches       map[string]StringRegexMap `json:"path_part_matches,omitempty"`
-	PayloadMatches        *StringRegexMap           `json:"payload_matches,omitempty"`
-	QueryValMatches       map[string]StringRegexMap `json:"query_val_matches,omitempty"`
+	HeaderMatches map[string]StringRegexMap `json:"header_matches,omitempty"`
+	PathPartMatches map[string]StringRegexMap `json:"path_part_matches,omitempty"`
+	PayloadMatches *StringRegexMap `json:"payload_matches,omitempty"`
+	QueryValMatches map[string]StringRegexMap `json:"query_val_matches,omitempty"`
 	RequestContextMatches map[string]StringRegexMap `json:"request_context_matches,omitempty"`
-	SessionMetaMatches    map[string]StringRegexMap `json:"session_meta_matches,omitempty"`
+	SessionMetaMatches map[string]StringRegexMap `json:"session_meta_matches,omitempty"`
 }

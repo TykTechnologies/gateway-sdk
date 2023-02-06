@@ -10,11 +10,11 @@ package gateway
 
 // CertificateBasics represents basic details of a certificate
 type CertificateBasics struct {
-	Id         string   `json:"id,omitempty"`
-	IssuerCn   string   `json:"issuer_cn,omitempty"`
-	SubjectCn  string   `json:"subject_cn,omitempty"`
-	DnsNames   []string `json:"dns_names,omitempty"`
-	HasPrivate string   `json:"has_private,omitempty"`
-	NotBefore  string   `json:"not_before,omitempty"`
-	NotAfter   string   `json:"not_after,omitempty"`
+	Id string `json:"id,omitempty"`
+	IssuerCn string `json:"issuer_cn,omitempty"`
+	SubjectCn string `json:"subject_cn,omitempty"`
+	DnsNames []string `json:"dns_names,omitempty"`
+	HasPrivate string `json:"has_private,omitempty"`
+	NotBefore string `json:"not_before,omitempty"`
+	NotAfter string `json:"not_after,omitempty"`
 }

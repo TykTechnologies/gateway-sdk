@@ -9,9 +9,9 @@
 package gateway
 
 type PolicyPartitions struct {
-	Quota      bool `json:"quota,omitempty"`
-	RateLimit  bool `json:"rate_limit,omitempty"`
+	Quota bool `json:"quota,omitempty"`
+	RateLimit bool `json:"rate_limit,omitempty"`
 	Complexity bool `json:"complexity,omitempty"`
-	Acl        bool `json:"acl,omitempty"`
-	PerApi     bool `json:"per_api,omitempty"`
+	Acl bool `json:"acl,omitempty"`
+	PerApi bool `json:"per_api,omitempty"`
 }

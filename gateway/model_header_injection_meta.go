@@ -9,9 +9,9 @@
 package gateway
 
 type HeaderInjectionMeta struct {
-	ActOn         bool              `json:"act_on,omitempty"`
-	AddHeaders    map[string]string `json:"add_headers,omitempty"`
-	DeleteHeaders []string          `json:"delete_headers,omitempty"`
-	Method        string            `json:"method,omitempty"`
-	Path          string            `json:"path,omitempty"`
+	ActOn bool `json:"act_on,omitempty"`
+	AddHeaders map[string]string `json:"add_headers,omitempty"`
+	DeleteHeaders []string `json:"delete_headers,omitempty"`
+	Method string `json:"method,omitempty"`
+	Path string `json:"path,omitempty"`
 }

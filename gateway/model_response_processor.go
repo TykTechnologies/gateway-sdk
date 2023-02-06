@@ -9,6 +9,6 @@
 package gateway
 
 type ResponseProcessor struct {
-	Name    string       `json:"name,omitempty"`
+	Name string `json:"name,omitempty"`
 	Options *interface{} `json:"options,omitempty"`
 }

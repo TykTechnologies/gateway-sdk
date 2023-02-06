@@ -9,7 +9,7 @@
 package gateway
 
 type RequestSizeMeta struct {
-	Method    string `json:"method,omitempty"`
-	Path      string `json:"path,omitempty"`
-	SizeLimit int64  `json:"size_limit,omitempty"`
+	Method string `json:"method,omitempty"`
+	Path string `json:"path,omitempty"`
+	SizeLimit int64 `json:"size_limit,omitempty"`
 }

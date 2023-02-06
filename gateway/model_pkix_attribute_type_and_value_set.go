@@ -10,6 +10,6 @@ package gateway
 
 // AttributeTypeAndValueSET represents a set of ASN.1 sequences of AttributeTypeAndValue sequences from RFC 2986 (PKCS
 type PkixAttributeTypeAndValueSet struct {
-	Type_ []int32                       `json:"Type,omitempty"`
+	Type_ []int32 `json:"Type,omitempty"`
 	Value [][]PkixAttributeTypeAndValue `json:"Value,omitempty"`
 }

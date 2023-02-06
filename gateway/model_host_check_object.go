@@ -9,8 +9,8 @@
 package gateway
 
 type HostCheckObject struct {
-	Body    string            `json:"body,omitempty"`
+	Body string `json:"body,omitempty"`
 	Headers map[string]string `json:"headers,omitempty"`
-	Method  string            `json:"method,omitempty"`
-	Url     string            `json:"url,omitempty"`
+	Method string `json:"method,omitempty"`
+	Url string `json:"url,omitempty"`
 }

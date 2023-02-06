@@ -9,6 +9,6 @@
 package gateway
 
 type OpenIdOptions struct {
-	Providers         []OidProviderConfig `json:"providers,omitempty"`
-	SegregateByClient bool                `json:"segregate_by_client,omitempty"`
+	Providers []OidProviderConfig `json:"providers,omitempty"`
+	SegregateByClient bool `json:"segregate_by_client,omitempty"`
 }

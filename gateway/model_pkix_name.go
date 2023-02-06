@@ -10,15 +10,15 @@ package gateway
 
 // Name represents an X.509 distinguished name
 type PkixName struct {
-	Country            []string                       `json:"Country,omitempty"`
-	Organization       []string                       `json:"Organization,omitempty"`
-	OrganizationalUnit []string                       `json:"OrganizationalUnit,omitempty"`
-	Locality           []string                       `json:"Locality,omitempty"`
-	Province           []string                       `json:"Province,omitempty"`
-	StreetAddress      []string                       `json:"StreetAddress,omitempty"`
-	PostalCode         []string                       `json:"PostalCode,omitempty"`
-	SerialNumber       string                         `json:"SerialNumber,omitempty"`
-	CommonName         string                         `json:"CommonName,omitempty"`
-	Names              []PkixAttributeTypeAndValue    `json:"Names,omitempty"`
-	ExtraNames         []PkixAttributeTypeAndValueSet `json:"ExtraNames,omitempty"`
+	Country []string `json:"Country,omitempty"`
+	Organization []string `json:"Organization,omitempty"`
+	OrganizationalUnit []string `json:"OrganizationalUnit,omitempty"`
+	Locality []string `json:"Locality,omitempty"`
+	Province []string `json:"Province,omitempty"`
+	StreetAddress []string `json:"StreetAddress,omitempty"`
+	PostalCode []string `json:"PostalCode,omitempty"`
+	SerialNumber string `json:"SerialNumber,omitempty"`
+	CommonName string `json:"CommonName,omitempty"`
+	Names []PkixAttributeTypeAndValue `json:"Names,omitempty"`
+	ExtraNames []PkixAttributeTypeAndValueSet `json:"ExtraNames,omitempty"`
 }

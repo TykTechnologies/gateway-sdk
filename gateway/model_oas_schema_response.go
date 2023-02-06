@@ -10,7 +10,7 @@ package gateway
 
 // OAS schema endpoint response
 type OasSchemaResponse struct {
-	Status  string `json:"status,omitempty"`
+	Status string `json:"status,omitempty"`
 	Message string `json:"message,omitempty"`
 	// <OAS schema definition>
 	Schema string `json:"schema,omitempty"`

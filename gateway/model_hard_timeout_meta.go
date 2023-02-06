@@ -9,7 +9,7 @@
 package gateway
 
 type HardTimeoutMeta struct {
-	Method  string `json:"method,omitempty"`
-	Path    string `json:"path,omitempty"`
-	Timeout int64  `json:"timeout,omitempty"`
+	Method string `json:"method,omitempty"`
+	Path string `json:"path,omitempty"`
+	Timeout int64 `json:"timeout,omitempty"`
 }

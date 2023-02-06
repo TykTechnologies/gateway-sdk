@@ -9,7 +9,7 @@
 package gateway
 
 type SessionProviderMeta struct {
-	Meta          map[string]interface{} `json:"meta,omitempty"`
-	Name          string                 `json:"name,omitempty"`
-	StorageEngine string                 `json:"storage_engine,omitempty"`
+	Meta map[string]interface{} `json:"meta,omitempty"`
+	Name string `json:"name,omitempty"`
+	StorageEngine string `json:"storage_engine,omitempty"`
 }

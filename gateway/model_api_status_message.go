@@ -12,5 +12,5 @@ package gateway
 type ApiStatusMessage struct {
 	// Response details
 	Message string `json:"message,omitempty"`
-	Status  string `json:"status,omitempty"`
+	Status string `json:"status,omitempty"`
 }

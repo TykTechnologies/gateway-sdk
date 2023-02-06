@@ -9,6 +9,6 @@
 package gateway
 
 type OAuthClientToken struct {
-	Code    string `json:"code,omitempty"`
-	Expires int64  `json:"expires,omitempty"`
+	Code string `json:"code,omitempty"`
+	Expires int64 `json:"expires,omitempty"`
 }

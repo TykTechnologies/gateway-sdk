@@ -9,8 +9,8 @@
 package gateway
 
 type EndpointMethodMeta struct {
-	Action  string            `json:"action,omitempty"`
-	Code    int64             `json:"code,omitempty"`
-	Data    string            `json:"data,omitempty"`
+	Action string `json:"action,omitempty"`
+	Code int64 `json:"code,omitempty"`
+	Data string `json:"data,omitempty"`
 	Headers map[string]string `json:"headers,omitempty"`
 }

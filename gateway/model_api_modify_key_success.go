@@ -12,7 +12,7 @@ package gateway
 type ApiModifyKeySuccess struct {
 	Action string `json:"action,omitempty"`
 	// in:body
-	Key     string `json:"key,omitempty"`
+	Key string `json:"key,omitempty"`
 	KeyHash string `json:"key_hash,omitempty"`
-	Status  string `json:"status,omitempty"`
+	Status string `json:"status,omitempty"`
 }
