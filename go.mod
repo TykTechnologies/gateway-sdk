@@ -1,6 +1,6 @@
 module github.com/TykTechnologies/gateway-sdk
 
-go 1.19
+go 1.18
 
 require (
 	github.com/antihax/optional v1.0.0
