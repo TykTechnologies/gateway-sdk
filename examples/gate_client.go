@@ -25,29 +25,19 @@ func main() {
 	// You can use this client now, to make any request to the gateway.
 	client := gateway.NewAPIClient(cfg)
 
-	// List policies.
-	policy, err := ListPolicy(context.Background(), client)
+	// Delete policy.
+	statusMessage, resp, err := client.PoliciesApi.DeletePolicy(context.Background())
 	if err != nil {
 		log.Println(err)
 
 		return
 	}
-
-	fmt.Printf("%+v\n", policy)
-}
-
-func ListPolicy(ctx context.Context, client *gateway.APIClient) ([]gateway.Policy, error) {
-	policies, resp, err := client.PoliciesApi.ListPolicies(ctx)
-	if err != nil {
-		log.Println(err)
-
-		return nil, err
-	}
 	if resp.StatusCode != 200 {
 		// Do something here.
-		return nil, errors.New(resp.Status)
-
+		log.Println(errors.New(resp.Status))
+		
+		return
 	}
 
-	return policies, nil
+	fmt.Printf("%+v\n", statusMessage)
 }
