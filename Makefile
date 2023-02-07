@@ -14,6 +14,22 @@ gen:
 
 gateway-sdks:
 	 docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v6.2.0 generate \
+         --type-mappings APIDefinitionCORSModelModel=APIDefinitionCORSModel \
+         --type-mappings AuthModelModel=AuthModel \
+         --type-mappings AuthProviderMetaModelModel=AuthProviderMetaModel \
+         --type-mappings APIDefinitionBasicAuthModelModel=APIDefinitionBasicAuthModel \
+         --type-mappings APIDefinitionDefinitionModelModel=APIDefinitionDefinitionModel \
+         --type-mappings EventHandlerMetaConfigModelModel=EventHandlerMetaConfigModel \
+         --type-mappings SignatureConfigModelModel=SignatureConfig \
+         --type-mappings CacheOptionsModelModel=CacheOptionsModel \
+         --type-mappings MiddlewareSectionModelModel=MiddlewareSectionModel \
+         --type-mappings GlobalRateLimitModelModel=GlobalRateLimitModel \
+         --type-mappings NotificationsManagerModelModel=NotificationsManager \
+         --type-mappings APIDefinitionOauthMetaModelModel=APIDefinitionOauthMetaModel \
+         --type-mappings OpenIDOptionsModelModel=OpenIDOptionsModel \
+         --type-mappings APIDefinitionProxyModelModel=APIDefinitionProxyModel \
+         --type-mappings ResponseProcessorModelModel=ResponseProcessorModel \
+         --type-mappings SessionProviderMetaModelModel=SessionProviderMetaModel\
          --git-user-id TykTechnologies --git-repo-id gateway-sdk \
          --package-name apim \
          --api-name-suffix API \
@@ -22,5 +38,6 @@ gateway-sdks:
         -i /local/swagger.yml \
         -g go \
         -o /local/apim
+
 
 
