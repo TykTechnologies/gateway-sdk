@@ -15,7 +15,7 @@ jobs:
       - name: Generate gateway sdks and commit them
         run: |
           make gateway-sdks
-          bash rem.sh
+          sudo bash rem.sh
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
