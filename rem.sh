@@ -1,4 +1,4 @@
 echo "hello"
-cd gate || exit
+cd apim || exit
 [ ! -e go.mod ] || rm go.mod
 [ ! -e go.sum ] || rm go.sum
