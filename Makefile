@@ -15,12 +15,12 @@ gen:
 gateway-sdks:
 	 docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v6.2.0 generate \
          --git-user-id TykTechnologies --git-repo-id gateway-sdk \
-         --package-name gate \
+         --package-name apim \
          --api-name-suffix API \
           --model-name-suffix Model \
          --additional-properties=isGoSubmodule=false,generateInterfaces=true,hideGenerationTimestamp=false,outputAsLibrary=true \
         -i /local/swagger.yml \
         -g go \
-        -o /local/gate
+        -o /local/apim
 
 
