@@ -12,9 +12,14 @@ jobs:
       # Checkout your code
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.16'
       - name: Generate gateway sdks and commit them
         run: |
           make apim-sdk
+          go mod tidy
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: save generated gateway sdks
