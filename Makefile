@@ -15,7 +15,7 @@ apim-sdk:
         --global-property supportingFiles \
         --additional-properties generateInterfaces=true
 
-	rm -rf pkg/apim/go.mod pkg/apim/go.sum pkg/apim/model_server_variable.go
+	sudo rm -rf pkg/apim/go.mod pkg/apim/go.sum pkg/apim/model_server_variable.go
 	git mod tidy
 
 codegen-sdk:
