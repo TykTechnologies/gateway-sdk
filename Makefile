@@ -16,7 +16,6 @@ apim-sdk:
         --additional-properties generateInterfaces=true
 
 	sudo rm -rf pkg/apim/go.mod pkg/apim/go.sum pkg/apim/model_server_variable.go
-	git mod tidy
 
 codegen-sdk:
 	 docker run --rm -v "${PWD}:/local" swaggerapi/swagger-codegen-cli-v3:3.0.22 generate \

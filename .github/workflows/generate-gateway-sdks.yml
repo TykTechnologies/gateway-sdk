@@ -15,6 +15,7 @@ jobs:
       - name: Generate gateway sdks and commit them
         run: |
           make apim-sdk
+          sudo bash rem.sh
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
