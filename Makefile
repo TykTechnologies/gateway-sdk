@@ -30,7 +30,9 @@ gen:
 	oapi-codegen -generate types,client -package spec swagger.yml > ./oapi/gen.go
 
 
-
+validate-swagger:
+	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v6.2.0 validate \
+		-i /local/swagger.yml
 gateway-sdks:
 	 docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v6.2.0 generate \
          --type-mappings APIDefinitionCORSModelModel=APIDefinitionCORSModel \

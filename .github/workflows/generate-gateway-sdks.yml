@@ -18,6 +18,7 @@ jobs:
           go-version: '1.16'
       - name: Generate gateway sdks and commit them
         run: |
+          make validate-swagger
           make apim-sdk
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
