@@ -62,4 +62,4 @@ func main() {
 
 ## Documentation
 
-For documentation please [look here](https://github.com/TykTechnologies/gateway-sdk/blob/main/gateway/README.md).
+For documentation please [look here](https://github.com/TykTechnologies/gateway-sdk/blob/main/pkg/apim/README.md).
