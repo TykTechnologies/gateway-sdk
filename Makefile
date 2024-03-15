@@ -1,7 +1,7 @@
 apim-sdk:
 	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
     	--generator-name go \
-        --input-spec /local/swagger.yml \
+        --input-spec /local/open.yml \
         --output /local/pkg/apim/ \
         --skip-overwrite \
         --git-host github.com \
@@ -15,7 +15,6 @@ apim-sdk:
         --global-property supportingFiles \
         --additional-properties generateInterfaces=true
 
-	sudo rm -rf pkg/apim/go.mod pkg/apim/go.sum pkg/apim/model_server_variable.go
 
 codegen-sdk:
 	 docker run --rm -v "${PWD}:/local" swaggerapi/swagger-codegen-cli-v3:3.0.22 generate \
@@ -32,7 +31,7 @@ gen:
 
 validate-swagger:
 	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v6.2.0 validate \
-		-i /local/swagger.yml
+		-i /local/open.yml
 gateway-sdks:
 	 docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v6.2.0 generate \
          --type-mappings APIDefinitionCORSModelModel=APIDefinitionCORSModel \
