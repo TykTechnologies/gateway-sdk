@@ -3724,7 +3724,7 @@ components:
       type: object
     Policy:
       properties:
-        _id:
+        _mid:
           example: 5ead7120575961000181867e
           type: string
         access_rights:
