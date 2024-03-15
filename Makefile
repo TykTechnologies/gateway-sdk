@@ -1,7 +1,7 @@
 apim-sdk:
 	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
     	--generator-name go \
-        --input-spec /local/swagger.yml \
+        --input-spec /local/open.yaml \
         --output /local/pkg/apim/ \
         --skip-overwrite \
         --git-host github.com \
@@ -56,7 +56,7 @@ gateway-sdks:
          --api-name-suffix API \
           --model-name-suffix Model \
          --additional-properties=isGoSubmodule=false,generateInterfaces=true,hideGenerationTimestamp=false,outputAsLibrary=true \
-        -i /local/swagger.yml \
+        -i /local/open.yaml \
         -g go \
         -o /local/apim
 
