@@ -1,21 +1,26 @@
 apim-sdk:
 	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
-    	--generator-name go \
-        --input-spec /local/open.yaml \
+         --generator-name go \
+        --input-spec /local/swagger.yml \
         --output /local/pkg/apim/ \
         --skip-overwrite \
         --git-host github.com \
         --git-user-id TykTechnologies \
-        --git-repo-id gateway-sdk/pkg/apim \
-        --package-name apim \
-        --api-name-suffix API \
+         --git-repo-id gateway-sdk/pkg/apim \
+         --package-name apim \
+         --api-name-suffix API \
+         --minimal-update \
         --global-property skipFormModel=true \
-        --global-property apis,apiTests=false,apiDocs=false \
-        --global-property models,modelTests=false,modelDocs=false \
+        --global-property skipFormModel=true \
+        --global-property apis,apiTests=false,apiDocs=true \
+        --global-property models,modelTests=true,modelDocs=true \
         --global-property supportingFiles \
-        --additional-properties generateInterfaces=true
+        -c /local/config.json\
+        --name-mappings _id=MID
 
-	    sudo rm -rf pkg/apim/go.mod pkg/apim/go.sum
+	sudo rm -rf pkg/apim/model_server_variable.go
+	sudo gofmt -s -w .
+	go mod tidy
 
 codegen-sdk:
 	 docker run --rm -v "${PWD}:/local" swaggerapi/swagger-codegen-cli-v3:3.0.22 generate \

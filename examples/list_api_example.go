@@ -4,19 +4,20 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/TykTechnologies/gateway-sdk/pkg/apim"
 	"log"
+
+	"github.com/TykTechnologies/gateway-sdk/pkg/apim"
 )
 
 var (
-	BaseUrl           = "http://localhost:8080"
+	BaseUrl           = "http://tyk-gateway.localhost:8080"
 	xTykAuthorization = "x-tyk-authorization"
 )
 
 func main() {
 	apiConfig := apim.Configuration{
 		DefaultHeader: map[string]string{
-			xTykAuthorization: "<Your TYK SECRET HERE>",
+			xTykAuthorization: "<YOUR GATEWAY AUTHORIZATION KEY HERE>",
 		},
 		Debug: false,
 		Servers: apim.ServerConfigurations{
@@ -28,7 +29,7 @@ func main() {
 	}
 	client := apim.NewAPIClient(&apiConfig)
 	ctx := context.Background()
-	policies, resp, err := client.PoliciesAPI.ListPolicies(ctx).Execute()
+	apis, resp, err := client.APIsAPI.ListApis(ctx).Execute()
 	if err != nil {
 		log.Println(err)
 		return
@@ -39,5 +40,7 @@ func main() {
 
 		return
 	}
-	fmt.Printf("%+v\n", policies)
+	for _, item := range apis {
+		fmt.Printf("%+v\n", item.GetApiId())
+	}
 }
