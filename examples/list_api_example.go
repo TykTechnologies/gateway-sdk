@@ -2,9 +2,10 @@ package main
 
 import (
 	"context"
-	"errors"
 	"fmt"
+	"io"
 	"log"
+	"net/http"
 
 	"github.com/TykTechnologies/gateway-sdk/pkg/apim"
 )
@@ -30,17 +31,29 @@ func main() {
 	client := apim.NewAPIClient(&apiConfig)
 	ctx := context.Background()
 	apis, resp, err := client.APIsAPI.ListApis(ctx).Execute()
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	if resp.StatusCode != 200 {
-		// Do something here.
-		log.Println(errors.New(resp.Status))
-
+	if err != nil || resp.StatusCode != 200 {
+		body, err := ReadResponseBody(resp)
+		if err != nil {
+			log.Println(resp.Status)
+			return
+		}
+		log.Println(body)
 		return
 	}
 	for _, item := range apis {
 		fmt.Printf("%+v\n", item.GetApiId())
 	}
+}
+
+func ReadResponseBody(resp *http.Response) (string, error) {
+	defer resp.Body.Close()
+
+	// Read the response body
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	// Convert the body to a string and return
+	return string(body), nil
 }
