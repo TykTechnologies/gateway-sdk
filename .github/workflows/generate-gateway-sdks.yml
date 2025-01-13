@@ -5,21 +5,21 @@ on:
       - main
 jobs:
   generate-angular-client:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     name: Example
     steps:
 
       # Checkout your code
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Set up Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v5
         with:
-          go-version: '1.16'
+          go-version: '1.23.2'
       - name: Generate gateway sdks and commit them
         run: |
           make validate-swagger
           make apim-sdk
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: save generated gateway sdks
