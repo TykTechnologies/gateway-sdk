@@ -1,5 +1,5 @@
 apim-sdk:
-	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
+	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v7.10.0 generate \
          --generator-name go \
         --input-spec /local/swagger.yml \
         --output /local/pkg/apim/ \
@@ -22,22 +22,10 @@ apim-sdk:
 	sudo gofmt -s -w .
 	go mod tidy
 
-codegen-sdk:
-	 docker run --rm -v "${PWD}:/local" swaggerapi/swagger-codegen-cli-v3:3.0.22 generate \
-        -i /local/swagger.yml \
-        --additional-properties=packageName=gateway \
-        -l go \
-        -o /local/gateway
-rm-gateway:
-	bash rem.sh
-
-gen:
-	oapi-codegen -generate types,client -package spec swagger.yml > ./oapi/gen.go
-
-
 validate-swagger:
-	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v6.2.0 validate \
+	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v7.10.0 validate \
 		-i /local/swagger.yml
+
 gateway-sdks:
 	 docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v6.2.0 generate \
          --type-mappings APIDefinitionCORSModelModel=APIDefinitionCORSModel \
