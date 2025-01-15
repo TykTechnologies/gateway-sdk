@@ -13,7 +13,7 @@ To install the sdk run
 In these samples Tyk Gateway is running on localhost port 8080.
 The BaseUrl is: `http://localhost:8080` and the secret key is `secret`, you should change this to your actual key.
 
-## List Apis in the gateway example
+## Example to list Apis in the gateway
 ```go
 package main
 
