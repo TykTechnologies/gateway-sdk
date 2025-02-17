@@ -19,7 +19,7 @@ jobs:
           # Try to read the input. For pull_request events, this may be empty.
           BRANCHES="${{ github.event.inputs.branches }}"
           if [ -z "$BRANCHES" ]; then
-            BRANCHES="master,5.0"
+            BRANCHES="master,5.7"
           fi
           # Remove spaces and convert to a JSON array.
           JSON_ARRAY=$(echo "$BRANCHES" | sed 's/ //g' | awk -F',' '{ 
@@ -81,7 +81,7 @@ jobs:
           echo "Using Tyk branch: ${{ matrix.source_branch }}"
           cp tyk/swagger.yml swagger.yml
 
-      - name: Generate dashboard sdks
+      - name: Generate gateway sdks
         run: |
           make validate-swagger
           make apim-sdk
