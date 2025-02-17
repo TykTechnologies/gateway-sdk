@@ -90,9 +90,9 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.ORG_GH_TOKEN }}
-          commit-message: "save generated gateway sdks for source branch ${{ matrix.source_branch }}"
-          title: "Generated dashboard SDKs for ${{ matrix.source_branch }}"
-          body: "This PR contains the generated dashboard SDKs."
+          commit-message: "save generated gateway sdks for source branch ${{ env.TARGET_BRANCH }}"
+          title: "Generated gateway SDKs for ${{ env.TARGET_BRANCH }}"
+          body: "This PR contains the generated gateway SDKs."
           branch: ${{ env.TARGET_BRANCH }}-update   # The new branch with -update suffix
           base: ${{ env.TARGET_BRANCH }}
 
