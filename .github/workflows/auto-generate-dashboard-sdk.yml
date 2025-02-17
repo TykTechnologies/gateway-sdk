@@ -1,12 +1,12 @@
 name: Generate dashboard sdks
 on:
+  pull_request:
   workflow_dispatch:
     inputs:
       branches:
         description: 'Comma-separated branches for the Tyk repo (e.g. "5.0,master,5.6")'
         required: true
         default: '5.0,master,5.6'
-  pull_request:
 
 jobs:
   generate-dashboard-sdks:
