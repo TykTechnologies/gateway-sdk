@@ -1,12 +1,11 @@
 name: Generate gateway sdks
 on:
-  pull_request:
   workflow_dispatch:
     inputs:
       branches:
         description: 'Comma-separated branches for the Tyk repo (e.g. "master,5.3,5.4,5.7")'
         required: false
-        default: 'master,5.3,5.4,5.7'
+        default: 'master'
 
 jobs:
   setup-matrix:
@@ -19,7 +18,7 @@ jobs:
           # Try to read the input. For pull_request events, this may be empty.
           BRANCHES="${{ github.event.inputs.branches }}"
           if [ -z "$BRANCHES" ]; then
-            BRANCHES="master,5.7"
+            BRANCHES="master"
           fi
           # Remove spaces and convert to a JSON array.
           JSON_ARRAY=$(echo "$BRANCHES" | sed 's/ //g' | awk -F',' '{ 
