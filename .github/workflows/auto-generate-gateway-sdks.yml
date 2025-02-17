@@ -93,7 +93,7 @@ jobs:
         run: |
           echo "Base branch $env.TARGET_BRANCH did not exist remotely."
           echo "Pushing update branch ${TARGET_BRANCH} to remote..."
-          git push origin "${TARGET_BRANCH}-update"
+          git push origin "${TARGET_BRANCH}"
 
       - name: Create Pull Request with generated SDKs
         uses: peter-evans/create-pull-request@v7
