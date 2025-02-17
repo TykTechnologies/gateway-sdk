@@ -22,7 +22,7 @@ import (
 type DebugAPI interface {
 
 	/*
-		DebugApiDefinition Test an an API definition.
+		DebugApiDefinition Test a Classic or an OAS API definition.
 
 		Used to test API definition by sending sample request and analysing output of both response and logs.
 
@@ -55,7 +55,7 @@ func (r ApiDebugApiDefinitionRequest) Execute() (*TraceResponse, *http.Response,
 }
 
 /*
-DebugApiDefinition Test an an API definition.
+DebugApiDefinition Test a Classic or an OAS API definition.
 
 Used to test API definition by sending sample request and analysing output of both response and logs.
 
