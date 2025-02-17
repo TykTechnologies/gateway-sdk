@@ -111,8 +111,8 @@ Class | Method | HTTP request | Description
 *CertsAPI* | [**AddCert**](docs/CertsAPI.md#addcert) | **Post** /tyk/certs | Add a certificate.
 *CertsAPI* | [**DeleteCerts**](docs/CertsAPI.md#deletecerts) | **Delete** /tyk/certs/{certID} | Delete certificate.
 *CertsAPI* | [**ListCerts**](docs/CertsAPI.md#listcerts) | **Get** /tyk/certs | List certificates.
-*CertsTagAPI* | [**ListCertsWithIDs**](docs/CertsTagAPI.md#listcertswithids) | **Get** /tyk/certs/{certID} | Return one certificate or list multiple certificates in the Tyk Gateway given a comma separated list of cert IDs.
-*DebugAPI* | [**DebugApiDefinition**](docs/DebugAPI.md#debugapidefinition) | **Post** /tyk/debug | Test an an API definition.
+*CertsAPI* | [**ListCertsWithIDs**](docs/CertsAPI.md#listcertswithids) | **Get** /tyk/certs/{certID} | Return one certificate or list multiple certificates in the Tyk Gateway given a comma separated list of cert IDs.
+*DebugAPI* | [**DebugApiDefinition**](docs/DebugAPI.md#debugapidefinition) | **Post** /tyk/debug | Test a Classic or an OAS API definition.
 *HealthCheckingAPI* | [**Hello**](docs/HealthCheckingAPI.md#hello) | **Get** /hello | Check the health of the Tyk Gateway.
 *HotReloadAPI* | [**HotReload**](docs/HotReloadAPI.md#hotreload) | **Get** /tyk/reload | Hot-reload a single node.
 *HotReloadAPI* | [**HotReloadGroup**](docs/HotReloadAPI.md#hotreloadgroup) | **Get** /tyk/reload/group | Hot-reload a group of Tyk nodes.

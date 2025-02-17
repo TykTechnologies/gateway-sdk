@@ -23,14 +23,14 @@ import (
 type CertsTagAPI interface {
 
 	/*
-		ListCertsWithIDs Return one certificate or list multiple certificates in the Tyk Gateway given a comma separated list of cert IDs.
+			ListCertsWithIDs Return one certificate or list multiple certificates in the Tyk Gateway given a comma separated list of cert IDs.
 
-		Note that the certID path parameter can take a list of certIDs separated with commas (e.g /tyk/certs/certIDOne,certIDTwo).
-	 If you send a single certID it will return a single CertificateMeta object otherwise if you send more than two certIDs is will return an array of certificateMeta objects.
+			Note that the certID path parameter can take a list of certIDs separated with commas (e.g /tyk/certs/certIDOne,certIDTwo).
+		 If you send a single certID it will return a single CertificateMeta object otherwise if you send more than two certIDs is will return an array of certificateMeta objects.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param certID Comma separated list of certificates to list.
-		@return ApiListCertsWithIDsRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@param certID Comma separated list of certificates to list.
+			@return ApiListCertsWithIDsRequest
 	*/
 	ListCertsWithIDs(ctx context.Context, certID string) ApiListCertsWithIDsRequest
 

@@ -57,8 +57,6 @@ type APIClient struct {
 
 	CertsAPI CertsAPI
 
-	CertsTagAPI CertsTagAPI
-
 	DebugAPI DebugAPI
 
 	HealthCheckingAPI HealthCheckingAPI
@@ -98,7 +96,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.BatchRequestsAPI = (*BatchRequestsAPIService)(&c.common)
 	c.CacheInvalidationAPI = (*CacheInvalidationAPIService)(&c.common)
 	c.CertsAPI = (*CertsAPIService)(&c.common)
-	c.CertsTagAPI = (*CertsTagAPIService)(&c.common)
 	c.DebugAPI = (*DebugAPIService)(&c.common)
 	c.HealthCheckingAPI = (*HealthCheckingAPIService)(&c.common)
 	c.HotReloadAPI = (*HotReloadAPIService)(&c.common)

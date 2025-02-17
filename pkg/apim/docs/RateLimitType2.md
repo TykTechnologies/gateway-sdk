@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Per** | Pointer to **float32** |  | [optional] 
 **Rate** | Pointer to **float32** |  | [optional] 
-**Smoothing** | Pointer to [**RateLimitSmoothing**](RateLimitSmoothing.md) |  | [optional] 
+**Smoothing** | Pointer to [**NullableRateLimitSmoothing**](RateLimitSmoothing.md) |  | [optional] 
 
 ## Methods
 
@@ -102,6 +102,16 @@ SetSmoothing sets Smoothing field to given value.
 
 HasSmoothing returns a boolean if a field has been set.
 
+### SetSmoothingNil
+
+`func (o *RateLimitType2) SetSmoothingNil(b bool)`
+
+ SetSmoothingNil sets the value for Smoothing to be an explicit nil
+
+### UnsetSmoothing
+`func (o *RateLimitType2) UnsetSmoothing()`
+
+UnsetSmoothing ensures that no value is present for Smoothing, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
