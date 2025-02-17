@@ -4,7 +4,7 @@ All URIs are relative to *https://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DebugApiDefinition**](DebugAPI.md#DebugApiDefinition) | **Post** /tyk/debug | Test an an API definition.
+[**DebugApiDefinition**](DebugAPI.md#DebugApiDefinition) | **Post** /tyk/debug | Test a Classic or an OAS API definition.
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > TraceResponse DebugApiDefinition(ctx).TraceRequest(traceRequest).Execute()
 
-Test an an API definition.
+Test a Classic or an OAS API definition.
 
 
 
