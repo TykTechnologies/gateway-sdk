@@ -6,6 +6,7 @@ api_apis.go
 api_batch_requests.go
 api_cache_invalidation.go
 api_certs.go
+api_certs_tag.go
 api_debug.go
 api_health_checking.go
 api_hot_reload.go
@@ -53,6 +54,7 @@ docs/CertificatePinning.md
 docs/CertsAPI.md
 docs/CertsCertificateBasics.md
 docs/CertsCertificateMeta.md
+docs/CertsTagAPI.md
 docs/CheckCommand.md
 docs/CircuitBreaker.md
 docs/CircuitBreakerMeta.md
