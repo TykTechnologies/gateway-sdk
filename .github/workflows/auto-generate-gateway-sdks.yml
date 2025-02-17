@@ -84,10 +84,15 @@ jobs:
       - name: Generate dashboard sdks
         run: |
           make validate-swagger
-          make dashboard
+          make apim-sdk
 
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Create Pull Request with generated SDKs
+        uses: peter-evans/create-pull-request@v7
         with:
-          commit_message: "save generated gateway sdks for source branch ${{ matrix.source_branch }} (committed on $TARGET_BRANCH)"
-          branch: ${{ env.TARGET_BRANCH }}
+          token: ${{ secrets.ORG_GH_TOKEN }}
+          commit-message: "save generated gateway sdks for source branch ${{ matrix.source_branch }}"
+          title: "Generated dashboard SDKs for ${{ matrix.source_branch }}"
+          body: "This PR contains the generated dashboard SDKs."
+          branch: ${{ env.TARGET_BRANCH }}-update   # The new branch with -update suffix
+          base: ${{ env.TARGET_BRANCH }}
+
