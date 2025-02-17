@@ -59,8 +59,10 @@ jobs:
           echo "Switching to branch: $TARGET_BRANCH"
           git fetch origin "$TARGET_BRANCH" || true
           if git rev-parse --verify origin/"$TARGET_BRANCH"; then
+            echo "BRANCH_EXISTS=true" >> $GITHUB_ENV
             git checkout -B "$TARGET_BRANCH" origin/"$TARGET_BRANCH"
           else
+            echo "BRANCH_EXISTS=false" >> $GITHUB_ENV
             git checkout -B "$TARGET_BRANCH"
           fi
 
@@ -85,6 +87,13 @@ jobs:
         run: |
           make validate-swagger
           make apim-sdk
+
+      - name: Push new branch if base branch does not exist
+        if: ${{ env.BRANCH_EXISTS == 'false' }}
+        run: |
+          echo "Base branch $env.TARGET_BRANCH did not exist remotely."
+          echo "Pushing update branch ${env.TARGET_BRANCH} to remote..."
+          git push origin "${env.TARGET_BRANCH}"
 
       - name: Create Pull Request with generated SDKs
         uses: peter-evans/create-pull-request@v7
