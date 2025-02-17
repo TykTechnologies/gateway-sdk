@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Request** | Pointer to [**TraceHttpRequest**](TraceHttpRequest.md) |  | [optional] 
 **Spec** | Pointer to [**APIDefinition**](APIDefinition.md) |  | [optional] 
+**Oas** | Pointer to [**NullableOneOf30XTykAPIGateway**](oneOf&lt;30,XTykAPIGateway&gt;.md) |  | [optional] 
 
 ## Methods
 
@@ -76,6 +77,41 @@ SetSpec sets Spec field to given value.
 
 HasSpec returns a boolean if a field has been set.
 
+### GetOas
+
+`func (o *TraceRequest) GetOas() OneOf30XTykAPIGateway`
+
+GetOas returns the Oas field if non-nil, zero value otherwise.
+
+### GetOasOk
+
+`func (o *TraceRequest) GetOasOk() (*OneOf30XTykAPIGateway, bool)`
+
+GetOasOk returns a tuple with the Oas field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOas
+
+`func (o *TraceRequest) SetOas(v OneOf30XTykAPIGateway)`
+
+SetOas sets Oas field to given value.
+
+### HasOas
+
+`func (o *TraceRequest) HasOas() bool`
+
+HasOas returns a boolean if a field has been set.
+
+### SetOasNil
+
+`func (o *TraceRequest) SetOasNil(b bool)`
+
+ SetOasNil sets the value for Oas to be an explicit nil
+
+### UnsetOas
+`func (o *TraceRequest) UnsetOas()`
+
+UnsetOas ensures that no value is present for Oas, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

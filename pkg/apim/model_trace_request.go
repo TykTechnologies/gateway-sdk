@@ -20,8 +20,9 @@ var _ MappedNullable = &TraceRequest{}
 
 // TraceRequest struct for TraceRequest
 type TraceRequest struct {
-	Request *TraceHttpRequest `json:"request,omitempty"`
-	Spec    *APIDefinition    `json:"spec,omitempty"`
+	Request *TraceHttpRequest
+	Spec    *APIDefinition
+	Oas     NullableOneOf30XTykAPIGateway
 }
 
 // NewTraceRequest instantiates a new TraceRequest object
@@ -105,6 +106,49 @@ func (o *TraceRequest) SetSpec(v APIDefinition) {
 	o.Spec = &v
 }
 
+// GetOas returns the Oas field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TraceRequest) GetOas() OneOf30XTykAPIGateway {
+	if o == nil || IsNil(o.Oas.Get()) {
+		var ret OneOf30XTykAPIGateway
+		return ret
+	}
+	return *o.Oas.Get()
+}
+
+// GetOasOk returns a tuple with the Oas field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TraceRequest) GetOasOk() (*OneOf30XTykAPIGateway, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Oas.Get(), o.Oas.IsSet()
+}
+
+// HasOas returns a boolean if a field has been set.
+func (o *TraceRequest) HasOas() bool {
+	if o != nil && o.Oas.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOas gets a reference to the given NullableOneOf30XTykAPIGateway and assigns it to the Oas field.
+func (o *TraceRequest) SetOas(v OneOf30XTykAPIGateway) {
+	o.Oas.Set(&v)
+}
+
+// SetOasNil sets the value for Oas to be an explicit nil
+func (o *TraceRequest) SetOasNil() {
+	o.Oas.Set(nil)
+}
+
+// UnsetOas ensures that no value is present for Oas, not even an explicit nil
+func (o *TraceRequest) UnsetOas() {
+	o.Oas.Unset()
+}
+
 func (o TraceRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -120,6 +164,9 @@ func (o TraceRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Spec) {
 		toSerialize["spec"] = o.Spec
+	}
+	if o.Oas.IsSet() {
+		toSerialize["oas"] = o.Oas.Get()
 	}
 	return toSerialize, nil
 }
