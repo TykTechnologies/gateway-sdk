@@ -2,7 +2,7 @@ name: Generate gateway sdks
 on:
   push:
     branches:
-      - main
+      - main-paused
 jobs:
   generate-angular-client:
     runs-on: ubuntu-latest
