@@ -8,7 +8,6 @@ on:
         default: '5.0,master,5.6'
   pull_request:
 
-
 jobs:
   generate-dashboard-sdks:
     runs-on: ubuntu-latest
