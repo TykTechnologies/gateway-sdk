@@ -1,4 +1,4 @@
-name: Generate dashboard sdks
+name: Generate gateway sdks
 on:
   pull_request:
   workflow_dispatch:
@@ -12,13 +12,10 @@ jobs:
   generate-dashboard-sdks:
     runs-on: ubuntu-latest
     strategy:
-      # Split the comma-separated branch list into an array.
-      # If the workflow was not triggered via workflow_dispatch (e.g. pull_request), fall back to the default.
       matrix:
-        source_branch: ${{ fromJson('["' + (github.event.inputs.branches || "master").replace(",", '","') + '"]') }}
+        source_branch: >
+          ${{ fromJson('["' + ((github.event_name == "workflow_dispatch" ? github.event.inputs.branches : "master").replace(",", '","')) + '"]') }}
     env:
-      # For the current repository: if the source branch is "master", use "main".
-      # Otherwise, use "release-<source_branch>".
       TARGET_BRANCH: ${{ matrix.source_branch == 'master' && 'main' || ('release-' + matrix.source_branch) }}
     steps:
       - name: Checkout current repository
@@ -51,7 +48,6 @@ jobs:
       - name: Prepare swagger file
         run: |
           echo "Using Tyk branch: ${{ matrix.source_branch }}"
-          # Adjust the file path as needed
           cp tyk/swagger.yml swagger.yml
 
       - name: Generate dashboard sdks
@@ -62,5 +58,5 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "save generated dashboard sdks for source branch ${{ matrix.source_branch }} (committed on $TARGET_BRANCH)"
+          commit_message: "save generated gateway sdks for source branch ${{ matrix.source_branch }} (committed on $TARGET_BRANCH)"
           branch: ${{ env.TARGET_BRANCH }}
