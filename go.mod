@@ -1,4 +1,4 @@
-module github.com/TykTechnologies/gateway-sdk
+module github.com/TykTechnologies/gateway-sdk/v5.7.2
 
 go 1.23.2
 
