@@ -3,11 +3,22 @@
 - This is the gateway sdk generated from the open Api specs.
 - Report any issue you may encounter while using this Sdk.
 
+## Versioning
+
+- For versionning since the sdks are still experimental we are using a tag like: v0.0.1-gateway.5.7.2
+ The -gateway.5.7.2 indicates the gateway that this sdks were generated for.
+
 ## How to install
 
 To install the sdk run
 
-`go get github.com/TykTechnologies/gateway-sdk`
+`go get github.com/TykTechnologies/gateway-sdk` (For master branch)
+
+For a branch like 5.7.2 You would install as follows:
+
+ go get github.com/TykTechnologies/gateway-sdk@v0.0.1-gateway.5.7.2`
+
+
 
 ## Sample Usage
 In these samples Tyk Gateway is running on localhost port 8080.
