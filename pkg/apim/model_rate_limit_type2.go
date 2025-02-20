@@ -20,9 +20,9 @@ var _ MappedNullable = &RateLimitType2{}
 
 // RateLimitType2 struct for RateLimitType2
 type RateLimitType2 struct {
-	Per       *float32                   `json:"per,omitempty"`
-	Rate      *float32                   `json:"rate,omitempty"`
-	Smoothing NullableRateLimitSmoothing `json:"smoothing,omitempty"`
+	Per       *float32            `json:"per,omitempty"`
+	Rate      *float32            `json:"rate,omitempty"`
+	Smoothing *RateLimitSmoothing `json:"smoothing,omitempty"`
 }
 
 // NewRateLimitType2 instantiates a new RateLimitType2 object
@@ -106,47 +106,36 @@ func (o *RateLimitType2) SetRate(v float32) {
 	o.Rate = &v
 }
 
-// GetSmoothing returns the Smoothing field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSmoothing returns the Smoothing field value if set, zero value otherwise.
 func (o *RateLimitType2) GetSmoothing() RateLimitSmoothing {
-	if o == nil || IsNil(o.Smoothing.Get()) {
+	if o == nil || IsNil(o.Smoothing) {
 		var ret RateLimitSmoothing
 		return ret
 	}
-	return *o.Smoothing.Get()
+	return *o.Smoothing
 }
 
 // GetSmoothingOk returns a tuple with the Smoothing field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RateLimitType2) GetSmoothingOk() (*RateLimitSmoothing, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Smoothing) {
 		return nil, false
 	}
-	return o.Smoothing.Get(), o.Smoothing.IsSet()
+	return o.Smoothing, true
 }
 
 // HasSmoothing returns a boolean if a field has been set.
 func (o *RateLimitType2) HasSmoothing() bool {
-	if o != nil && o.Smoothing.IsSet() {
+	if o != nil && !IsNil(o.Smoothing) {
 		return true
 	}
 
 	return false
 }
 
-// SetSmoothing gets a reference to the given NullableRateLimitSmoothing and assigns it to the Smoothing field.
+// SetSmoothing gets a reference to the given RateLimitSmoothing and assigns it to the Smoothing field.
 func (o *RateLimitType2) SetSmoothing(v RateLimitSmoothing) {
-	o.Smoothing.Set(&v)
-}
-
-// SetSmoothingNil sets the value for Smoothing to be an explicit nil
-func (o *RateLimitType2) SetSmoothingNil() {
-	o.Smoothing.Set(nil)
-}
-
-// UnsetSmoothing ensures that no value is present for Smoothing, not even an explicit nil
-func (o *RateLimitType2) UnsetSmoothing() {
-	o.Smoothing.Unset()
+	o.Smoothing = &v
 }
 
 func (o RateLimitType2) MarshalJSON() ([]byte, error) {
@@ -165,8 +154,8 @@ func (o RateLimitType2) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rate) {
 		toSerialize["rate"] = o.Rate
 	}
-	if o.Smoothing.IsSet() {
-		toSerialize["smoothing"] = o.Smoothing.Get()
+	if !IsNil(o.Smoothing) {
+		toSerialize["smoothing"] = o.Smoothing
 	}
 	return toSerialize, nil
 }

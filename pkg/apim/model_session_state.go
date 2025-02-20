@@ -34,35 +34,35 @@ type SessionState struct {
 	DateCreated   *time.Time     `json:"date_created,omitempty"`
 	// deprecated use enable_detailed_recording going forward instead
 	// Deprecated
-	EnableDetailRecording         *bool                      `json:"enable_detail_recording,omitempty"`
-	EnableDetailedRecording       *bool                      `json:"enable_detailed_recording,omitempty"`
-	EnableHttpSignatureValidation *bool                      `json:"enable_http_signature_validation,omitempty"`
-	Expires                       *int64                     `json:"expires,omitempty"`
-	HmacEnabled                   *bool                      `json:"hmac_enabled,omitempty"`
-	HmacString                    *string                    `json:"hmac_string,omitempty"`
-	IdExtractorDeadline           *int64                     `json:"id_extractor_deadline,omitempty"`
-	IsInactive                    *bool                      `json:"is_inactive,omitempty"`
-	JwtData                       *JWTData                   `json:"jwt_data,omitempty"`
-	LastCheck                     *int64                     `json:"last_check,omitempty"`
-	LastUpdated                   *string                    `json:"last_updated,omitempty"`
-	MaxQueryDepth                 *int32                     `json:"max_query_depth,omitempty"`
-	MetaData                      map[string]interface{}     `json:"meta_data,omitempty"`
-	Monitor                       *Monitor                   `json:"monitor,omitempty"`
-	OauthClientId                 *string                    `json:"oauth_client_id,omitempty"`
-	OauthKeys                     map[string]string          `json:"oauth_keys,omitempty"`
-	OrgId                         *string                    `json:"org_id,omitempty"`
-	Per                           *float64                   `json:"per,omitempty"`
-	QuotaMax                      *int64                     `json:"quota_max,omitempty"`
-	QuotaRemaining                *int64                     `json:"quota_remaining,omitempty"`
-	QuotaRenewalRate              *int64                     `json:"quota_renewal_rate,omitempty"`
-	QuotaRenews                   *int64                     `json:"quota_renews,omitempty"`
-	Rate                          *float64                   `json:"rate,omitempty"`
-	RsaCertificateId              *string                    `json:"rsa_certificate_id,omitempty"`
-	SessionLifetime               *int64                     `json:"session_lifetime,omitempty"`
-	Smoothing                     NullableRateLimitSmoothing `json:"smoothing,omitempty"`
-	Tags                          []string                   `json:"tags,omitempty"`
-	ThrottleInterval              *float64                   `json:"throttle_interval,omitempty"`
-	ThrottleRetryLimit            *int32                     `json:"throttle_retry_limit,omitempty"`
+	EnableDetailRecording         *bool                  `json:"enable_detail_recording,omitempty"`
+	EnableDetailedRecording       *bool                  `json:"enable_detailed_recording,omitempty"`
+	EnableHttpSignatureValidation *bool                  `json:"enable_http_signature_validation,omitempty"`
+	Expires                       *int64                 `json:"expires,omitempty"`
+	HmacEnabled                   *bool                  `json:"hmac_enabled,omitempty"`
+	HmacString                    *string                `json:"hmac_string,omitempty"`
+	IdExtractorDeadline           *int64                 `json:"id_extractor_deadline,omitempty"`
+	IsInactive                    *bool                  `json:"is_inactive,omitempty"`
+	JwtData                       *JWTData               `json:"jwt_data,omitempty"`
+	LastCheck                     *int64                 `json:"last_check,omitempty"`
+	LastUpdated                   *string                `json:"last_updated,omitempty"`
+	MaxQueryDepth                 *int32                 `json:"max_query_depth,omitempty"`
+	MetaData                      map[string]interface{} `json:"meta_data,omitempty"`
+	Monitor                       *Monitor               `json:"monitor,omitempty"`
+	OauthClientId                 *string                `json:"oauth_client_id,omitempty"`
+	OauthKeys                     map[string]string      `json:"oauth_keys,omitempty"`
+	OrgId                         *string                `json:"org_id,omitempty"`
+	Per                           *float64               `json:"per,omitempty"`
+	QuotaMax                      *int64                 `json:"quota_max,omitempty"`
+	QuotaRemaining                *int64                 `json:"quota_remaining,omitempty"`
+	QuotaRenewalRate              *int64                 `json:"quota_renewal_rate,omitempty"`
+	QuotaRenews                   *int64                 `json:"quota_renews,omitempty"`
+	Rate                          *float64               `json:"rate,omitempty"`
+	RsaCertificateId              *string                `json:"rsa_certificate_id,omitempty"`
+	SessionLifetime               *int64                 `json:"session_lifetime,omitempty"`
+	Smoothing                     *RateLimitSmoothing    `json:"smoothing,omitempty"`
+	Tags                          []string               `json:"tags,omitempty"`
+	ThrottleInterval              *float64               `json:"throttle_interval,omitempty"`
+	ThrottleRetryLimit            *int32                 `json:"throttle_retry_limit,omitempty"`
 }
 
 // NewSessionState instantiates a new SessionState object
@@ -1180,47 +1180,36 @@ func (o *SessionState) SetSessionLifetime(v int64) {
 	o.SessionLifetime = &v
 }
 
-// GetSmoothing returns the Smoothing field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSmoothing returns the Smoothing field value if set, zero value otherwise.
 func (o *SessionState) GetSmoothing() RateLimitSmoothing {
-	if o == nil || IsNil(o.Smoothing.Get()) {
+	if o == nil || IsNil(o.Smoothing) {
 		var ret RateLimitSmoothing
 		return ret
 	}
-	return *o.Smoothing.Get()
+	return *o.Smoothing
 }
 
 // GetSmoothingOk returns a tuple with the Smoothing field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SessionState) GetSmoothingOk() (*RateLimitSmoothing, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Smoothing) {
 		return nil, false
 	}
-	return o.Smoothing.Get(), o.Smoothing.IsSet()
+	return o.Smoothing, true
 }
 
 // HasSmoothing returns a boolean if a field has been set.
 func (o *SessionState) HasSmoothing() bool {
-	if o != nil && o.Smoothing.IsSet() {
+	if o != nil && !IsNil(o.Smoothing) {
 		return true
 	}
 
 	return false
 }
 
-// SetSmoothing gets a reference to the given NullableRateLimitSmoothing and assigns it to the Smoothing field.
+// SetSmoothing gets a reference to the given RateLimitSmoothing and assigns it to the Smoothing field.
 func (o *SessionState) SetSmoothing(v RateLimitSmoothing) {
-	o.Smoothing.Set(&v)
-}
-
-// SetSmoothingNil sets the value for Smoothing to be an explicit nil
-func (o *SessionState) SetSmoothingNil() {
-	o.Smoothing.Set(nil)
-}
-
-// UnsetSmoothing ensures that no value is present for Smoothing, not even an explicit nil
-func (o *SessionState) UnsetSmoothing() {
-	o.Smoothing.Unset()
+	o.Smoothing = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1432,8 +1421,8 @@ func (o SessionState) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SessionLifetime) {
 		toSerialize["session_lifetime"] = o.SessionLifetime
 	}
-	if o.Smoothing.IsSet() {
-		toSerialize["smoothing"] = o.Smoothing.Get()
+	if !IsNil(o.Smoothing) {
+		toSerialize["smoothing"] = o.Smoothing
 	}
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
