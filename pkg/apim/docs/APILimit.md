@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **QuotaRenewalRate** | Pointer to **int32** |  | [optional] 
 **QuotaRenews** | Pointer to **int32** |  | [optional] 
 **Rate** | Pointer to **float32** |  | [optional] 
-**Smoothing** | Pointer to [**NullableRateLimitSmoothing**](RateLimitSmoothing.md) |  | [optional] 
+**Smoothing** | Pointer to [**RateLimitSmoothing**](RateLimitSmoothing.md) |  | [optional] 
 **ThrottleInterval** | Pointer to **float32** |  | [optional] 
 **ThrottleRetryLimit** | Pointer to **int32** |  | [optional] 
 
@@ -234,16 +234,6 @@ SetSmoothing sets Smoothing field to given value.
 
 HasSmoothing returns a boolean if a field has been set.
 
-### SetSmoothingNil
-
-`func (o *APILimit) SetSmoothingNil(b bool)`
-
- SetSmoothingNil sets the value for Smoothing to be an explicit nil
-
-### UnsetSmoothing
-`func (o *APILimit) UnsetSmoothing()`
-
-UnsetSmoothing ensures that no value is present for Smoothing, not even an explicit nil
 ### GetThrottleInterval
 
 `func (o *APILimit) GetThrottleInterval() float32`
