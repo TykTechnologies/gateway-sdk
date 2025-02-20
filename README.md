@@ -5,19 +5,22 @@
 
 ## Versioning
 
-- For versionning since the sdks are still experimental we are using a tag like: v0.0.1-gateway.5.7.2
- The -gateway.5.7.2 indicates the gateway that this sdks were generated for.
+Since the SDK is still experimental, we adopt a versioning scheme that reflects both its developmental status and the specific Gateway version used to generate it. For example, a tag like `v0.0.1-gateway.5.7.2` indicates that:
 
-## How to install
+- **v0.0.1** – The SDK is in an early, experimental stage and may undergo breaking changes.
+- **-gateway.5.7.2** – The SDK was generated from Gateway version 5.7.2.
 
-To install the sdk run
+This versioning strategy ensures clear traceability, allowing users to easily identify which Gateway version the SDK is compatible with.
 
-`go get github.com/TykTechnologies/gateway-sdk` (For master branch)
+## How to Install
 
-For a branch like 5.7.2 You would install as follows:
+To install the SDK from the master branch, run:
 
- go get github.com/TykTechnologies/gateway-sdk@v0.0.1-gateway.5.7.2`
+`go get github.com/TykTechnologies/gateway-sdk`
+  
+### To install the SDK generated for a specific Gateway version (e.g., 5.7.2), run:
 
+  `go get github.com/TykTechnologies/gateway-sdk@v0.0.1-gateway.5.7.2`
 
 
 ## Sample Usage
