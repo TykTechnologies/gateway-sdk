@@ -38,7 +38,7 @@ Name | Type | Description | Notes
 **Rate** | Pointer to **float64** |  | [optional] 
 **RsaCertificateId** | Pointer to **string** |  | [optional] 
 **SessionLifetime** | Pointer to **int64** |  | [optional] 
-**Smoothing** | Pointer to [**NullableRateLimitSmoothing**](RateLimitSmoothing.md) |  | [optional] 
+**Smoothing** | Pointer to [**RateLimitSmoothing**](RateLimitSmoothing.md) |  | [optional] 
 **Tags** | Pointer to **[]string** |  | [optional] 
 **ThrottleInterval** | Pointer to **float64** |  | [optional] 
 **ThrottleRetryLimit** | Pointer to **int32** |  | [optional] 
@@ -977,16 +977,6 @@ SetSmoothing sets Smoothing field to given value.
 
 HasSmoothing returns a boolean if a field has been set.
 
-### SetSmoothingNil
-
-`func (o *SessionState) SetSmoothingNil(b bool)`
-
- SetSmoothingNil sets the value for Smoothing to be an explicit nil
-
-### UnsetSmoothing
-`func (o *SessionState) UnsetSmoothing()`
-
-UnsetSmoothing ensures that no value is present for Smoothing, not even an explicit nil
 ### GetTags
 
 `func (o *SessionState) GetTags() []string`
