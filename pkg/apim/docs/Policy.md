@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **QuotaMax** | Pointer to **int64** |  | [optional] 
 **QuotaRenewalRate** | Pointer to **int64** |  | [optional] 
 **Rate** | Pointer to **float64** |  | [optional] 
-**Smoothing** | Pointer to [**NullableRateLimitSmoothing**](RateLimitSmoothing.md) |  | [optional] 
+**Smoothing** | Pointer to [**RateLimitSmoothing**](RateLimitSmoothing.md) |  | [optional] 
 **Tags** | Pointer to **[]string** |  | [optional] 
 **ThrottleInterval** | Pointer to **float64** |  | [optional] 
 **ThrottleRetryLimit** | Pointer to **int32** |  | [optional] 
@@ -577,16 +577,6 @@ SetSmoothing sets Smoothing field to given value.
 
 HasSmoothing returns a boolean if a field has been set.
 
-### SetSmoothingNil
-
-`func (o *Policy) SetSmoothingNil(b bool)`
-
- SetSmoothingNil sets the value for Smoothing to be an explicit nil
-
-### UnsetSmoothing
-`func (o *Policy) UnsetSmoothing()`
-
-UnsetSmoothing ensures that no value is present for Smoothing, not even an explicit nil
 ### GetTags
 
 `func (o *Policy) GetTags() []string`

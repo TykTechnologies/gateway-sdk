@@ -39,7 +39,7 @@ type Policy struct {
 	QuotaMax                      *int64                            `json:"quota_max,omitempty"`
 	QuotaRenewalRate              *int64                            `json:"quota_renewal_rate,omitempty"`
 	Rate                          *float64                          `json:"rate,omitempty"`
-	Smoothing                     NullableRateLimitSmoothing        `json:"smoothing,omitempty"`
+	Smoothing                     *RateLimitSmoothing               `json:"smoothing,omitempty"`
 	Tags                          []string                          `json:"tags,omitempty"`
 	ThrottleInterval              *float64                          `json:"throttle_interval,omitempty"`
 	ThrottleRetryLimit            *int32                            `json:"throttle_retry_limit,omitempty"`
@@ -673,47 +673,36 @@ func (o *Policy) SetRate(v float64) {
 	o.Rate = &v
 }
 
-// GetSmoothing returns the Smoothing field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSmoothing returns the Smoothing field value if set, zero value otherwise.
 func (o *Policy) GetSmoothing() RateLimitSmoothing {
-	if o == nil || IsNil(o.Smoothing.Get()) {
+	if o == nil || IsNil(o.Smoothing) {
 		var ret RateLimitSmoothing
 		return ret
 	}
-	return *o.Smoothing.Get()
+	return *o.Smoothing
 }
 
 // GetSmoothingOk returns a tuple with the Smoothing field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Policy) GetSmoothingOk() (*RateLimitSmoothing, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Smoothing) {
 		return nil, false
 	}
-	return o.Smoothing.Get(), o.Smoothing.IsSet()
+	return o.Smoothing, true
 }
 
 // HasSmoothing returns a boolean if a field has been set.
 func (o *Policy) HasSmoothing() bool {
-	if o != nil && o.Smoothing.IsSet() {
+	if o != nil && !IsNil(o.Smoothing) {
 		return true
 	}
 
 	return false
 }
 
-// SetSmoothing gets a reference to the given NullableRateLimitSmoothing and assigns it to the Smoothing field.
+// SetSmoothing gets a reference to the given RateLimitSmoothing and assigns it to the Smoothing field.
 func (o *Policy) SetSmoothing(v RateLimitSmoothing) {
-	o.Smoothing.Set(&v)
-}
-
-// SetSmoothingNil sets the value for Smoothing to be an explicit nil
-func (o *Policy) SetSmoothingNil() {
-	o.Smoothing.Set(nil)
-}
-
-// UnsetSmoothing ensures that no value is present for Smoothing, not even an explicit nil
-func (o *Policy) UnsetSmoothing() {
-	o.Smoothing.Unset()
+	o.Smoothing = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -880,8 +869,8 @@ func (o Policy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rate) {
 		toSerialize["rate"] = o.Rate
 	}
-	if o.Smoothing.IsSet() {
-		toSerialize["smoothing"] = o.Smoothing.Get()
+	if !IsNil(o.Smoothing) {
+		toSerialize["smoothing"] = o.Smoothing
 	}
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
