@@ -1,0 +1,105 @@
+name: Generate gateway sdks
+on:
+  workflow_dispatch:
+    inputs:
+      branches:
+        description: 'Comma-separated branches for the Tyk repo (e.g. "master,5.3,5.4,5.7")'
+        required: false
+        default: 'master'
+
+jobs:
+  setup-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      branchArray: ${{ steps.split.outputs.branchArray }}
+    steps:
+      - id: split
+        run: |
+          # Try to read the input. For pull_request events, this may be empty.
+          BRANCHES="${{ github.event.inputs.branches }}"
+          if [ -z "$BRANCHES" ]; then
+            BRANCHES="master"
+          fi
+          # Remove spaces and convert to a JSON array.
+          JSON_ARRAY=$(echo "$BRANCHES" | sed 's/ //g' | awk -F',' '{ 
+            printf "["; 
+            for(i=1;i<=NF;i++){
+              printf "\"%s\"", $i; 
+              if(i<NF) printf ",";
+            } 
+            printf "]"
+          }')
+          echo "branchArray=$JSON_ARRAY" >> $GITHUB_OUTPUT
+
+  generate-gateway-sdks:
+    needs: setup-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Convert the JSON array output to an actual array.
+        source_branch: ${{ fromJSON(needs.setup-matrix.outputs.branchArray) }}
+    steps:
+      - name: Set TARGET_BRANCH environment variable
+        id: set-target
+        run: |
+          if [ "${{ matrix.source_branch }}" = "master" ]; then
+            echo "TARGET_BRANCH=main" >> $GITHUB_ENV
+          else
+            echo "TARGET_BRANCH=release-${{ matrix.source_branch }}" >> $GITHUB_ENV
+          fi
+
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Switch to branch ${{ env.TARGET_BRANCH }} in current repository
+        run: |
+          echo "Switching to branch: $TARGET_BRANCH"
+          git fetch origin "$TARGET_BRANCH" || true
+          if git rev-parse --verify origin/"$TARGET_BRANCH"; then
+            echo "BRANCH_EXISTS=true" >> $GITHUB_ENV
+            git checkout -B "$TARGET_BRANCH" origin/"$TARGET_BRANCH"
+          else
+            echo "BRANCH_EXISTS=false" >> $GITHUB_ENV
+            git checkout -B "$TARGET_BRANCH"
+          fi
+
+      - name: Checkout Tyk repo
+        uses: actions/checkout@v4
+        with:
+          repository: TykTechnologies/tyk
+          ref: ${{ env.TARGET_BRANCH == 'main' && 'master' || env.TARGET_BRANCH }}
+          path: tyk
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23.2'
+
+      - name: Prepare swagger file
+        run: |
+          echo "Using Tyk branch: ${{ matrix.source_branch }}"
+          cp tyk/swagger.yml swagger.yml
+
+      - name: Generate gateway sdks
+        run: |
+          make apim-sdk
+
+      - name: Push new branch if base branch does not exist
+        if: ${{ env.BRANCH_EXISTS == 'false' }}
+        run: |
+          echo "Base branch $env.TARGET_BRANCH did not exist remotely."
+          echo "Pushing update branch ${TARGET_BRANCH} to remote..."
+          git push origin "${TARGET_BRANCH}"
+
+      - name: Create Pull Request with generated SDKs
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.ORG_GH_TOKEN }}
+          commit-message: "save generated gateway sdks for source branch ${{ env.TARGET_BRANCH }}"
+          title: "Generated gateway SDKs for ${{ env.TARGET_BRANCH }}"
+          body: "This PR contains the generated gateway SDKs."
+          branch: ${{ env.TARGET_BRANCH }}-update   # The new branch with -update suffix
+          base: ${{ env.TARGET_BRANCH }}
+
