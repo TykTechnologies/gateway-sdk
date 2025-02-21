@@ -62,7 +62,9 @@ jobs:
             git checkout -B "$TARGET_BRANCH" origin/"$TARGET_BRANCH"
           else
             echo "BRANCH_EXISTS=false" >> $GITHUB_ENV
-            git checkout -B "$TARGET_BRANCH"
+            git fetch origin sdk-base || true
+             # Create the new branch from sdk-base.
+            git checkout -B "$TARGET_BRANCH" origin/sdk-base
           fi
 
       - name: Checkout Tyk repo
@@ -91,9 +93,14 @@ jobs:
         run: |
           echo "Base branch $env.TARGET_BRANCH did not exist remotely."
           echo "Pushing update branch ${TARGET_BRANCH} to remote..."
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Save generated gateway SDKs for source branch $TARGET_BRANCH" || echo "No changes to commit"
           git push origin "${TARGET_BRANCH}"
 
       - name: Create Pull Request with generated SDKs
+        if: ${{ env.BRANCH_EXISTS == 'true' }}
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.ORG_GH_TOKEN }}
