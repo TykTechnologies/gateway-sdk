@@ -13,10 +13,6 @@ Since the SDK is still experimental, we adopt a versioning scheme that reflects 
 This versioning strategy ensures clear traceability, allowing users to easily identify which Gateway version the SDK is compatible with.
 
 ## How to Install
-
-To install the SDK from the master branch, run:
-
-`go get github.com/TykTechnologies/gateway-sdk`
   
 ### To install the SDK generated for a specific Gateway version (e.g., 5.7.2), run:
 
